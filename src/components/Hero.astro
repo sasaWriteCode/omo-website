@@ -13,10 +13,6 @@ import "../styles/hero.css";
   <div class="hero-premium-container">
     <!-- LEFT — Strong copywriting and trust stats -->
     <div class="hero-premium-content">
-      <div class="hero-premium-tag">
-        Business Incubator · Company Doctor · Growth Accelerator
-      </div>
-
       <h1 class="hero-premium-title">
         <div class="hero-line-container" style="overflow: hidden;">
           <span class="hero-line-inner" style="display: inline-block;"
@@ -36,47 +32,21 @@ import "../styles/hero.css";
       </h2>
 
       <p class="hero-premium-desc">
-        From early-stage incubation to scale and exit readiness, OMO diagnoses,
-        strategises, and transforms businesses through strategic marketing, AI,
+        From early-stage incubation to scale and exit readiness, we diagnose,
+        strategise, and transform businesses through strategic marketing, AI,
         and scalable operating systems.
       </p>
 
       <div class="hero-premium-ctas">
         <div class="hero-premium-buttons">
-          <a href="#cta" class="btn-premium-fill"
-            >Book a Diagnose Consultation</a
-          >
+          <a href="#cta" class="btn-premium-fill">Book Diagnose Consultation</a>
           <a href="#framework" class="btn-premium-outline"
-            >Explore Our Framework</a
+            >Explore OMO Framework</a
           >
         </div>
         <span class="hero-premium-cta-note"
           >30-minute complimentary strategy session</span
         >
-      </div>
-
-      <!-- Integrated Trust Stats Row -->
-      <div class="hero-premium-stats">
-        <div class="hero-premium-stat-item">
-          <span class="hero-premium-stat-num" id="stat-tracks">0</span>
-          <span class="hero-premium-stat-lbl">Growth Tracks</span>
-        </div>
-        <div class="hero-premium-stat-item">
-          <span class="hero-premium-stat-num" id="stat-framework">0</span>
-          <span class="hero-premium-stat-lbl">5-Stage Framework</span>
-        </div>
-        <div class="hero-premium-stat-item">
-          <span class="hero-premium-stat-num" id="stat-partners">0</span>
-          <span class="hero-premium-stat-lbl">Ecosystem Partners</span>
-        </div>
-        <div class="hero-premium-stat-item">
-          <span
-            class="hero-premium-stat-num"
-            style="font-family: var(--sans); font-size: 1.3rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px; margin-top: 5px;"
-            >APAC</span
-          >
-          <span class="hero-premium-stat-lbl">Regional Footprint</span>
-        </div>
       </div>
     </div>
 
@@ -100,16 +70,11 @@ import "../styles/hero.css";
     // If user prefers reduced motion, set final layout values instantly
     gsap.set(".hero-line-inner", { y: 0, opacity: 1 });
     gsap.set(
-      ".hero-premium-subtitle, .hero-premium-desc, .hero-premium-buttons, .hero-premium-cta-note, .hero-premium-stat-item",
+      ".hero-premium-subtitle, .hero-premium-desc, .hero-premium-buttons, .hero-premium-cta-note",
       { opacity: 1, y: 0 },
     );
     gsap.set(".iso-container", { opacity: 1 });
     gsap.set(".hero-pill-label", { opacity: 1, scale: 1 });
-
-    // Set final stats numbers
-    document.getElementById("stat-tracks")!.textContent = "3";
-    document.getElementById("stat-framework")!.textContent = "5";
-    document.getElementById("stat-partners")!.textContent = "7";
   } else {
     // Set initial states for animations
     gsap.set(".hero-line-inner", { y: "110%", opacity: 0 });
@@ -119,7 +84,6 @@ import "../styles/hero.css";
         ".hero-premium-desc",
         ".hero-premium-buttons",
         ".hero-premium-cta-note",
-        ".hero-premium-stat-item",
       ],
       { opacity: 0, y: 24 },
     );
@@ -131,8 +95,7 @@ import "../styles/hero.css";
       defaults: { ease: "power4.out", duration: 1.0 },
     });
 
-    tl.to(".hero-premium-tag", { opacity: 1, duration: 0.5 })
-      .to(".hero-line-inner", { y: "0%", opacity: 1, stagger: 0.15 }, "-=0.3")
+    tl.to(".hero-line-inner", { y: "0%", opacity: 1, stagger: 0.15 })
       .to(
         [".hero-premium-subtitle", ".hero-premium-desc"],
         { opacity: 1, y: 0, stagger: 0.1 },
@@ -143,38 +106,7 @@ import "../styles/hero.css";
         { opacity: 1, y: 0, stagger: 0.1 },
         "-=0.6",
       )
-      .to(
-        ".hero-premium-stat-item",
-        { opacity: 1, y: 0, stagger: 0.1 },
-        "-=0.6",
-      )
       .to(".iso-container", { opacity: 1, y: 0, duration: 1.2 }, "-=1.0");
-
-    // Stats count-up animation
-    const statsData = { val1: 0, val2: 0, val3: 0 };
-    tl.to(
-      statsData,
-      {
-        val1: 3,
-        val2: 5,
-        val3: 7,
-        duration: 2.0,
-        ease: "power2.out",
-        onUpdate: () => {
-          const tracksEl = document.getElementById("stat-tracks");
-          const frameworkEl = document.getElementById("stat-framework");
-          const partnersEl = document.getElementById("stat-partners");
-
-          if (tracksEl)
-            tracksEl.textContent = Math.floor(statsData.val1).toString();
-          if (frameworkEl)
-            frameworkEl.textContent = Math.floor(statsData.val2).toString();
-          if (partnersEl)
-            partnersEl.textContent = Math.floor(statsData.val3).toString();
-        },
-      },
-      "-=1.2",
-    );
 
     // Fade in floating badges/labels around the model
     tl.to(
