@@ -1,0 +1,1020 @@
+---
+interface Card {
+  id: string;
+  tag: string;
+  tagNum: string;
+  title: string;
+  copy: string;
+  accent: string;
+  icon: string;
+}
+
+const cards: Card[] = [
+  {
+    id: 'incubator',
+    tag: 'Foundation',
+    tagNum: '01',
+    title: 'Business Incubator',
+    copy: 'We nurture early-stage and new-market ventures and build the foundations, frameworks, and positioning needed to grow with confidence.',
+    accent: '#ed4823',
+    icon: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="14" cy="14" r="12" stroke="#ed4823" stroke-width="1.5" fill="none"/>
+      <path d="M9 14 L14 9 L19 14" stroke="#ed4823" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <line x1="14" y1="9" x2="14" y2="19" stroke="#ed4823" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>`,
+  },
+  {
+    id: 'doctor',
+    tag: 'Diagnosis',
+    tagNum: '02',
+    title: 'Company Doctor',
+    copy: 'We diagnose what\'s holding your business back — inefficiencies, structural gaps, revenue leaks — and prescribe clear, actionable remedies.',
+    accent: '#ed4823',
+    icon: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="3" y="7" width="22" height="16" rx="3" stroke="#ed4823" stroke-width="1.5" fill="none"/>
+      <line x1="14" y1="11" x2="14" y2="19" stroke="#ed4823" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="10" y1="15" x2="18" y2="15" stroke="#ed4823" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M10 7V5a2 2 0 0 1 4 0v2M14 7V5a2 2 0 0 1 4 0v2" stroke="#ed4823" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    </svg>`,
+  },
+  {
+    id: 'accelerator',
+    tag: 'Scale',
+    tagNum: '03',
+    title: 'Growth Accelerator',
+    copy: 'We compress timelines. Using AI, strategic marketing, and proven scaling systems, we accelerate growth toward investor-ready performance.',
+    accent: '#ed4823',
+    icon: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M6 22 L14 6 L22 22" stroke="#ed4823" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M9 18 L19 18" stroke="#ed4823" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>`,
+  },
+];
+---
+
+<!-- ══════════════════════════════════════════════
+     WHAT WE ARE + WHY OMO
+══════════════════════════════════════════════ -->
+<section id="what-we-are" aria-labelledby="wwa-heading">
+
+  <!-- Section header -->
+  <div class="wwa-header reveal">
+    <p class="wwa-eyebrow">What We Are</p>
+    <h2 class="wwa-title" id="wwa-heading">
+      We enable businesses to scale across<br/>
+      <span class="wwa-title-accent">Malaysia and APAC.</span>
+    </h2>
+    <p class="wwa-sub">
+      Why Us? We combine incubation, diagnosis, and acceleration into
+      <strong> one integrated growth system.</strong>
+    </p>
+  </div>
+
+  <!-- Waterfall cards -->
+  <div class="wwa-waterfall">
+    {cards.map(({ id, tag, tagNum, title, copy, icon }, i) => (
+      <article
+        class="wwa-step reveal-stagger"
+        style={`--delay:${i * 0.18}s; --step:${i}`}
+        data-card={id}
+      >
+        <!-- Connector line between steps -->
+        {i > 0 && <div class="wwa-step-line" aria-hidden="true"></div>}
+
+        <div class="wwa-step-inner">
+          <!-- Left: icon block -->
+          <div class="wwa-step-icon-wrap" aria-hidden="true">
+            <div class="wwa-step-icon" set:html={icon} />
+            <span class="wwa-step-num">{tagNum}</span>
+          </div>
+
+          <!-- Right: content -->
+          <div class="wwa-step-content">
+            <span class="wwa-step-tag">{tag}</span>
+            <h3 class="wwa-step-title">{title}</h3>
+            <p class="wwa-step-copy">{copy}</p>
+            <button
+              class="wwa-card-btn"
+              type="button"
+              aria-haspopup="dialog"
+              data-drawer={id}
+            >
+              <span>View Details</span>
+              <svg class="wwa-btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <!-- Why OMO Integration bar -->
+  <div class="wwa-why-bar reveal">
+    <div class="wwa-why-inner">
+      <span class="wwa-why-label">One integrated approach</span>
+      <div class="wwa-why-steps">
+        <span class="wwa-why-step">Incubation</span>
+        <svg class="wwa-why-arrow" width="20" height="12" viewBox="0 0 20 12" fill="none" aria-hidden="true">
+          <path d="M1 6h18M13 1l6 5-6 5" stroke="#ed4823" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="wwa-why-step">Diagnosis</span>
+        <svg class="wwa-why-arrow" width="20" height="12" viewBox="0 0 20 12" fill="none" aria-hidden="true">
+          <path d="M1 6h18M13 1l6 5-6 5" stroke="#ed4823" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="wwa-why-step">Acceleration</span>
+      </div>
+      <a href="#growth-framework" class="wwa-why-link">
+        Explore the OMO Framework
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SIDE DRAWERS
+══════════════════════════════════════════════ -->
+
+<!-- Backdrop -->
+<div id="wwa-backdrop" class="wwa-backdrop" aria-hidden="true"></div>
+
+<!-- Drawer: Business Incubator -->
+<aside
+  id="drawer-incubator"
+  class="wwa-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Business Incubator details"
+  tabindex="-1"
+>
+  <div class="wwa-drawer-inner">
+    <div class="wwa-drawer-head">
+      <div>
+        <span class="wwa-drawer-eyebrow">01 — Foundation</span>
+        <h2 class="wwa-drawer-title">Business Incubator</h2>
+      </div>
+      <button class="wwa-drawer-close" aria-label="Close drawer" data-close>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="wwa-drawer-body">
+      <div class="wwa-drawer-placeholder">
+        <div class="wwa-ph-icon">🌱</div>
+        <p class="wwa-ph-title">Services coming soon</p>
+        <p class="wwa-ph-sub">Detailed incubation services, milestones, and deliverables will be added in the Services section.</p>
+      </div>
+      <div class="wwa-drawer-tags">
+        <span class="wwa-dtag">Market Entry</span>
+        <span class="wwa-dtag">Brand Positioning</span>
+        <span class="wwa-dtag">Go-to-Market</span>
+        <span class="wwa-dtag">Framework Design</span>
+        <span class="wwa-dtag">Venture Building</span>
+      </div>
+    </div>
+    <div class="wwa-drawer-footer">
+      <a href="#cta" class="wwa-drawer-cta" data-close>Book a Consultation</a>
+    </div>
+  </div>
+</aside>
+
+<!-- Drawer: Company Doctor -->
+<aside
+  id="drawer-doctor"
+  class="wwa-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Company Doctor details"
+  tabindex="-1"
+>
+  <div class="wwa-drawer-inner">
+    <div class="wwa-drawer-head">
+      <div>
+        <span class="wwa-drawer-eyebrow">02 — Diagnosis</span>
+        <h2 class="wwa-drawer-title">Company Doctor</h2>
+      </div>
+      <button class="wwa-drawer-close" aria-label="Close drawer" data-close>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="wwa-drawer-body">
+      <div class="wwa-drawer-placeholder">
+        <div class="wwa-ph-icon">🩺</div>
+        <p class="wwa-ph-title">Services coming soon</p>
+        <p class="wwa-ph-sub">Detailed diagnostic services, audit frameworks, and remediation plans will be added in the Services section.</p>
+      </div>
+      <div class="wwa-drawer-tags">
+        <span class="wwa-dtag">Business Audit</span>
+        <span class="wwa-dtag">Revenue Diagnostics</span>
+        <span class="wwa-dtag">Operational Review</span>
+        <span class="wwa-dtag">Structural Fix</span>
+        <span class="wwa-dtag">Turnaround Strategy</span>
+      </div>
+    </div>
+    <div class="wwa-drawer-footer">
+      <a href="#cta" class="wwa-drawer-cta" data-close>Book a Consultation</a>
+    </div>
+  </div>
+</aside>
+
+<!-- Drawer: Growth Accelerator -->
+<aside
+  id="drawer-accelerator"
+  class="wwa-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Growth Accelerator details"
+  tabindex="-1"
+>
+  <div class="wwa-drawer-inner">
+    <div class="wwa-drawer-head">
+      <div>
+        <span class="wwa-drawer-eyebrow">03 — Scale</span>
+        <h2 class="wwa-drawer-title">Growth Accelerator</h2>
+      </div>
+      <button class="wwa-drawer-close" aria-label="Close drawer" data-close>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="wwa-drawer-body">
+      <div class="wwa-drawer-placeholder">
+        <div class="wwa-ph-icon">🚀</div>
+        <p class="wwa-ph-title">Services coming soon</p>
+        <p class="wwa-ph-sub">Detailed acceleration services, AI tools, growth playbooks, and KPI frameworks will be added in the Services section.</p>
+      </div>
+      <div class="wwa-drawer-tags">
+        <span class="wwa-dtag">AI Marketing</span>
+        <span class="wwa-dtag">Performance Funnels</span>
+        <span class="wwa-dtag">APAC Expansion</span>
+        <span class="wwa-dtag">Investor Readiness</span>
+        <span class="wwa-dtag">Scale Playbooks</span>
+      </div>
+    </div>
+    <div class="wwa-drawer-footer">
+      <a href="#cta" class="wwa-drawer-cta" data-close>Book a Consultation</a>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════════════════════════════════════════
+     SCRIPTS — Drawer interaction
+══════════════════════════════════════════════ -->
+<script>
+  const backdrop = document.getElementById('wwa-backdrop')!;
+  let activeDrawer: HTMLElement | null = null;
+  let triggerEl: HTMLElement | null = null;
+
+  function openDrawer(id: string, trigger: HTMLElement) {
+    const drawer = document.getElementById(`drawer-${id}`) as HTMLElement | null;
+    if (!drawer) return;
+    // Close any open drawer first
+    if (activeDrawer) closeDrawer(false);
+
+    activeDrawer = drawer;
+    triggerEl = trigger;
+
+    drawer.classList.add('is-open');
+    backdrop.classList.add('is-visible');
+    document.body.style.overflow = 'hidden';
+
+    // Focus the drawer for accessibility
+    drawer.focus();
+  }
+
+  function closeDrawer(returnFocus = true) {
+    if (!activeDrawer) return;
+    activeDrawer.classList.remove('is-open');
+    backdrop.classList.remove('is-visible');
+    document.body.style.overflow = '';
+
+    if (returnFocus && triggerEl) triggerEl.focus();
+    activeDrawer = null;
+    triggerEl = null;
+  }
+
+  // Open buttons
+  document.querySelectorAll<HTMLButtonElement>('[data-drawer]').forEach((btn) => {
+    btn.addEventListener('click', () => openDrawer(btn.dataset.drawer!, btn));
+  });
+
+  // Close buttons (data-close attr)
+  document.querySelectorAll<HTMLElement>('[data-close]').forEach((el) => {
+    el.addEventListener('click', () => closeDrawer());
+  });
+
+  // Backdrop click
+  backdrop.addEventListener('click', () => closeDrawer());
+
+  // Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && activeDrawer) closeDrawer();
+  });
+
+  // Trap focus inside open drawer
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab' || !activeDrawer) return;
+    const focusable = activeDrawer.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
+      e.preventDefault();
+      (e.shiftKey ? last : first).focus();
+    }
+  });
+</script>
+
+<style>
+/* ══════════════════════════════════════════════
+   WHAT WE ARE — Section
+══════════════════════════════════════════════ */
+#what-we-are {
+  background: #fafaf8;
+  padding: 120px var(--gutter) 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle grid texture */
+#what-we-are::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(237, 72, 35, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(237, 72, 35, 0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+}
+
+/* ── Section header ──────────────────────────── */
+.wwa-header {
+  max-width: 680px;
+  margin: 0 auto 72px;
+  text-align: center;
+}
+
+.wwa-eyebrow {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #ed4823;
+  margin-bottom: 16px;
+  position: relative;
+  padding: 0 20px;
+}
+
+.wwa-eyebrow::before,
+.wwa-eyebrow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 1px;
+  background: #ed4823;
+}
+.wwa-eyebrow::before { right: 100%; margin-right: -18px; }
+.wwa-eyebrow::after  { left:  100%; margin-left:  -18px; }
+
+.wwa-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.18;
+  color: #111;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.wwa-title-accent {
+  color: #ed4823;
+}
+
+.wwa-sub {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: #555;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.wwa-sub strong {
+  color: #111;
+  font-weight: 600;
+}
+
+/* ── Waterfall steps ─────────────────────────── */
+.wwa-waterfall {
+  max-width: var(--max-wide);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Each step sits in a constrained block that is pushed L / C / R */
+.wwa-step {
+  position: relative;
+  width: 60%;
+  padding: 52px 0;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.07);
+
+  /* Entrance animation */
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.wwa-step:last-child {
+  border-bottom: none;
+}
+
+/* Step 1 — flush left */
+.wwa-step:nth-child(1) {
+  align-self: flex-start;
+  margin-left: 0;
+}
+
+/* Step 2 — centre */
+.wwa-step:nth-child(2) {
+  align-self: center;
+}
+
+/* Step 3 — flush right */
+.wwa-step:nth-child(3) {
+  align-self: flex-end;
+  margin-right: 0;
+}
+
+/* Reveal stagger utility */
+.reveal-stagger.in {
+  animation: fadeUp 0.65s cubic-bezier(0.22, 0.68, 0, 1.2) var(--delay, 0s) both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Vertical connector line — always aligned to icon centre (28px from inner left) */
+.wwa-step-line {
+  position: absolute;
+  top: 0;
+  left: 28px;
+  width: 1px;
+  height: 52px;
+  background: linear-gradient(to bottom, rgba(237, 72, 35, 0.3), rgba(237, 72, 35, 0.05));
+  transform: translateY(-100%);
+}
+
+/* Inner flex row: icon | content */
+.wwa-step-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 36px;
+}
+
+/* Icon wrap */
+.wwa-step-icon-wrap {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: 6px;
+}
+
+.wwa-step-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(237, 72, 35, 0.06);
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.wwa-step:hover .wwa-step-icon {
+  background: rgba(237, 72, 35, 0.12);
+}
+
+/* Override SVG size inside the icon circle */
+.wwa-step-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.wwa-step-num {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(237, 72, 35, 0.7);
+}
+
+/* Content column */
+.wwa-step-content {
+  flex: 1;
+}
+
+.wwa-step-tag {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(17, 17, 17, 0.38);
+  margin-bottom: 10px;
+}
+
+.wwa-step-title {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 3.2vw, 3rem);
+  font-weight: 400;
+  color: #111;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+
+.wwa-step-copy {
+  font-size: 0.93rem;
+  line-height: 1.72;
+  color: #666;
+  max-width: 480px;
+  margin-bottom: 24px;
+}
+
+/* View Details button — OMO orange fill on hover */
+.wwa-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ed4823;
+  background: none;
+  border: 1.5px solid rgba(237, 72, 35, 0.4);
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wwa-card-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, #ed4823 0%, #f86240 45%, #ffd0b0 55%, #f86240 65%, #ed4823 100%);
+  background-size: 200% auto;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.22, 0.68, 0, 1.2);
+  z-index: 0;
+}
+
+.wwa-card-btn:hover {
+  color: #111;
+  border-color: #ed4823;
+  box-shadow: 0 6px 20px rgba(237, 72, 35, 0.3);
+}
+
+.wwa-card-btn:hover::before {
+  transform: scaleX(1);
+  animation: btn-shimmer 3s linear infinite;
+}
+
+.wwa-card-btn:hover::before {
+  transform: scaleX(1);
+}
+
+.wwa-card-btn span,
+.wwa-card-btn svg,
+.wwa-btn-arrow {
+  position: relative;
+  z-index: 1;
+}
+
+.wwa-btn-arrow {
+  transition: transform 0.25s ease;
+}
+
+.wwa-card-btn:hover .wwa-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Why OMO integration bar ─────────────────── */
+.wwa-why-bar {
+  max-width: var(--max-wide);
+  margin: 60px auto 0;
+  background: #111;
+  border-radius: 10px;
+  padding: 28px 40px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.wwa-why-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 50%, rgba(237, 72, 35, 0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.wwa-why-inner {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.wwa-why-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+}
+
+.wwa-why-steps {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.wwa-why-step {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.02em;
+}
+
+.wwa-why-arrow {
+  flex-shrink: 0;
+}
+
+.wwa-why-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ed4823;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: gap 0.2s ease;
+  margin-left: auto;
+}
+
+.wwa-why-link:hover {
+  gap: 11px;
+}
+
+/* ══════════════════════════════════════════════
+   BACKDROP
+══════════════════════════════════════════════ */
+.wwa-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 900;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.32s ease;
+}
+
+.wwa-backdrop.is-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ══════════════════════════════════════════════
+   SIDE DRAWER
+══════════════════════════════════════════════ */
+.wwa-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  width: min(520px, 100vw);
+  background: #ffffff;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.38s cubic-bezier(0.22, 0.68, 0, 1.2);
+  box-shadow: -8px 0 60px rgba(0, 0, 0, 0.18);
+  outline: none;
+}
+
+.wwa-drawer.is-open {
+  transform: translateX(0);
+}
+
+/* Drawer inner scroll container */
+.wwa-drawer-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Drawer header */
+.wwa-drawer-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 40px 36px 28px;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.07);
+  flex-shrink: 0;
+}
+
+.wwa-drawer-eyebrow {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ed4823;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.wwa-drawer-title {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  color: #111;
+  line-height: 1.2;
+}
+
+/* Close button */
+.wwa-drawer-close {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17, 17, 17, 0.05);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #555;
+  transition: background 0.2s ease, color 0.2s ease;
+  margin-top: 2px;
+}
+
+.wwa-drawer-close:hover {
+  background: #ed4823;
+  color: #fff;
+}
+
+/* Drawer body — scrollable */
+.wwa-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 36px 36px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Placeholder area */
+.wwa-drawer-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #f7f3ef;
+  border: 1.5px dashed rgba(237, 72, 35, 0.25);
+  border-radius: 10px;
+  padding: 52px 32px;
+  gap: 14px;
+  min-height: 240px;
+}
+
+.wwa-ph-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.wwa-ph-title {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #333;
+}
+
+.wwa-ph-sub {
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: #888;
+  max-width: 320px;
+}
+
+/* Capability tags */
+.wwa-drawer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.wwa-dtag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #333;
+  background: rgba(17, 17, 17, 0.05);
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 4px;
+  padding: 7px 14px;
+}
+
+/* Drawer footer */
+.wwa-drawer-footer {
+  padding: 20px 36px 32px;
+  border-top: 1px solid rgba(17, 17, 17, 0.07);
+  flex-shrink: 0;
+}
+
+.wwa-drawer-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(110deg, #ed4823 0%, #f86240 45%, #ffd0b0 55%, #f86240 65%, #ed4823 100%);
+  background-size: 200% auto;
+  animation: btn-shimmer 3s linear infinite;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 16px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.wwa-drawer-cta:hover {
+  box-shadow: 0 8px 28px rgba(237, 72, 35, 0.4);
+  transform: translateY(-2px);
+}
+
+@keyframes btn-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* ══════════════════════════════════════════════
+   REVEAL ANIMATIONS
+══════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 0.68, 0, 1.2);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media (max-width: 1023px) {
+  /* Tablet: shrink each step slightly, keep L/C/R but tighter */
+  .wwa-step {
+    width: 72%;
+  }
+
+  .wwa-why-inner {
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .wwa-why-link {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  #what-we-are {
+    padding: 80px var(--gutter) 60px;
+  }
+
+  .wwa-header {
+    margin-bottom: 48px;
+  }
+
+  /* Mobile: full width, no L/C/R positioning */
+  .wwa-step,
+  .wwa-step:nth-child(1),
+  .wwa-step:nth-child(2),
+  .wwa-step:nth-child(3) {
+    width: 100%;
+    align-self: stretch;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .wwa-step-line {
+    left: 28px;
+  }
+
+  .wwa-step-title {
+    font-size: 1.7rem;
+  }
+
+  .wwa-why-bar {
+    padding: 24px 24px;
+    margin-top: 40px;
+  }
+
+  /* Mobile: Drawer becomes full-screen bottom sheet */
+  .wwa-drawer {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 90dvh;
+    border-radius: 20px 20px 0 0;
+    transform: translateY(100%);
+  }
+
+  .wwa-drawer.is-open {
+    transform: translateY(0);
+  }
+
+  /* Drag handle hint */
+  .wwa-drawer-inner::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: rgba(17, 17, 17, 0.15);
+    border-radius: 2px;
+    margin: 14px auto 0;
+    flex-shrink: 0;
+  }
+
+  .wwa-drawer-head {
+    padding: 20px 24px 20px;
+  }
+
+  .wwa-drawer-body {
+    padding: 28px 24px 20px;
+  }
+
+  .wwa-drawer-footer {
+    padding: 16px 24px 24px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .wwa-step,
+  .wwa-backdrop,
+  .wwa-drawer,
+  .wwa-drawer-cta,
+  .reveal,
+  .reveal-stagger {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+</style>
