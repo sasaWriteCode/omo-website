@@ -1,0 +1,77 @@
+---
+---
+<section id="moat" class="section">
+    <div class="page-wrap">
+      <div class="moat-header reveal">
+        <hr class="accent" />
+        <span class="label">Strategic Advantage</span>
+        <h2 class="title" style="font-size:clamp(2rem,3.2vw,2.7rem);margin-top:.5rem;margin-bottom:1rem">
+          Built to Be <span class="orange">Difficult to Copy</span>
+        </h2>
+        <p class="body">OMO's multi-layered strategic moat is not a single product — it is an integrated capability
+          stack refined through real cross-border execution across industries and markets.</p>
+        <div class="moat-pills">
+          <span class="moat-pill on">ASEAN Expertise</span>
+          <span class="moat-pill">Integrated Ecosystem</span>
+          <span class="moat-pill">Cross-Border Capability</span>
+          <span class="moat-pill">Multi-disciplinary Integration</span>
+          <span class="moat-pill">Strategic Business Network</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<style>
+/* ─────────────────────────────────────
+   MOAT
+───────────────────────────────────── */
+    #moat {
+      background: var(--light);
+    }
+
+    .moat-header {
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+
+    .moat-header .title {
+      font-size: clamp(2rem, 3.2vw, 2.7rem);
+      margin-bottom: 1rem;
+    }
+
+    .moat-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: 1.5rem;
+    }
+
+    .moat-pill {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      border: 1px solid var(--border);
+      padding: .45rem 1rem;
+      cursor: default;
+      transition: all .18s;
+    }
+
+    .moat-pill:hover,
+    .moat-pill.on {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #fff;
+    }
+</style>
+
+<script>
+// Moat pills
+    document.querySelectorAll('.moat-pill').forEach(p => {
+      p.addEventListener('click', () => {
+        document.querySelectorAll('.moat-pill').forEach(x => x.classList.remove('on'));
+        p.classList.add('on');
+      });
+    });
+</script>
