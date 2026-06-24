@@ -1,0 +1,59 @@
+---
+interface Stat {
+  target: number;
+  suffix?: string;
+  label: string;
+}
+
+const stats: Stat[] = [
+  { target: 9,  suffix: '+', label: 'ASEAN Markets' },
+  { target: 7,  suffix: '',  label: 'Ecosystem Partners' },
+  { target: 20, suffix: '+', label: 'Global Portfolios' },
+  { target: 3,  suffix: '',  label: 'Growth Stages' },
+];
+---
+
+<div id="numbers">
+  <div class="page-wrap">
+    <div class="numbers-row reveal">
+      {stats.map(({ target, suffix = '', label }) => (
+        <div class="num-item">
+          <span class="num-big countup" data-target={target} data-suffix={suffix}>
+            {target}{suffix}
+          </span>
+          <span class="num-lbl">{label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  // Count-up on intersection
+  function animateCountUp(el: Element) {
+    const target = parseInt((el as HTMLElement).dataset.target ?? '0', 10);
+    const suffix = (el as HTMLElement).dataset.suffix ?? '';
+    const duration = 1800;
+    const startTime = performance.now();
+    const easeOut = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+    function tick(now: number) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      el.textContent = Math.floor(easeOut(progress) * target) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = target + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const obs = new IntersectionObserver(
+    (entries) => entries.forEach(e => {
+      if (e.isIntersecting) { animateCountUp(e.target); obs.unobserve(e.target); }
+    }),
+    { threshold: 0.4 }
+  );
+
+  document.querySelectorAll('.countup').forEach(el => {
+    el.textContent = '0' + ((el as HTMLElement).dataset.suffix ?? '');
+    obs.observe(el);
+  });
+</script>

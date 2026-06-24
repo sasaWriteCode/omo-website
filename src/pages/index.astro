@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import StatsRow from '../components/StatsRow.astro';
+import GrowthFramework from '../components/GrowthFramework.astro';
+import EcosystemPartners from '../components/EcosystemPartners.astro';
+import CTASection from '../components/CTASection.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="OMO — Business Growth & Scaling Advisory | Malaysia · ASEAN"
+  description="Hands-on advisory from Malaysia to ASEAN. Design-led strategy, real execution, and measurable business growth — from market entry to full scale."
+>
+  <Header />
+  <main>
+    <Hero />
+    <StatsRow />
+    <GrowthFramework />
+    <EcosystemPartners />
+    <CTASection />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<!-- Global scroll-reveal via IntersectionObserver -->
+<script>
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
+    revealObserver.observe(el);
+  });
+</script>

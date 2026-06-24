@@ -1,0 +1,124 @@
+---
+---
+<section id="hero">
+
+  <!-- Atmospheric layers -->
+  <div class="hero-grid-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-orange-line"></div>
+
+  <!-- Split-screen body -->
+  <div class="hero-body">
+
+    <!-- LEFT — Strong copy -->
+    <div class="hero-left">
+      <div class="hero-tag">Malaysia · ASEAN · Beyond</div>
+
+      <h1 class="hero-h1 display">
+        <span class="line line-1">OMO Business</span>
+        <span class="line line-2">Growth &amp; Scaling</span>
+        <span class="line line-3">Advisory.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Hands-on advisory from Malaysia to ASEAN. Design-led strategy,
+        real execution, and measurable growth — from market entry to full scale.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#cta" class="btn btn-fill">Book Free Strategy Call →</a>
+        <a href="#framework" class="btn btn-outline-white">Explore Framework</a>
+      </div>
+
+      <!-- Mini stats teaser -->
+      <div class="hero-stats-preview">
+        <div class="hero-stat-item">
+          <span class="hero-stat-num">9+</span>
+          <span class="hero-stat-lbl">ASEAN Markets</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-num">7</span>
+          <span class="hero-stat-lbl">Ecosystem Partners</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-num">20+</span>
+          <span class="hero-stat-lbl">Global Portfolios</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — Visual placeholder (Spline TBD) -->
+    <div class="hero-right">
+      <div class="hero-visual-container">
+
+        <!-- Concentric rings -->
+        <div class="hero-visual-ring"></div>
+        <div class="hero-visual-ring"></div>
+        <div class="hero-visual-ring"></div>
+
+        <!-- Spinning orbit -->
+        <svg class="hero-orbit-svg" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="160" cy="160" r="130" stroke="rgba(237,72,35,0.18)" stroke-width="1" stroke-dasharray="6 10"/>
+          <circle cx="160" cy="160" r="100" stroke="rgba(237,72,35,0.08)" stroke-width="1"/>
+          <path d="M 160 30 L 168 44 L 152 44 Z" fill="rgba(237,72,35,0.5)"/>
+          <path d="M 160 290 L 152 276 L 168 276 Z" fill="rgba(237,72,35,0.5)"/>
+          <path d="M 30 160 L 44 152 L 44 168 Z" fill="rgba(237,72,35,0.3)"/>
+          <path d="M 290 160 L 276 168 L 276 152 Z" fill="rgba(237,72,35,0.3)"/>
+        </svg>
+
+        <!-- Center orb -->
+        <div class="hero-visual-orb">
+          <span class="hero-visual-orb-label">OMO<br/>Ecosystem</span>
+          <span class="hero-visual-orb-sub">ASEAN</span>
+        </div>
+
+        <!-- Floating service labels -->
+        <span class="service-label service-label--tl">Market Entry</span>
+        <span class="service-label service-label--tr">Brand Strategy</span>
+        <span class="service-label service-label--ml">AI &amp; Scale</span>
+        <span class="service-label service-label--br">Capital Solutions</span>
+        <span class="service-label service-label--bl">Corp. Advisory</span>
+
+        <!-- Placeholder note -->
+        <span class="hero-visual-placeholder-text">3D Scene — Coming Soon</span>
+      </div>
+    </div>
+
+  </div><!-- /hero-body -->
+
+  <!-- Scroll cue -->
+  <div class="hero-scroll-cue">
+    <div class="scroll-mouse"></div>
+    <span class="scroll-cue-text">Scroll to explore</span>
+  </div>
+
+  <!-- Bottom ticker -->
+  <div class="hero-ticker">
+    <div class="hero-ticker-track">
+      <span class="hero-ticker-item lit">Market Entry</span>
+      <span class="hero-ticker-sep"></span>
+      <span class="hero-ticker-item">Business Setup</span>
+      <span class="hero-ticker-sep"></span>
+      <span class="hero-ticker-item">Brand Positioning</span>
+      <span class="hero-ticker-sep"></span>
+      <span class="hero-ticker-item">ASEAN Expansion</span>
+      <span class="hero-ticker-sep"></span>
+      <span class="hero-ticker-item">AI &amp; Scale</span>
+      <span class="hero-ticker-sep"></span>
+      <span class="hero-ticker-item">M&amp;A Integration</span>
+    </div>
+    <span class="hero-ticker-url">omomarketingads.com</span>
+  </div>
+
+</section>
+
+<script>
+  // Ticker cycling highlight
+  const ticks = document.querySelectorAll('.hero-ticker-item');
+  let ti = 0;
+  setInterval(() => {
+    ticks.forEach(t => t.classList.remove('lit'));
+    ti = (ti + 1) % ticks.length;
+    ticks[ti]?.classList.add('lit');
+  }, 2000);
+</script>

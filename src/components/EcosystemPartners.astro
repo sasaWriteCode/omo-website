@@ -1,0 +1,254 @@
+---
+interface Partner {
+  num: string;
+  logoSrc: string;
+  logoDark?: boolean;
+  brand: string;
+  name: string;
+  desc: string;
+  accent?: string;
+}
+
+const partners: Partner[] = [
+  {
+    num: '01',
+    logoSrc: '/assets/omo_logo.png',
+    brand: 'OMO Group',
+    name: 'Corporate Advisory & Strategy',
+    desc: 'The central hub of the OMO ecosystem — providing strategic advisory, market entry facilitation, and cross-border expansion support across ASEAN.',
+  },
+  {
+    num: '02',
+    logoSrc: '/assets/ONEBiz_Logo.png',
+    brand: 'ONEBiz',
+    name: 'Business Formation & Compliance',
+    desc: 'Streamlined company incorporation, licensing, regulatory compliance, and corporate secretarial services for businesses entering ASEAN markets.',
+    accent: '#2A7AE4',
+  },
+  {
+    num: '03',
+    logoSrc: '/assets/Communication21-LOGO_ICON-RED.png',
+    logoDark: true,
+    brand: 'Communication 21',
+    name: 'Media, PR & Brand Amplification',
+    desc: 'Integrated media relations, digital PR, and brand storytelling to build awareness and credibility across Southeast Asian markets.',
+    accent: '#d62020',
+  },
+  {
+    num: '04',
+    logoSrc: '/assets/OT21_Black.png',
+    logoDark: true,
+    brand: 'OT21',
+    name: 'Technology & Digital Infrastructure',
+    desc: 'Enterprise technology solutions, AI integration, and digital transformation services to modernise operations and unlock scalable growth.',
+    accent: '#111',
+  },
+  {
+    num: '05',
+    logoSrc: '/assets/113Venture_logo.png',
+    brand: '113 Venture',
+    name: 'Investment & Capital Solutions',
+    desc: 'Venture capital access, investor relations, and fund structuring support to connect high-growth businesses with the right capital partners.',
+    accent: '#1a6f3c',
+  },
+  {
+    num: '06',
+    logoSrc: '/assets/tikstar_logo.png',
+    brand: 'TikStar',
+    name: 'Influencer & Social Commerce',
+    desc: 'Performance-driven influencer marketing, social commerce strategy, and creator partnerships to fuel brand growth on TikTok and beyond.',
+    accent: '#010101',
+  },
+  {
+    num: '07',
+    logoSrc: '/assets/YCM_logo.png',
+    brand: 'YCM',
+    name: 'Creative Production & Content',
+    desc: 'Full-service creative production — from photography and videography to brand content strategies that resonate with regional audiences.',
+    accent: '#8B5CF6',
+  },
+];
+---
+
+<!-- ═══ ECOSYSTEM ═══ -->
+<section id="ecosystem" class="section">
+  <div class="page-wrap">
+    <div class="eco-wrap">
+
+      <div class="eco-header reveal">
+        <hr class="accent" style="margin: 0 auto 1.4rem" />
+        <span class="label" style="color:rgba(237,72,35,.75)">Integrated Platform</span>
+        <h2 class="title" style="font-size:clamp(2rem,3.5vw,3rem);margin-top:.5rem;margin-bottom:1rem">
+          The OMO <span class="orange">ASEAN</span><br />Business Ecosystem
+        </h2>
+        <p class="body-text" style="color:rgba(255,255,255,.45)">
+          Five interconnected modules — each independently powerful, exponentially stronger together.
+        </p>
+      </div>
+
+      <!-- Circular Diagram -->
+      <div class="eco-diagram reveal">
+
+        <svg class="eco-orbit-svg" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="160" cy="160" r="130" stroke="rgba(237,72,35,0.18)" stroke-width="1" stroke-dasharray="6 10"/>
+          <circle cx="160" cy="160" r="100" stroke="rgba(237,72,35,0.08)" stroke-width="1"/>
+          <path d="M 160 30 L 168 44 L 152 44 Z" fill="rgba(237,72,35,0.5)"/>
+          <path d="M 160 290 L 152 276 L 168 276 Z" fill="rgba(237,72,35,0.5)"/>
+          <path d="M 30 160 L 44 152 L 44 168 Z" fill="rgba(237,72,35,0.3)"/>
+          <path d="M 290 160 L 276 168 L 276 152 Z" fill="rgba(237,72,35,0.3)"/>
+        </svg>
+
+        <div class="eco-center">
+          <span class="eco-center-label">OMO<br/>Ecosystem</span>
+          <span class="eco-center-sub">ASEAN</span>
+        </div>
+
+        <div class="eco-node eco-node-1">
+          <div class="eco-node-num">01</div>
+          <div class="eco-node-title">ASEAN Expansion</div>
+          <p class="eco-node-desc">Every expansion plan is custom-designed and executed with on-the-ground support, ensuring smooth entry and rapid operational setup.</p>
+          <span class="eco-node-tag">Market Entry</span>
+        </div>
+
+        <div class="eco-node eco-node-2">
+          <div class="eco-node-num">02</div>
+          <div class="eco-node-title">Brand &amp; Market Acceleration</div>
+          <p class="eco-node-desc">From brand design to campaign execution, we guide every step, ensuring strategy translates into measurable growth.</p>
+          <span class="eco-node-tag">Growth</span>
+        </div>
+
+        <div class="eco-node eco-node-3">
+          <div class="eco-node-num">03</div>
+          <div class="eco-node-title">Financial &amp; Corporate Solutions</div>
+          <p class="eco-node-desc">Streamline financial management, corporate governance, and operational efficiency.</p>
+          <span class="eco-node-tag">Corporate</span>
+        </div>
+
+        <div class="eco-node eco-node-4">
+          <div class="eco-node-num">04</div>
+          <div class="eco-node-title">Investment &amp; Capital Solutions</div>
+          <p class="eco-node-desc">Access funding, structure investments, and optimize capital strategies.</p>
+          <span class="eco-node-tag">Capital</span>
+        </div>
+
+        <div class="eco-node eco-node-5">
+          <div class="eco-node-num">05</div>
+          <div class="eco-node-title">Technology &amp; AI Infrastructure</div>
+          <p class="eco-node-desc">Integrate technology, automation, and AI-driven insights into your operations.</p>
+          <span class="eco-node-tag">AI &amp; Tech</span>
+        </div>
+
+      </div><!-- /eco-diagram -->
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PARTNERS CAROUSEL ═══ -->
+<section id="partners" class="section">
+  <div class="page-wrap">
+
+    <div class="partners-header reveal">
+      <hr class="accent" />
+      <span class="label" style="color:rgba(237,72,35,.75)">Ecosystem Partners</span>
+      <h2 class="title" style="font-size:clamp(2rem,3.2vw,2.7rem);margin-top:.5rem;margin-bottom:1rem">
+        A Network Built for <span class="orange">ASEAN Scale</span>
+      </h2>
+      <p class="body-text" style="color:rgba(255,255,255,.45)">
+        Seven specialised entities — each a leader in its domain — unified under
+        the OMO ecosystem to deliver integrated, end-to-end business growth.
+      </p>
+    </div>
+
+    <div class="partners-carousel-wrap">
+      <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="carousel-btn next" id="carouselNext" aria-label="Next">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <div class="partners-track-fade">
+        <div class="partners-track" id="partnersTrack">
+          {partners.map((p) => (
+            <div class="pc" style={p.accent ? `--accent:${p.accent}` : ''}>
+              <span class="pc-num">{p.num}</span>
+              <div class={`pc-logo${p.logoDark ? ' on-dark' : ''}`}>
+                <img src={p.logoSrc} alt={p.brand} loading="lazy" />
+              </div>
+              <div>
+                <div class="pc-brand">{p.brand}</div>
+                <div class="pc-name">{p.name}</div>
+              </div>
+              <p class="pc-desc">{p.desc}</p>
+              <span class="pc-arrow">→</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="carousel-dots" id="carouselDots">
+        {partners.map((_, i) => (
+          <button class={`carousel-dot${i === 0 ? ' active' : ''}`} aria-label={`Go to partner ${i + 1}`}></button>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Partners carousel logic
+  (function () {
+    const track = document.getElementById('partnersTrack') as HTMLElement | null;
+    const prevBtn = document.getElementById('carouselPrev') as HTMLButtonElement | null;
+    const nextBtn = document.getElementById('carouselNext') as HTMLButtonElement | null;
+    const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+    if (!track) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let startScroll = 0;
+
+    const getCardWidth = () => {
+      const card = track.querySelector('.pc') as HTMLElement | null;
+      return card ? card.offsetWidth + 22 : 310;
+    };
+
+    function updateUI() {
+      const max = track.scrollWidth - track.clientWidth;
+      const ratio = max > 0 ? track.scrollLeft / max : 0;
+      const activeIdx = Math.round(ratio * (dots.length - 1));
+      dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+      if (prevBtn) prevBtn.style.opacity = track.scrollLeft <= 2 ? '.3' : '1';
+      if (nextBtn) nextBtn.style.opacity = track.scrollLeft >= max - 2 ? '.3' : '1';
+    }
+
+    prevBtn?.addEventListener('click', () => track.scrollBy({ left: -getCardWidth(), behavior: 'smooth' }));
+    nextBtn?.addEventListener('click', () => track.scrollBy({ left: getCardWidth(), behavior: 'smooth' }));
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        track.scrollTo({ left: i * getCardWidth(), behavior: 'smooth' });
+      });
+    });
+
+    track.addEventListener('mousedown', e => {
+      isDragging = true;
+      startX = e.pageX - track.offsetLeft;
+      startScroll = track.scrollLeft;
+      track.style.userSelect = 'none';
+    });
+    document.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      track.scrollLeft = startScroll - (e.pageX - track.offsetLeft - startX);
+    });
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+      track.style.userSelect = '';
+    });
+
+    track.addEventListener('scroll', updateUI, { passive: true });
+    updateUI();
+  })();
+</script>
