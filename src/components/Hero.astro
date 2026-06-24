@@ -14,16 +14,19 @@ import "../styles/hero.css";
     <!-- LEFT — Strong copywriting and trust stats -->
     <div class="hero-premium-content">
       <div class="hero-premium-tag">
-        OMO Advisory · Business Incubator · Company Doctor · Growth Accelerator
+        Business Incubator · Company Doctor · Growth Accelerator
       </div>
 
       <h1 class="hero-premium-title">
         <div class="hero-line-container" style="overflow: hidden;">
-          <span class="hero-line-inner" style="display: inline-block;">We transform businesses</span>
+          <span class="hero-line-inner" style="display: inline-block;"
+            >We transform businesses</span
+          >
         </div>
         <div class="hero-line-container" style="overflow: hidden;">
           <span class="hero-line-inner" style="display: inline-block;">
-            into <span class="orange-highlight">profitable growth engines.</span>
+            into <span class="orange-highlight">profitable growth engines.</span
+            >
           </span>
         </div>
       </h1>
@@ -33,15 +36,23 @@ import "../styles/hero.css";
       </h2>
 
       <p class="hero-premium-desc">
-        From early-stage incubation to scale and exit readiness, OMO diagnoses, strategises, and transforms businesses through strategic marketing, AI, and scalable operating systems.
+        From early-stage incubation to scale and exit readiness, OMO diagnoses,
+        strategises, and transforms businesses through strategic marketing, AI,
+        and scalable operating systems.
       </p>
 
       <div class="hero-premium-ctas">
         <div class="hero-premium-buttons">
-          <a href="#cta" class="btn-premium-fill">Book a Diagnose Consultation</a>
-          <a href="#framework" class="btn-premium-outline">Explore Our Framework</a>
+          <a href="#cta" class="btn-premium-fill"
+            >Book a Diagnose Consultation</a
+          >
+          <a href="#framework" class="btn-premium-outline"
+            >Explore Our Framework</a
+          >
         </div>
-        <span class="hero-premium-cta-note">30-minute complimentary strategy session</span>
+        <span class="hero-premium-cta-note"
+          >30-minute complimentary strategy session</span
+        >
       </div>
 
       <!-- Integrated Trust Stats Row -->
@@ -59,7 +70,11 @@ import "../styles/hero.css";
           <span class="hero-premium-stat-lbl">Ecosystem Partners</span>
         </div>
         <div class="hero-premium-stat-item">
-          <span class="hero-premium-stat-num" style="font-family: var(--sans); font-size: 1.3rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px; margin-top: 5px;">APAC</span>
+          <span
+            class="hero-premium-stat-num"
+            style="font-family: var(--sans); font-size: 1.3rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px; margin-top: 5px;"
+            >APAC</span
+          >
           <span class="hero-premium-stat-lbl">Regional Footprint</span>
         </div>
       </div>
@@ -77,15 +92,20 @@ import "../styles/hero.css";
   import { gsap } from "gsap";
 
   // Check user preferences for animations
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
   if (prefersReducedMotion) {
     // If user prefers reduced motion, set final layout values instantly
     gsap.set(".hero-line-inner", { y: 0, opacity: 1 });
-    gsap.set(".hero-premium-subtitle, .hero-premium-desc, .hero-premium-buttons, .hero-premium-cta-note, .hero-premium-stat-item", { opacity: 1, y: 0 });
+    gsap.set(
+      ".hero-premium-subtitle, .hero-premium-desc, .hero-premium-buttons, .hero-premium-cta-note, .hero-premium-stat-item",
+      { opacity: 1, y: 0 },
+    );
     gsap.set(".iso-container", { opacity: 1 });
     gsap.set(".hero-pill-label", { opacity: 1, scale: 1 });
-    
+
     // Set final stats numbers
     document.getElementById("stat-tracks")!.textContent = "3";
     document.getElementById("stat-framework")!.textContent = "5";
@@ -93,86 +113,153 @@ import "../styles/hero.css";
   } else {
     // Set initial states for animations
     gsap.set(".hero-line-inner", { y: "110%", opacity: 0 });
-    gsap.set([".hero-premium-subtitle", ".hero-premium-desc", ".hero-premium-buttons", ".hero-premium-cta-note", ".hero-premium-stat-item"], { opacity: 0, y: 24 });
+    gsap.set(
+      [
+        ".hero-premium-subtitle",
+        ".hero-premium-desc",
+        ".hero-premium-buttons",
+        ".hero-premium-cta-note",
+        ".hero-premium-stat-item",
+      ],
+      { opacity: 0, y: 24 },
+    );
     gsap.set(".iso-container", { opacity: 0, y: 40 });
     gsap.set(".hero-pill-label", { opacity: 0, scale: 0.8, y: 15 });
 
     // GSAP Reveal Timeline
-    const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.0 } });
+    const tl = gsap.timeline({
+      defaults: { ease: "power4.out", duration: 1.0 },
+    });
 
     tl.to(".hero-premium-tag", { opacity: 1, duration: 0.5 })
       .to(".hero-line-inner", { y: "0%", opacity: 1, stagger: 0.15 }, "-=0.3")
-      .to([".hero-premium-subtitle", ".hero-premium-desc"], { opacity: 1, y: 0, stagger: 0.1 }, "-=0.5")
-      .to([".hero-premium-buttons", ".hero-premium-cta-note"], { opacity: 1, y: 0, stagger: 0.1 }, "-=0.6")
-      .to(".hero-premium-stat-item", { opacity: 1, y: 0, stagger: 0.1 }, "-=0.6")
+      .to(
+        [".hero-premium-subtitle", ".hero-premium-desc"],
+        { opacity: 1, y: 0, stagger: 0.1 },
+        "-=0.5",
+      )
+      .to(
+        [".hero-premium-buttons", ".hero-premium-cta-note"],
+        { opacity: 1, y: 0, stagger: 0.1 },
+        "-=0.6",
+      )
+      .to(
+        ".hero-premium-stat-item",
+        { opacity: 1, y: 0, stagger: 0.1 },
+        "-=0.6",
+      )
       .to(".iso-container", { opacity: 1, y: 0, duration: 1.2 }, "-=1.0");
 
     // Stats count-up animation
     const statsData = { val1: 0, val2: 0, val3: 0 };
-    tl.to(statsData, {
-      val1: 3,
-      val2: 5,
-      val3: 7,
-      duration: 2.0,
-      ease: "power2.out",
-      onUpdate: () => {
-        const tracksEl = document.getElementById("stat-tracks");
-        const frameworkEl = document.getElementById("stat-framework");
-        const partnersEl = document.getElementById("stat-partners");
-        
-        if (tracksEl) tracksEl.textContent = Math.floor(statsData.val1).toString();
-        if (frameworkEl) frameworkEl.textContent = Math.floor(statsData.val2).toString();
-        if (partnersEl) partnersEl.textContent = Math.floor(statsData.val3).toString();
-      }
-    }, "-=1.2");
+    tl.to(
+      statsData,
+      {
+        val1: 3,
+        val2: 5,
+        val3: 7,
+        duration: 2.0,
+        ease: "power2.out",
+        onUpdate: () => {
+          const tracksEl = document.getElementById("stat-tracks");
+          const frameworkEl = document.getElementById("stat-framework");
+          const partnersEl = document.getElementById("stat-partners");
+
+          if (tracksEl)
+            tracksEl.textContent = Math.floor(statsData.val1).toString();
+          if (frameworkEl)
+            frameworkEl.textContent = Math.floor(statsData.val2).toString();
+          if (partnersEl)
+            partnersEl.textContent = Math.floor(statsData.val3).toString();
+        },
+      },
+      "-=1.2",
+    );
 
     // Fade in floating badges/labels around the model
-    tl.to(".hero-pill-label", { opacity: 1, scale: 1, y: 0, stagger: 0.08, duration: 0.6 }, "-=0.8");
+    tl.to(
+      ".hero-pill-label",
+      { opacity: 1, scale: 1, y: 0, stagger: 0.08, duration: 0.6 },
+      "-=0.8",
+    );
 
     // ─────────────────────────────────────────────
     // Continuous Idle Floating & Hover Effects
     // ─────────────────────────────────────────────
-    
+
     // Slow float for accent spheres
-    gsap.to("#sphere1", { y: -15, duration: 3.5, repeat: -1, yoyo: true, ease: "sine.inOut" });
-    gsap.to("#sphere2", { y: 12, duration: 4.2, repeat: -1, yoyo: true, ease: "sine.inOut" });
-    
-    // Slow float for the Strategy Dashboard Card
-    gsap.to("#dashboardPanel", { y: -6, z: 46, duration: 3.8, repeat: -1, yoyo: true, ease: "sine.inOut" });
-    
-    // Slow float and rotation for the AI Data Cube
-    gsap.to("#aiCube", { 
-      y: 6, 
-      z: 32, 
-      rotationY: 360,
-      duration: 8.0, 
-      repeat: -1, 
-      ease: "linear"
+    gsap.to("#sphere1", {
+      y: -15,
+      duration: 3.5,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
     });
-    
+    gsap.to("#sphere2", {
+      y: 12,
+      duration: 4.2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+
+    // Slow float for the Strategy Dashboard Card
+    gsap.to("#dashboardPanel", {
+      y: -6,
+      z: 46,
+      duration: 3.8,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+
+    // Slow float and rotation for the AI Data Cube
+    gsap.to("#aiCube", {
+      y: 6,
+      z: 32,
+      rotationY: 360,
+      duration: 8.0,
+      repeat: -1,
+      ease: "linear",
+    });
+
     // Staggered plate hovering for the Growth Tower
-    gsap.to("#towerPlate2", { z: 36, duration: 3.2, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 0.1 });
-    gsap.to("#towerPlate3", { z: 58, duration: 2.8, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 0.2 });
+    gsap.to("#towerPlate2", {
+      z: 36,
+      duration: 3.2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: 0.1,
+    });
+    gsap.to("#towerPlate3", {
+      z: 58,
+      duration: 2.8,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: 0.2,
+    });
 
     // ─────────────────────────────────────────────
     // Mouse Parallax Interaction on 2.5D City Map
     // ─────────────────────────────────────────────
     const visualArea = document.querySelector(".hero-premium-visual");
     const isoContainer = document.getElementById("isoContainer");
-    
+
     if (visualArea && isoContainer) {
       visualArea.addEventListener("mousemove", (e: any) => {
         const rect = visualArea.getBoundingClientRect();
         // Mouse coordinate scale: -0.5 to 0.5
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-        
+
         // Tilt the isometric container slightly based on mouse
         gsap.to(isoContainer, {
           rotationX: 60 - y * 12,
           rotationZ: -45 + x * 15,
           duration: 0.8,
-          ease: "power2.out"
+          ease: "power2.out",
         });
       });
 
@@ -182,7 +269,7 @@ import "../styles/hero.css";
           rotationX: 60,
           rotationZ: -45,
           duration: 1.2,
-          ease: "power2.out"
+          ease: "power2.out",
         });
       });
     }
