@@ -1,0 +1,156 @@
+---
+interface Props {
+  splineUrl?: string;
+}
+
+const { splineUrl = "" } = Astro.props;
+---
+
+<div class="hero-premium-stage">
+  {splineUrl ? (
+    <div class="spline-wrapper">
+      <spline-viewer url={splineUrl} class="spline-scene"></spline-viewer>
+    </div>
+  ) : (
+    // Reusable Custom 2.5D Isometric Fallback: "OMO Growth Engine City"
+    <div class="iso-container" id="isoContainer">
+      <!-- Ground shadow/glow -->
+      <div class="visual-ambient-glow"></div>
+      
+      <!-- Isometric Base Grid Map -->
+      <div class="iso-map-bg">
+        <svg class="iso-svg-grid" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid lines -->
+          <path d="M 0 60 L 360 60 M 0 120 L 360 120 M 0 180 L 360 180 M 0 240 L 360 240 M 0 300 L 360 300" stroke="rgba(237, 72, 35, 0.05)" stroke-width="1.5" />
+          <path d="M 60 0 L 60 360 M 120 0 L 120 360 M 180 0 L 180 360 M 240 0 L 240 360 M 300 0 L 300 360" stroke="rgba(237, 72, 35, 0.05)" stroke-width="1.5" />
+          
+          <!-- Orange Growth Pathway Flow -->
+          <path 
+            d="M 60 60 L 180 60 L 180 180 L 300 180 L 300 300" 
+            stroke="url(#orange-gradient)" 
+            stroke-width="4" 
+            stroke-linecap="round" 
+            stroke-linejoin="round"
+            class="growth-path-line"
+          />
+          <path 
+            d="M 180 60 L 300 60 L 300 180" 
+            stroke="rgba(237, 72, 35, 0.25)" 
+            stroke-width="2" 
+            stroke-dasharray="4 6" 
+            stroke-linecap="round" 
+            stroke-linejoin="round"
+          />
+          
+          <!-- Definitions for gradients -->
+          <defs>
+            <linearGradient id="orange-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ed4823" stop-opacity="0.2" />
+              <stop offset="50%" stop-color="#ed4823" stop-opacity="1" />
+              <stop offset="100%" stop-color="#ed4823" stop-opacity="0.5" />
+            </linearGradient>
+          </defs>
+        </svg>
+        
+        <!-- Pulsing partner ecosystem nodes -->
+        <div class="ecosystem-nodes">
+          <!-- Node 1: Incubator Hub -->
+          <div class="node-pulse" style="top: 54px; left: 54px;" title="Incubation Node"></div>
+          <!-- Node 2: AI Core -->
+          <div class="node-pulse" style="top: 174px; left: 174px;" title="AI Marketing Node"></div>
+          <!-- Node 3: APAC Router -->
+          <div class="node-pulse" style="top: 294px; left: 294px;" title="APAC Expansion Node"></div>
+        </div>
+      </div>
+      
+      <!-- 2.5D Isometric Objects with simulated depth -->
+      
+      <!-- Element A: AI Data Cube (CSS 3D Cube) -->
+      <div class="iso-object ai-cube-obj" style="top: 36px; left: 36px;">
+        <div class="iso-shadow cube-shadow"></div>
+        <div class="css-cube" id="aiCube">
+          <div class="cube-face cube-face-front"></div>
+          <div class="cube-face cube-face-back"></div>
+          <div class="cube-face cube-face-left"></div>
+          <div class="cube-face cube-face-right"></div>
+          <div class="cube-face cube-face-top"></div>
+          <div class="cube-face cube-face-bottom"></div>
+        </div>
+      </div>
+      
+      <!-- Element B: Strategy Dashboard Panel (Glass Card) -->
+      <div class="iso-object dashboard-obj" style="top: 36px; right: 36px;">
+        <div class="iso-shadow dashboard-shadow"></div>
+        <div class="dashboard-panel" id="dashboardPanel">
+          <div class="db-bar orange"></div>
+          <div class="db-bar long"></div>
+          <div class="db-bar"></div>
+          <div class="db-grid">
+            <div class="db-line"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Element C: Market Expansion Tower (Stacked plates) -->
+      <div class="iso-object tower-obj" style="bottom: 36px; right: 36px;">
+        <div class="iso-shadow tower-shadow"></div>
+        <div class="tower-plate" id="towerPlate1" style="transform: translateZ(10px);"></div>
+        <div class="tower-plate" id="towerPlate2" style="transform: translateZ(30px); background: rgba(255,255,255,0.4); border-color: rgba(237, 72, 35, 0.4);"></div>
+        <div class="tower-plate" id="towerPlate3" style="transform: translateZ(50px); background: rgba(255,255,255,0.2); border-color: rgba(237, 72, 35, 0.6); display: flex; align-items: center; justify-content: center;">
+          <div style="width: 12px; height: 12px; background: var(--orange); border-radius: 50%; box-shadow: 0 0 10px var(--orange);"></div>
+        </div>
+      </div>
+      
+      <!-- Floating Orange Accent Spheres (Gradients with depth) -->
+      <div class="floating-sphere" id="sphere1" style="width: 24px; height: 24px; top: 180px; left: 40px; transform: translateZ(80px);"></div>
+      <div class="floating-sphere" id="sphere2" style="width: 16px; height: 16px; bottom: 100px; right: 180px; transform: translateZ(110px);"></div>
+    </div>
+  )}
+
+  <!-- Floating labels around the visual area (Desktop/Tablet) -->
+  <span class="hero-pill-label pill-incubator">Business Incubator</span>
+  <span class="hero-pill-label pill-doctor">Company Doctor</span>
+  <span class="hero-pill-label pill-accelerator">Growth Accelerator</span>
+  <span class="hero-pill-label pill-marketing">AI-Powered Marketing</span>
+  <span class="hero-pill-label pill-apac">APAC Expansion</span>
+  <span class="hero-pill-label pill-capital">Capital Readiness</span>
+</div>
+
+<!-- Mobile layout labels list (Flex container styled in CSS) -->
+<div class="hero-premium-mobile-pills">
+  <span class="mobile-pill">Business Incubator</span>
+  <span class="mobile-pill">Company Doctor</span>
+  <span class="mobile-pill">Growth Accelerator</span>
+  <span class="mobile-pill">AI-Powered Marketing</span>
+  <span class="mobile-pill">APAC Expansion</span>
+  <span class="mobile-pill">Capital Readiness</span>
+</div>
+
+<style>
+  /* Spline styling if enabled */
+  .spline-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .spline-scene {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+  /* Pathway drawing animation */
+  .growth-path-line {
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: drawPath 4s cubic-bezier(0.22, 0.68, 0, 1.2) forwards 1.2s;
+  }
+  
+  @keyframes drawPath {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>

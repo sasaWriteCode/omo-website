@@ -1,124 +1,190 @@
 ---
+import HeroVisual from "./HeroVisual.astro";
+import "../styles/hero.css";
 ---
-<section id="hero">
 
-  <!-- Atmospheric layers -->
-  <div class="hero-grid-lines"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-orange-line"></div>
+<section id="hero-premium">
+  <!-- Atmospheric background layers -->
+  <div class="hero-premium-bg">
+    <div class="hero-premium-grid"></div>
+    <div class="hero-premium-glow"></div>
+  </div>
 
-  <!-- Split-screen body -->
-  <div class="hero-body">
+  <div class="hero-premium-container">
+    <!-- LEFT — Strong copywriting and trust stats -->
+    <div class="hero-premium-content">
+      <div class="hero-premium-tag">
+        OMO Advisory · Business Incubator · Company Doctor · Growth Accelerator
+      </div>
 
-    <!-- LEFT — Strong copy -->
-    <div class="hero-left">
-      <div class="hero-tag">Malaysia · ASEAN · Beyond</div>
-
-      <h1 class="hero-h1 display">
-        <span class="line line-1">OMO Business</span>
-        <span class="line line-2">Growth &amp; Scaling</span>
-        <span class="line line-3">Advisory.</span>
+      <h1 class="hero-premium-title">
+        <div class="hero-line-container" style="overflow: hidden;">
+          <span class="hero-line-inner" style="display: inline-block;">We transform businesses</span>
+        </div>
+        <div class="hero-line-container" style="overflow: hidden;">
+          <span class="hero-line-inner" style="display: inline-block;">
+            into <span class="orange-highlight">profitable growth engines.</span>
+          </span>
+        </div>
       </h1>
 
-      <p class="hero-sub">
-        Hands-on advisory from Malaysia to ASEAN. Design-led strategy,
-        real execution, and measurable growth — from market entry to full scale.
+      <h2 class="hero-premium-subtitle">
+        We incubate, grow, and scale businesses across Malaysia &amp; APAC.
+      </h2>
+
+      <p class="hero-premium-desc">
+        From early-stage incubation to scale and exit readiness, OMO diagnoses, strategises, and transforms businesses through strategic marketing, AI, and scalable operating systems.
       </p>
 
-      <div class="hero-btns">
-        <a href="#cta" class="btn btn-fill">Book Free Strategy Call →</a>
-        <a href="#framework" class="btn btn-outline-white">Explore Framework</a>
+      <div class="hero-premium-ctas">
+        <div class="hero-premium-buttons">
+          <a href="#cta" class="btn-premium-fill">Book a Diagnose Consultation</a>
+          <a href="#framework" class="btn-premium-outline">Explore Our Framework</a>
+        </div>
+        <span class="hero-premium-cta-note">30-minute complimentary strategy session</span>
       </div>
 
-      <!-- Mini stats teaser -->
-      <div class="hero-stats-preview">
-        <div class="hero-stat-item">
-          <span class="hero-stat-num">9+</span>
-          <span class="hero-stat-lbl">ASEAN Markets</span>
+      <!-- Integrated Trust Stats Row -->
+      <div class="hero-premium-stats">
+        <div class="hero-premium-stat-item">
+          <span class="hero-premium-stat-num" id="stat-tracks">0</span>
+          <span class="hero-premium-stat-lbl">Growth Tracks</span>
         </div>
-        <div class="hero-stat-item">
-          <span class="hero-stat-num">7</span>
-          <span class="hero-stat-lbl">Ecosystem Partners</span>
+        <div class="hero-premium-stat-item">
+          <span class="hero-premium-stat-num" id="stat-framework">0</span>
+          <span class="hero-premium-stat-lbl">5-Stage Framework</span>
         </div>
-        <div class="hero-stat-item">
-          <span class="hero-stat-num">20+</span>
-          <span class="hero-stat-lbl">Global Portfolios</span>
+        <div class="hero-premium-stat-item">
+          <span class="hero-premium-stat-num" id="stat-partners">0</span>
+          <span class="hero-premium-stat-lbl">Ecosystem Partners</span>
         </div>
-      </div>
-    </div>
-
-    <!-- RIGHT — Visual placeholder (Spline TBD) -->
-    <div class="hero-right">
-      <div class="hero-visual-container">
-
-        <!-- Concentric rings -->
-        <div class="hero-visual-ring"></div>
-        <div class="hero-visual-ring"></div>
-        <div class="hero-visual-ring"></div>
-
-        <!-- Spinning orbit -->
-        <svg class="hero-orbit-svg" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="160" cy="160" r="130" stroke="rgba(237,72,35,0.18)" stroke-width="1" stroke-dasharray="6 10"/>
-          <circle cx="160" cy="160" r="100" stroke="rgba(237,72,35,0.08)" stroke-width="1"/>
-          <path d="M 160 30 L 168 44 L 152 44 Z" fill="rgba(237,72,35,0.5)"/>
-          <path d="M 160 290 L 152 276 L 168 276 Z" fill="rgba(237,72,35,0.5)"/>
-          <path d="M 30 160 L 44 152 L 44 168 Z" fill="rgba(237,72,35,0.3)"/>
-          <path d="M 290 160 L 276 168 L 276 152 Z" fill="rgba(237,72,35,0.3)"/>
-        </svg>
-
-        <!-- Center orb -->
-        <div class="hero-visual-orb">
-          <span class="hero-visual-orb-label">OMO<br/>Ecosystem</span>
-          <span class="hero-visual-orb-sub">ASEAN</span>
+        <div class="hero-premium-stat-item">
+          <span class="hero-premium-stat-num" style="font-family: var(--sans); font-size: 1.3rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px; margin-top: 5px;">APAC</span>
+          <span class="hero-premium-stat-lbl">Regional Footprint</span>
         </div>
-
-        <!-- Floating service labels -->
-        <span class="service-label service-label--tl">Market Entry</span>
-        <span class="service-label service-label--tr">Brand Strategy</span>
-        <span class="service-label service-label--ml">AI &amp; Scale</span>
-        <span class="service-label service-label--br">Capital Solutions</span>
-        <span class="service-label service-label--bl">Corp. Advisory</span>
-
-        <!-- Placeholder note -->
-        <span class="hero-visual-placeholder-text">3D Scene — Coming Soon</span>
       </div>
     </div>
 
-  </div><!-- /hero-body -->
-
-  <!-- Scroll cue -->
-  <div class="hero-scroll-cue">
-    <div class="scroll-mouse"></div>
-    <span class="scroll-cue-text">Scroll to explore</span>
+    <!-- RIGHT — Interactive 2.5D visual area -->
+    <div class="hero-premium-visual">
+      <HeroVisual />
+    </div>
   </div>
-
-  <!-- Bottom ticker -->
-  <div class="hero-ticker">
-    <div class="hero-ticker-track">
-      <span class="hero-ticker-item lit">Market Entry</span>
-      <span class="hero-ticker-sep"></span>
-      <span class="hero-ticker-item">Business Setup</span>
-      <span class="hero-ticker-sep"></span>
-      <span class="hero-ticker-item">Brand Positioning</span>
-      <span class="hero-ticker-sep"></span>
-      <span class="hero-ticker-item">ASEAN Expansion</span>
-      <span class="hero-ticker-sep"></span>
-      <span class="hero-ticker-item">AI &amp; Scale</span>
-      <span class="hero-ticker-sep"></span>
-      <span class="hero-ticker-item">M&amp;A Integration</span>
-    </div>
-    <span class="hero-ticker-url">omomarketingads.com</span>
-  </div>
-
 </section>
 
+<!-- Client-side script for premium reveal & interactive floating motion -->
 <script>
-  // Ticker cycling highlight
-  const ticks = document.querySelectorAll('.hero-ticker-item');
-  let ti = 0;
-  setInterval(() => {
-    ticks.forEach(t => t.classList.remove('lit'));
-    ti = (ti + 1) % ticks.length;
-    ticks[ti]?.classList.add('lit');
-  }, 2000);
+  import { gsap } from "gsap";
+
+  // Check user preferences for animations
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (prefersReducedMotion) {
+    // If user prefers reduced motion, set final layout values instantly
+    gsap.set(".hero-line-inner", { y: 0, opacity: 1 });
+    gsap.set(".hero-premium-subtitle, .hero-premium-desc, .hero-premium-buttons, .hero-premium-cta-note, .hero-premium-stat-item", { opacity: 1, y: 0 });
+    gsap.set(".iso-container", { opacity: 1 });
+    gsap.set(".hero-pill-label", { opacity: 1, scale: 1 });
+    
+    // Set final stats numbers
+    document.getElementById("stat-tracks")!.textContent = "3";
+    document.getElementById("stat-framework")!.textContent = "5";
+    document.getElementById("stat-partners")!.textContent = "7";
+  } else {
+    // Set initial states for animations
+    gsap.set(".hero-line-inner", { y: "110%", opacity: 0 });
+    gsap.set([".hero-premium-subtitle", ".hero-premium-desc", ".hero-premium-buttons", ".hero-premium-cta-note", ".hero-premium-stat-item"], { opacity: 0, y: 24 });
+    gsap.set(".iso-container", { opacity: 0, y: 40 });
+    gsap.set(".hero-pill-label", { opacity: 0, scale: 0.8, y: 15 });
+
+    // GSAP Reveal Timeline
+    const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.0 } });
+
+    tl.to(".hero-premium-tag", { opacity: 1, duration: 0.5 })
+      .to(".hero-line-inner", { y: "0%", opacity: 1, stagger: 0.15 }, "-=0.3")
+      .to([".hero-premium-subtitle", ".hero-premium-desc"], { opacity: 1, y: 0, stagger: 0.1 }, "-=0.5")
+      .to([".hero-premium-buttons", ".hero-premium-cta-note"], { opacity: 1, y: 0, stagger: 0.1 }, "-=0.6")
+      .to(".hero-premium-stat-item", { opacity: 1, y: 0, stagger: 0.1 }, "-=0.6")
+      .to(".iso-container", { opacity: 1, y: 0, duration: 1.2 }, "-=1.0");
+
+    // Stats count-up animation
+    const statsData = { val1: 0, val2: 0, val3: 0 };
+    tl.to(statsData, {
+      val1: 3,
+      val2: 5,
+      val3: 7,
+      duration: 2.0,
+      ease: "power2.out",
+      onUpdate: () => {
+        const tracksEl = document.getElementById("stat-tracks");
+        const frameworkEl = document.getElementById("stat-framework");
+        const partnersEl = document.getElementById("stat-partners");
+        
+        if (tracksEl) tracksEl.textContent = Math.floor(statsData.val1).toString();
+        if (frameworkEl) frameworkEl.textContent = Math.floor(statsData.val2).toString();
+        if (partnersEl) partnersEl.textContent = Math.floor(statsData.val3).toString();
+      }
+    }, "-=1.2");
+
+    // Fade in floating badges/labels around the model
+    tl.to(".hero-pill-label", { opacity: 1, scale: 1, y: 0, stagger: 0.08, duration: 0.6 }, "-=0.8");
+
+    // ─────────────────────────────────────────────
+    // Continuous Idle Floating & Hover Effects
+    // ─────────────────────────────────────────────
+    
+    // Slow float for accent spheres
+    gsap.to("#sphere1", { y: -15, duration: 3.5, repeat: -1, yoyo: true, ease: "sine.inOut" });
+    gsap.to("#sphere2", { y: 12, duration: 4.2, repeat: -1, yoyo: true, ease: "sine.inOut" });
+    
+    // Slow float for the Strategy Dashboard Card
+    gsap.to("#dashboardPanel", { y: -6, z: 46, duration: 3.8, repeat: -1, yoyo: true, ease: "sine.inOut" });
+    
+    // Slow float and rotation for the AI Data Cube
+    gsap.to("#aiCube", { 
+      y: 6, 
+      z: 32, 
+      rotationY: 360,
+      duration: 8.0, 
+      repeat: -1, 
+      ease: "linear"
+    });
+    
+    // Staggered plate hovering for the Growth Tower
+    gsap.to("#towerPlate2", { z: 36, duration: 3.2, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 0.1 });
+    gsap.to("#towerPlate3", { z: 58, duration: 2.8, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 0.2 });
+
+    // ─────────────────────────────────────────────
+    // Mouse Parallax Interaction on 2.5D City Map
+    // ─────────────────────────────────────────────
+    const visualArea = document.querySelector(".hero-premium-visual");
+    const isoContainer = document.getElementById("isoContainer");
+    
+    if (visualArea && isoContainer) {
+      visualArea.addEventListener("mousemove", (e: any) => {
+        const rect = visualArea.getBoundingClientRect();
+        // Mouse coordinate scale: -0.5 to 0.5
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        
+        // Tilt the isometric container slightly based on mouse
+        gsap.to(isoContainer, {
+          rotationX: 60 - y * 12,
+          rotationZ: -45 + x * 15,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+      });
+
+      visualArea.addEventListener("mouseleave", () => {
+        // Reset to default isometric angles smoothly
+        gsap.to(isoContainer, {
+          rotationX: 60,
+          rotationZ: -45,
+          duration: 1.2,
+          ease: "power2.out"
+        });
+      });
+    }
+  }
 </script>

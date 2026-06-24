@@ -1,18 +1,18 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import StatsRow from '../components/StatsRow.astro';
-import GrowthFramework from '../components/GrowthFramework.astro';
-import EcosystemPartners from '../components/EcosystemPartners.astro';
-import ProofOfExecution from '../components/ProofOfExecution.astro';
-import CaseStudies from '../components/CaseStudies.astro';
-import StrategicAdvantage from '../components/StrategicAdvantage.astro';
-import RegionalBlueprint from '../components/RegionalBlueprint.astro';
-import PartnerPathway from '../components/PartnerPathway.astro';
-import ExpansionJourney from '../components/ExpansionJourney.astro';
-import CTASection from '../components/CTASection.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import StatsRow from "../components/StatsRow.astro";
+import GrowthFramework from "../components/GrowthFramework.astro";
+import EcosystemPartners from "../components/EcosystemPartners.astro";
+import ProofOfExecution from "../components/ProofOfExecution.astro";
+import CaseStudies from "../components/CaseStudies.astro";
+import StrategicAdvantage from "../components/StrategicAdvantage.astro";
+import RegionalBlueprint from "../components/RegionalBlueprint.astro";
+import PartnerPathway from "../components/PartnerPathway.astro";
+import ExpansionJourney from "../components/ExpansionJourney.astro";
+import CTASection from "../components/CTASection.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <BaseLayout
@@ -40,17 +40,17 @@ import Footer from '../components/Footer.astro';
 <script>
   const revealObserver = new IntersectionObserver(
     (entries) => {
-      entries.forEach(e => {
+      entries.forEach((e) => {
         if (e.isIntersecting) {
-          e.target.classList.add('in');
+          e.target.classList.add("in");
           revealObserver.unobserve(e.target);
         }
       });
     },
-    { threshold: 0.12 }
+    { threshold: 0.12 },
   );
 
-  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
+  document.querySelectorAll(".reveal, .reveal-stagger").forEach((el) => {
     revealObserver.observe(el);
   });
 </script>
