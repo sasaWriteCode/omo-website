@@ -1,9 +1,9 @@
 ---
+
 ---
+
 <section id="cta">
-
   <div class="cta-wrap">
-
     <div class="cta-tag reveal">Ready to Scale</div>
 
     <h2 class="cta-headline reveal">
@@ -11,61 +11,68 @@
     </h2>
 
     <p class="cta-sub reveal">
-      Whether you're entering a new market, scaling an existing business,
-      or building the systems for exponential growth — OMO is your strategic partner.
+      Whether you're entering a new market, scaling an existing business, or
+      building the systems for exponential growth — OMO is your strategic
+      partner.
     </p>
 
-    <div class="reveal">
-      <a href="mailto:hello@omomarketingads.com" class="cta-main-btn">
-        Book Your Free Strategy Call <span class="cta-main-btn-arrow">→</span>
-      </a>
+    <div class="reveal cta-btn-container">
+      <div class="cta-primary-group">
+        <a href="mailto:hello@omomarketingads.com" class="cta-main-btn">
+          Book Diagnose Consultation
+        </a>
+        <p class="cta-support-label">
+          Start with a 30-minute complimentary strategy session.
+        </p>
+      </div>
       <a href="#growth-framework" class="cta-sec-btn">Explore Our Framework</a>
     </div>
-
-    <div class="cta-rule"></div>
-
-    <div class="cta-contacts reveal">
-
-      <a href="mailto:hello@omomarketingads.com" class="cta-contact">
-        <div class="cta-contact-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-        </div>
-        <div class="cta-contact-text">
-          <span class="cta-contact-label">Email</span>
-          <span class="cta-contact-value">hello@omomarketingads.com</span>
-        </div>
-      </a>
-
-      <a href="https://wa.me/601XXXXXXXX" class="cta-contact" target="_blank" rel="noopener">
-        <div class="cta-contact-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.44 2 2 0 0 1 3.57 1.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.87-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-        </div>
-        <div class="cta-contact-text">
-          <span class="cta-contact-label">WhatsApp</span>
-          <span class="cta-contact-value">Chat with us</span>
-        </div>
-      </a>
-
-      <a href="https://www.linkedin.com/company/omo-group" class="cta-contact" target="_blank" rel="noopener">
-        <div class="cta-contact-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-            <rect x="2" y="9" width="4" height="12"/>
-            <circle cx="4" cy="4" r="2"/>
-          </svg>
-        </div>
-        <div class="cta-contact-text">
-          <span class="cta-contact-label">LinkedIn</span>
-          <span class="cta-contact-value">OMO Group</span>
-        </div>
-      </a>
-
-    </div><!-- /cta-contacts -->
   </div><!-- /cta-wrap -->
-
 </section>
+
+<style>
+  .cta-btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .cta-primary-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .cta-support-label {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0;
+    text-align: center;
+  }
+
+  #cta .cta-main-btn {
+    margin-bottom: 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(237, 72, 35, 0.25);
+  }
+
+  #cta .cta-sec-btn {
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-top: 4px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .cta-btn-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+  }
+</style>
