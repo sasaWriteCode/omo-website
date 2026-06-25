@@ -983,7 +983,7 @@ const cards: Card[] = [
   margin-bottom: 24px;
 }
 
-/* View Details button — OMO orange fill on hover */
+/* View Details button — OMO orange fill by default, transparent outline on hover */
 .wwa-card-btn {
   display: inline-flex;
   align-items: center;
@@ -992,14 +992,15 @@ const cards: Card[] = [
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #ed4823;
+  color: #111;
   background: none;
-  border: 1.5px solid rgba(237, 72, 35, 0.4);
+  border: 1.5px solid #ed4823;
   border-radius: 4px;
   padding: 10px 20px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 6px 20px rgba(237, 72, 35, 0.3);
   transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1009,25 +1010,21 @@ const cards: Card[] = [
   inset: 0;
   background: linear-gradient(110deg, #ed4823 0%, #f86240 45%, #ffd0b0 55%, #f86240 65%, #ed4823 100%);
   background-size: 200% auto;
-  transform: scaleX(0);
+  transform: scaleX(1);
   transform-origin: left;
   transition: transform 0.32s cubic-bezier(0.22, 0.68, 0, 1.2);
   z-index: 0;
-}
-
-.wwa-card-btn:hover {
-  color: #111;
-  border-color: #ed4823;
-  box-shadow: 0 6px 20px rgba(237, 72, 35, 0.3);
-}
-
-.wwa-card-btn:hover::before {
-  transform: scaleX(1);
   animation: btn-shimmer 3s linear infinite;
 }
 
+.wwa-card-btn:hover {
+  color: #ed4823;
+  border-color: rgba(237, 72, 35, 0.4);
+  box-shadow: none;
+}
+
 .wwa-card-btn:hover::before {
-  transform: scaleX(1);
+  transform: scaleX(0);
 }
 
 .wwa-card-btn span,
