@@ -1,139 +1,42 @@
 ---
+import FrameworkStepper from "./FrameworkStepper.astro";
 ---
 
-<!-- ═══ WHY OMO ═══ -->
-<!--
-<section id="why" class="section">
+<section id="growth-framework" class="gf-section">
   <div class="page-wrap">
-
-    <div class="why-intro reveal">
-      <hr class="accent" />
-      <span class="label">Why OMO</span>
-      <h2 class="title" style="font-size:clamp(2rem,3.5vw,2.8rem);margin-bottom:1rem">
-        Your Business, Strategically<br />
-        <span class="orange">Designed to Scale</span>
-      </h2>
-      <p class="body-text">
-        OMO combines a design-led approach with hands-on execution to help businesses
-        grow sustainably across Malaysia and ASEAN. We don't just advise — we co-build
-        with you, from structure to scale.
-      </p>
-    </div>
-
-    <div class="pillars reveal-stagger">
-      <div class="pillar">
-        <div class="pillar-num">01</div>
-        <div class="pillar-body">
-          <div class="pillar-title">Design-Led Strategy</div>
-          <p class="pillar-text">
-            Every solution begins with intentional design — mapping structure, systems,
-            and market positioning before a single resource is committed.
-          </p>
-        </div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">02</div>
-        <div class="pillar-body">
-          <div class="pillar-title">Hands-On Execution</div>
-          <p class="pillar-text">
-            We work alongside you through licensing, compliance, branding, and market
-            entry — delivering real results, not just recommendations.
-          </p>
-        </div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">03</div>
-        <div class="pillar-body">
-          <div class="pillar-title">ASEAN-First Perspective</div>
-          <p class="pillar-text">
-            Deep regional expertise across nine markets ensures your expansion is
-            locally nuanced, commercially sound, and strategically sequenced.
-          </p>
-        </div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">04</div>
-        <div class="pillar-body">
-          <div class="pillar-title">Integrated Growth Engine</div>
-          <p class="pillar-text">
-            Our proprietary OMO Growth Engine™ unifies advisory, branding, AI, finance,
-            and operations into one coherent, scalable system.
-          </p>
-        </div>
-      </div>
-    </div>
-
+    <FrameworkStepper />
   </div>
 </section>
--->
 
+<style>
+  .gf-section {
+    background: #0b0b0b;
+    padding: 120px 72px;
+    position: relative;
+    overflow: hidden;
+    min-height: 980px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-<!-- ═══ FRAMEWORK ═══ -->
-<section id="framework" class="section">
-  <div class="page-wrap">
+  .page-wrap {
+    width: 100%;
+    max-width: var(--max-wide); /* Let's use wide to give the 3-column layout ample room on desktop */
+  }
 
-    <div class="fw-header reveal">
-      <hr class="accent" />
-      <span class="label">The OMO Method</span>
-      <h2 class="title" style="font-size:clamp(2rem,3.2vw,2.7rem);margin-top:.5rem;margin-bottom:1rem">
-        Three Stages. <span class="orange">One Clear Path.</span>
-      </h2>
-      <p class="body-text">
-        From corporate setup to AI-powered operations — designed first, executed
-        hands-on at every stage of your growth.
-      </p>
-    </div>
+  /* Responsive styling */
+  @media (max-width: 1024px) {
+    .gf-section {
+      padding: 80px 32px;
+      min-height: auto;
+    }
+  }
 
-    <div class="fw-stages reveal">
+  @media (max-width: 767px) {
+    .gf-section {
+      padding: 60px 16px;
+    }
+  }
+</style>
 
-      <div class="fw-stage">
-        <div class="fw-stage-num">01</div>
-        <div class="fw-stage-content">
-          <span class="fw-stage-tag">Entry Stage</span>
-          <div class="fw-stage-title">Design Corporate Structure &amp; Market Setup</div>
-          <span class="fw-stage-engine">OMO Growth Engine™</span>
-          <ul class="fw-list">
-            <li>Compliance &amp; Regulatory Framework</li>
-            <li>Licensing &amp; Corporate Registration</li>
-            <li>Strategic Business Advisory</li>
-            <li>Monthly Coaching &amp; Performance Review</li>
-            <li>Roadmap Design &amp; Fund Planning</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="fw-stage">
-        <div class="fw-stage-num">02</div>
-        <div class="fw-stage-content">
-          <span class="fw-stage-tag">Expansion Stage</span>
-          <div class="fw-stage-title">Design Business Growth &amp; Brand Positioning</div>
-          <span class="fw-stage-engine">Scale Engine — Upgrade Option</span>
-          <ul class="fw-list">
-            <li>Full Execution Support</li>
-            <li>Brand Positioning &amp; Identity Design</li>
-            <li>Market Expansion Strategy</li>
-            <li>Channel &amp; Partner Development</li>
-            <li>Revenue Growth Architecture</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="fw-stage">
-        <div class="fw-stage-num">03</div>
-        <div class="fw-stage-content">
-          <span class="fw-stage-tag">Scale Stage</span>
-          <div class="fw-stage-title">Design AI, Data &amp; Financial Systems</div>
-          <span class="fw-stage-engine">Complete Scale Engine</span>
-          <ul class="fw-list">
-            <li>AI Integration &amp; Digital Transformation</li>
-            <li>Marketing Automation Architecture</li>
-            <li>System &amp; Platform Integration</li>
-            <li>Sales Infrastructure &amp; Ops Scaling</li>
-            <li>Financial Systems Design</li>
-          </ul>
-        </div>
-      </div>
-
-    </div><!-- /fw-stages -->
-  </div>
-</section>

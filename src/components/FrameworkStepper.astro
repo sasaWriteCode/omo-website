@@ -1,0 +1,636 @@
+---
+const stages = [
+  {
+    num: "01",
+    id: "diagnose",
+    title: "Diagnose",
+    subtitle: "Audit gaps & opportunities",
+    desc: "We audit business gaps, market opportunities, revenue leaks, and operational bottlenecks before recommending solutions.",
+    color: "#f1f1ef",
+    glowColor: "rgba(241, 241, 239, 0.4)",
+    d: "M 96.2 281.5 A 397 397 0 0 1 799.8 312.2",
+    x2: 799.8,
+    y2: 312.2,
+    numX: 780.3,
+    numY: 275.5,
+    iconSvg: `<svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+    focusAreas: [
+      "Business health audit",
+      "Revenue leak diagnostics",
+      "Operational bottleneck check"
+    ]
+  },
+  {
+    num: "02",
+    id: "strategise",
+    title: "Strategise",
+    subtitle: "Brand, market & growth plan",
+    desc: "We create the brand, market, and growth plan needed to guide decision-making and execution.",
+    color: "#ecd76b",
+    glowColor: "rgba(236, 215, 107, 0.4)",
+    d: "M 155.0 315.5 A 329 329 0 0 1 738.2 341.0",
+    x2: 738.2,
+    y2: 341.0,
+    numX: 718.1,
+    numY: 304.2,
+    iconSvg: `<svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+    focusAreas: [
+      "Brand identity & positioning",
+      "Go-to-market strategy",
+      "Prioritized growth roadmap"
+    ]
+  },
+  {
+    num: "03",
+    id: "build",
+    title: "Build",
+    subtitle: "Systems, team & operations",
+    desc: "We structure the systems, team workflows, operating processes, and execution foundation needed for sustainable growth.",
+    color: "#eb6237",
+    glowColor: "rgba(235, 98, 55, 0.4)",
+    d: "M 214.0 349.5 A 261 261 0 0 1 676.5 369.7",
+    x2: 676.5,
+    y2: 369.7,
+    numX: 655.9,
+    numY: 333.3,
+    iconSvg: `<svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
+    focusAreas: [
+      "Workflow automation setup",
+      "Standard Operating Procedures (SOPs)",
+      "Core tech stack integration"
+    ]
+  },
+  {
+    num: "04",
+    id: "accelerate",
+    title: "Accelerate",
+    subtitle: "Revenue & AI-powered growth",
+    desc: "We activate revenue growth through AI-powered marketing, performance systems, funnel optimisation, and measurable execution.",
+    color: "#c63a2f",
+    glowColor: "rgba(198, 58, 47, 0.4)",
+    d: "M 272.9 383.5 A 193 193 0 0 1 614.9 398.4",
+    x2: 614.9,
+    y2: 398.4,
+    numX: 593.1,
+    numY: 362.5,
+    iconSvg: `<svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 22l10-6 10 6L12 2z"/></svg>`,
+    focusAreas: [
+      "AI-driven marketing engine",
+      "Conversion funnel optimization",
+      "Multi-channel growth campaigns"
+    ]
+  },
+  {
+    num: "05",
+    id: "capitalise",
+    title: "Capitalise",
+    subtitle: "Scale & exit ready",
+    desc: "We prepare the business for scale, investor readiness, regional expansion, or exit opportunities.",
+    color: "#d889d8",
+    glowColor: "rgba(216, 137, 216, 0.4)",
+    d: "M 331.7 417.5 A 125 125 0 0 1 553.3 427.2",
+    x2: 553.3,
+    y2: 427.2,
+    numX: 529.6,
+    numY: 392.8,
+    iconSvg: `<svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+    focusAreas: [
+      "Regional expansion playbook",
+      "Pitch deck & investor materials",
+      "Compliance & exit structuring"
+    ]
+  }
+];
+---
+
+<div class="framework-stepper-grid">
+  {/* LEFT COLUMN: Editorial Text */}
+  <div class="gf-left-column reveal">
+    <div class="accent-bar"></div>
+    <span class="gf-eyebrow">The OMO Method</span>
+    <h2 class="gf-title-text">
+      5 Stage<br /><span class="orange-text">Framework</span>
+    </h2>
+    <p class="gf-subtitle-text">How we take every client from diagnosis to growth.</p>
+    <p class="gf-desc-text">
+      Our framework starts with diagnosis before execution. We identify what is blocking growth, design the right strategy, build the systems, accelerate revenue, and prepare the business for scale or capital readiness.
+    </p>
+  </div>
+
+  {/* CENTER COLUMN: SVG Arc-Band Visual */}
+  <div class="gf-center-column reveal">
+    <div class="svg-visual-container">
+      <svg viewBox="0 0 920 680" class="gf-arc-svg" aria-hidden="true">
+        {/* Concentric background tracks */}
+        {stages.map((stage) => (
+          <path
+            class="arc-track-path"
+            d={stage.d}
+            stroke="rgba(255, 255, 255, 0.05)"
+            stroke-width="46"
+            fill="none"
+          />
+        ))}
+
+        {/* Foreground animated reveal paths */}
+        {stages.map((stage) => (
+          <path
+            class="arc-draw-path"
+            id={`path-${stage.id}`}
+            d={stage.d}
+            stroke={stage.color}
+            stroke-width="46"
+            fill="none"
+            stroke-linecap="butt"
+          />
+        ))}
+
+        {/* Arrowheads aligned clockwise at the end of the arcs */}
+        {stages.map((stage) => (
+          <g
+            id={`arrow-group-${stage.id}`}
+            class="arc-arrow-group"
+            transform={`translate(${stage.x2}, ${stage.y2}) rotate(65)`}
+            style={`--glow-color: ${stage.glowColor};`}
+          >
+            <polygon
+              points="0,-28 34,0 0,28"
+              fill={stage.color}
+              class="arrowhead-poly"
+            />
+          </g>
+        ))}
+
+        {/* Stage numbers inside the bands */}
+        {stages.map((stage) => (
+          <text
+            x={stage.numX}
+            y={stage.numY}
+            fill="#0b0b0b"
+            font-size="28"
+            font-weight="800"
+            text-anchor="middle"
+            dominant-baseline="central"
+            class="arc-number-text"
+            id={`num-${stage.id}`}
+          >
+            {stage.num}
+          </text>
+        ))}
+      </svg>
+    </div>
+  </div>
+
+  {/* RIGHT COLUMN: Stage List */}
+  <div class="gf-right-column">
+    {stages.map((stage, idx) => (
+      <div
+        class="stage-list-item"
+        id={`item-${stage.id}`}
+        data-step-id={stage.id}
+        data-index={idx}
+      >
+        <div class="stage-badge" style={`background-color: ${stage.color};`}>
+          <Fragment set:html={stage.iconSvg} />
+        </div>
+        <div class="stage-list-content">
+          <h3 class="stage-list-title">{stage.title}</h3>
+          <p class="stage-list-desc">{stage.subtitle}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  /* ── 3-Column Desktop Grid Layout ──────────────────────────────────── */
+  .framework-stepper-grid {
+    display: grid;
+    grid-template-columns: 28% 44% 28%;
+    gap: 32px;
+    align-items: start;
+    width: 100%;
+  }
+
+  /* ── Left Column Text Styles ────────────────────────────────────────── */
+  .gf-left-column {
+    position: sticky;
+    top: 140px;
+  }
+
+  .accent-bar {
+    width: 68px;
+    height: 4px;
+    background: #ed4823;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+
+  .gf-eyebrow {
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ed4823;
+    display: block;
+    font-weight: 700;
+  }
+
+  .gf-title-text {
+    font-family: var(--serif);
+    font-size: 76px;
+    line-height: 0.96;
+    font-weight: 700;
+    color: #ffffff;
+    margin-top: 18px;
+    margin-bottom: 28px;
+  }
+
+  .orange-text {
+    color: #ed4823;
+  }
+
+  .gf-subtitle-text {
+    font-size: 22px;
+    line-height: 1.35;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 90%;
+    margin-bottom: 28px;
+  }
+
+  .gf-desc-text {
+    font-size: 16px;
+    line-height: 1.8;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.72);
+    max-width: 92%;
+    margin: 0;
+  }
+
+  /* ── Center Column SVG Styles ───────────────────────────────────────── */
+  .gf-center-column {
+    width: 100%;
+  }
+
+  .svg-visual-container {
+    position: relative;
+    width: 100%;
+    height: 760px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .gf-arc-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .arc-arrow-group {
+    opacity: 0;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+
+  .arc-arrow-group.is-active {
+    filter: drop-shadow(0 0 8px var(--glow-color, rgba(237, 72, 35, 0.6)));
+  }
+
+  .arc-number-text {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .arc-number-text.is-active {
+    opacity: 1;
+  }
+
+  /* ── Right Column Stage List Styles ────────────────────────────────── */
+  .gf-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    justify-content: center;
+    min-height: 760px;
+    padding-left: 12px;
+  }
+
+  .stage-list-item {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: default;
+    width: 100%;
+    opacity: 0.55;
+    transform: translateX(8px);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .stage-list-item.is-active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .stage-badge {
+    width: 92px;
+    height: 92px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  #item-diagnose .stage-badge,
+  #item-strategise .stage-badge {
+    color: #0b0b0b;
+  }
+
+  #item-build .stage-badge,
+  #item-accelerate .stage-badge,
+  #item-capitalise .stage-badge {
+    color: #ffffff;
+  }
+
+  .stage-badge svg {
+    transition: transform 0.3s ease;
+  }
+
+  .stage-list-item.is-active .stage-badge {
+    transform: scale(1.05);
+  }
+
+  .stage-list-item.is-active .stage-badge svg {
+    transform: scale(1.06);
+  }
+
+  .stage-list-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stage-list-title {
+    font-size: 28px;
+    line-height: 1.1;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .stage-list-desc {
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.86);
+    margin: 0;
+  }
+
+  /* ── Tablet Viewport Spec ───────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .framework-stepper-grid {
+      grid-template-columns: 100%;
+      gap: 48px;
+    }
+
+    .gf-left-column {
+      position: static;
+      max-width: 100%;
+    }
+
+    .gf-title-text {
+      font-size: 60px;
+    }
+
+    .svg-visual-container {
+      height: 620px;
+      justify-content: center;
+    }
+
+    .gf-right-column {
+      min-height: auto;
+      gap: 24px;
+      padding-left: 0;
+    }
+
+    .stage-badge {
+      width: 76px;
+      height: 76px;
+    }
+
+    .stage-badge svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    .stage-list-title {
+      font-size: 24px;
+    }
+  }
+
+  /* ── Mobile Viewport Spec ───────────────────────────────────────────── */
+  @media (max-width: 767px) {
+    .svg-visual-container {
+      height: 340px;
+    }
+
+    .gf-title-text {
+      font-size: 48px;
+    }
+
+    .stage-badge {
+      width: 56px;
+      height: 56px;
+    }
+
+    .stage-badge svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .stage-list-title {
+      font-size: 22px;
+    }
+
+    .stage-list-desc {
+      font-size: 14px;
+    }
+
+    .stage-list-item {
+      gap: 16px;
+      transform: none !important;
+    }
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .arc-arrow-group,
+    .arc-number-text,
+    .stage-list-item,
+    .stage-badge,
+    .stage-badge svg {
+      transition: none !important;
+      transform: none !important;
+      animation: none !important;
+      opacity: 1 !important;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function setupArcStepper() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.innerWidth < 768;
+    const stages = ['diagnose', 'strategise', 'build', 'accelerate', 'capitalise'];
+
+    /* ── Reduced Motion Fallback ────────────────────────────────────── */
+    if (prefersReducedMotion) {
+      stages.forEach((id) => {
+        const path = document.getElementById(`path-${id}`) as SVGPathElement | null;
+        const arrow = document.getElementById(`arrow-group-${id}`);
+        const num = document.getElementById(`num-${id}`);
+        const item = document.getElementById(`item-${id}`);
+
+        if (path) {
+          const len = path.getTotalLength();
+          path.style.strokeDasharray = len.toString();
+          path.style.strokeDashoffset = '0';
+        }
+        if (arrow) arrow.classList.add('is-active');
+        if (num) num.classList.add('is-active');
+        if (item) item.classList.add('is-active');
+      });
+      return;
+    }
+
+    /* ── SVG Path Length Initialization ─────────────────────────────── */
+    const paths: Record<string, SVGPathElement> = {};
+    const pathLengths: Record<string, number> = {};
+
+    stages.forEach((id) => {
+      const path = document.getElementById(`path-${id}`) as SVGPathElement | null;
+      if (path) {
+        const len = path.getTotalLength();
+        path.style.strokeDasharray = len.toString();
+        path.style.strokeDashoffset = len.toString();
+        paths[id] = path;
+        pathLengths[id] = len;
+      }
+    });
+
+    /* ── Mobile: Auto-reveal timeline without scroll-pin scrub ──────── */
+    if (isMobile) {
+      const mobileTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#growth-framework',
+          start: 'top 70%',
+          once: true
+        }
+      });
+
+      stages.forEach((id) => {
+        const p = paths[id];
+        const arrow = document.getElementById(`arrow-group-${id}`);
+        const num = document.getElementById(`num-${id}`);
+        const item = document.getElementById(`item-${id}`);
+
+        if (!p) return;
+
+        mobileTl.to(p, {
+          strokeDashoffset: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          onComplete: () => {
+            if (item) item.classList.add('is-active');
+          }
+        });
+
+        mobileTl.to([arrow, num], {
+          opacity: 1,
+          duration: 0.15,
+          onStart: () => {
+            if (arrow) arrow.classList.add('is-active');
+            if (num) num.classList.add('is-active');
+          }
+        }, '-=0.1');
+      });
+
+      return;
+    }
+
+    /* ── Desktop & Tablet: Scroll-Pinned Scrub Timeline ─────────────── */
+    const desktopTl = gsap.timeline();
+
+    stages.forEach((id, idx) => {
+      const p = paths[id];
+      const arrow = document.getElementById(`arrow-group-${id}`);
+      const num = document.getElementById(`num-${id}`);
+
+      if (!p) return;
+
+      // Draw the arc band path
+      desktopTl.to(p, {
+        strokeDashoffset: 0,
+        duration: 1.0,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          setActiveStage(id);
+        },
+        onReverseComplete: () => {
+          if (idx === 0) {
+            setActiveStage('');
+          } else {
+            setActiveStage(stages[idx - 1]);
+          }
+        }
+      });
+
+      // Scale/activate arrow tip, number watermark, and stage details
+      desktopTl.to([arrow, num], {
+        opacity: 1,
+        duration: 0.2,
+        ease: 'power2.out',
+        onStart: () => {
+          if (arrow) arrow.classList.add('is-active');
+          if (num) num.classList.add('is-active');
+        },
+        onReverseComplete: () => {
+          if (arrow) arrow.classList.remove('is-active');
+          if (num) num.classList.remove('is-active');
+        }
+      }, '-=0.2');
+    });
+
+    // Pinned ScrollTrigger setup (desktop timeline scrub)
+    ScrollTrigger.create({
+      trigger: '#growth-framework',
+      start: 'center center',
+      end: '+=1600',
+      pin: true,
+      scrub: 1.2,
+      animation: desktopTl,
+      invalidateOnRefresh: true
+    });
+
+    function setActiveStage(id: string) {
+      stages.forEach((sId) => {
+        const item = document.getElementById(`item-${sId}`);
+        if (item) {
+          item.classList.toggle('is-active', sId === id);
+        }
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', setupArcStepper);
+</script>
