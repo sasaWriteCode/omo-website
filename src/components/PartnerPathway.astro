@@ -599,6 +599,46 @@ const partners: PartnerDetail[] = [
         filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.95)) drop-shadow(0 0 20px rgba(239, 68, 68, 0.6));
       }
 
+      @media (max-width: 1023px) {
+        .partner-card-backdrop {
+          position: fixed;
+          inset: 0;
+          background: rgba(10, 10, 10, 0.45);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          z-index: 10000;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+        }
+
+        .partner-card-backdrop.active {
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .partner-card {
+          position: fixed !important;
+          top: 50% !important;
+          left: 50% !important;
+          transform: translate(-50%, -50%) scale(0.9) !important;
+          width: 90% !important;
+          max-width: 400px !important;
+          z-index: 10001 !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
+          margin: 0 !important;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px var(--card-accent, rgba(239, 68, 68, 0.25)) !important;
+          transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        .partner-card.active {
+          opacity: 1 !important;
+          transform: translate(-50%, -50%) scale(1) !important;
+          pointer-events: auto !important;
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .rolling-sphere-group {
           animation: none;
@@ -919,6 +959,8 @@ const partners: PartnerDetail[] = [
               <p class="partner-card-desc" id="cardDesc"></p>
             </div>
           </div>
+          <!-- Backdrop for mobile viewport modal centering -->
+          <div class="partner-card-backdrop" id="partnerCardBackdrop"></div>
 
         </div>
       </div>
@@ -985,20 +1027,31 @@ const partners: PartnerDetail[] = [
 
         // Reset state from previous opens
         card.classList.remove('active');
+        const backdropEl = document.getElementById('partnerCardBackdrop');
+        if (backdropEl) backdropEl.classList.remove('active');
 
-        // 1. Cinematic Zoom-in
-        const coords = origins[id];
-        if (coords && innerContainer) {
-          if (wrapContainer) wrapContainer.classList.add('zoomed-state');
-          innerContainer.style.transformOrigin = `${coords.x} ${coords.y}`;
-          innerContainer.classList.add('zoomed');
+        const isMobile = window.innerWidth <= 1023;
+
+        // 1. Cinematic Zoom-in (desktop only)
+        if (!isMobile) {
+          const coords = origins[id];
+          if (coords && innerContainer) {
+            if (wrapContainer) wrapContainer.classList.add('zoomed-state');
+            innerContainer.style.transformOrigin = `${coords.x} ${coords.y}`;
+            innerContainer.classList.add('zoomed');
+          }
         }
 
-        // 2. Position the card relative to the clicked partner
-        const pos = cardPositions[id];
-        if (pos) {
-          card.style.left = pos.left;
-          card.style.top = pos.top;
+        // 2. Position the card relative to the clicked partner (desktop only)
+        if (!isMobile) {
+          const pos = cardPositions[id];
+          if (pos) {
+            card.style.left = pos.left;
+            card.style.top = pos.top;
+          }
+        } else {
+          card.style.left = '';
+          card.style.top = '';
         }
 
         // 3. Load Card Data
@@ -1034,10 +1087,15 @@ const partners: PartnerDetail[] = [
           card.style.setProperty('--card-accent-label', '#ef4444');
         }
 
-        // 4. Open Card after Cinematic Zoom decelerates (700ms)
+        // 4. Open Card after Cinematic Zoom decelerates (or immediately on mobile)
+        const delay = isMobile ? 50 : 700;
         setTimeout(() => {
           card.classList.add('active');
           card.setAttribute('aria-hidden', 'false');
+          if (isMobile && backdropEl) {
+            backdropEl.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
           
           // Attach document listener on next tick to avoid capturing current click
           setTimeout(() => {
@@ -1046,12 +1104,16 @@ const partners: PartnerDetail[] = [
               clickOutsideHandlerAttached = true;
             }
           }, 50);
-        }, 700);
+        }, delay);
       }
 
       function closeCard() {
         card.classList.remove('active');
         card.setAttribute('aria-hidden', 'true');
+        
+        const backdropEl = document.getElementById('partnerCardBackdrop');
+        if (backdropEl) backdropEl.classList.remove('active');
+        document.body.style.overflow = '';
         
         // Remove click listener
         if (clickOutsideHandlerAttached) {
@@ -1092,6 +1154,11 @@ const partners: PartnerDetail[] = [
       });
 
       closeBtn.addEventListener('click', closeCard);
+
+      const backdropEl = document.getElementById('partnerCardBackdrop');
+      if (backdropEl) {
+        backdropEl.addEventListener('click', closeCard);
+      }
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && card.classList.contains('active')) {

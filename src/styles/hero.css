@@ -621,7 +621,6 @@
     height: 300px;
   }
 }
-
 /* Tablet (768px to 1023px) */
 @media (max-width: 1023px) {
   #hero-premium {
@@ -638,6 +637,9 @@
   .hero-premium-content {
     align-items: center;
     text-align: center;
+    position: relative !important;
+    z-index: 2 !important;
+    pointer-events: auto !important;
   }
 
   .hero-premium-desc {
@@ -660,13 +662,27 @@
   }
 
   .hero-premium-visual {
-    height: 450px;
-    margin-top: 20px;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 500px !important;
+    max-width: 600px !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .hero-premium-stage {
     max-width: 440px;
     max-height: 440px;
+    opacity: 0.12 !important; /* Faded background visual */
+    pointer-events: none !important;
   }
 
   .iso-container {
@@ -674,10 +690,23 @@
     height: 260px;
   }
 
-  /* Adjust floating labels slightly closer */
-  .pill-incubator  { top: 8%;  left: 0%; }
-  .pill-doctor     { top: 8%;  right: 0%; }
-  .pill-accelerator{ bottom: 10%; left: 50%; transform: translateX(-50%); }
+  /* Hide custom absolute 3D spacing for labels to avoid overflow,
+     we will render them as a flex row of standard pills under the copywriting content */
+  .hero-premium-stage .hero-pill-label {
+    display: none !important;
+  }
+
+  /* Show mobile style pills container on tablet as well */
+  .hero-premium-mobile-pills {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+    width: 100%;
+    position: relative;
+    z-index: 3;
+  }
 }
 
 /* Mobile (under 768px) */
@@ -727,12 +756,23 @@
 
   /* 2.5D visual container on mobile */
   .hero-premium-visual {
-    height: 380px;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 480px !important;
+    max-height: 480px !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    margin: 0 !important;
   }
 
   .hero-premium-stage {
     max-width: 320px;
     max-height: 320px;
+    opacity: 0.08 !important; /* Even lower opacity for small screens */
   }
 
   .iso-container {
@@ -741,19 +781,21 @@
   }
 
   /* Hide custom absolute 3D spacing for labels to avoid overflow,
-     we will render them as a flex row of standard pills under the visual container */
+     we will render them as a flex row of standard pills under the copywriting content */
   .hero-premium-stage .hero-pill-label {
-    display: none;
+    display: none !important;
   }
 
   /* Mobile only container for labels */
   .hero-premium-mobile-pills {
-    display: flex;
+    display: flex !important;
     flex-wrap: wrap;
     justify-content: center;
     gap: 8px;
     margin-top: 20px;
     width: 100%;
+    position: relative;
+    z-index: 3;
   }
 
   .mobile-pill {
