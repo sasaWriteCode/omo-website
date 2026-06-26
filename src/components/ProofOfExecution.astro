@@ -14,7 +14,8 @@
           methodologies — deployed across industries and geographies.</p>
       </div>
 
-      <div class="port-cards reveal">
+      <div class="port-cards-wrapper reveal">
+        <div class="port-cards">
 
         <!-- Suzuran Japan -->
         <div class="port-card">
@@ -122,14 +123,74 @@
       margin-bottom: 1rem;
     }
 
-    /* 4-card grid */
+    /* Header layout for controls */
+    .port-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+    }
+
+    .port-controls {
+      display: flex;
+      gap: .75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .port-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s ease;
+    }
+
+    .port-btn:hover:not(.disabled) {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: #fff;
+    }
+
+    .port-btn.disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .port-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Carousel layout */
+    .port-cards-wrapper {
+      overflow: hidden;
+      width: 100%;
+    }
+
     .port-cards {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      display: flex;
       gap: 1.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+      padding-bottom: 1.5rem; /* space for card shadows */
+    }
+
+    .port-cards::-webkit-scrollbar {
+      display: none; /* Safari/Chrome */
     }
 
     .port-card {
+      flex: 0 0 calc(33.333% - 1rem); /* 3 cards visible on desktop */
+      scroll-snap-align: start;
       display: flex;
       flex-direction: column;
       background: var(--light);
