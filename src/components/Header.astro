@@ -1,9 +1,11 @@
 ---
+
 ---
+
 <nav id="nav">
   <div class="nav-wrap">
     <a href="#" class="nav-logo">
-      <img src="/assets/omo_logo.png" alt="OMO Group" />
+      <img src="assets/omo_logo.png" alt="OMO Group" />
     </a>
 
     <ul class="nav-links">
@@ -39,9 +41,11 @@
     display: none;
     background: var(--orange-d);
     padding: 1rem var(--gutter);
-    border-top: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
-  .nav-mobile.open { display: block; }
+  .nav-mobile.open {
+    display: block;
+  }
   .nav-mobile-links {
     display: flex;
     flex-direction: column;
@@ -53,13 +57,17 @@
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: rgba(0,0,0,0.8);
+    color: rgba(0, 0, 0, 0.8);
     padding: 0.65rem 0.5rem;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     transition: color 0.15s;
   }
-  .nav-mobile-links a:last-child { border-bottom: none; }
-  .nav-mobile-links a:hover { color: #000; }
+  .nav-mobile-links a:last-child {
+    border-bottom: none;
+  }
+  .nav-mobile-links a:hover {
+    color: #000;
+  }
   .nav-mobile-cta {
     background: #000 !important;
     color: var(--white) !important;
@@ -73,20 +81,24 @@
 
 <script>
   // Scroll: add .scrolled class
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav?.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
+  const nav = document.getElementById("nav");
+  window.addEventListener(
+    "scroll",
+    () => {
+      nav?.classList.toggle("scrolled", window.scrollY > 40);
+    },
+    { passive: true },
+  );
 
   // Hamburger toggle
-  const hamburger = document.getElementById('navHamburger');
-  const mobileMenu = document.getElementById('navMobile');
-  hamburger?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('open');
+  const hamburger = document.getElementById("navHamburger");
+  const mobileMenu = document.getElementById("navMobile");
+  hamburger?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("open");
   });
 
   // Close mobile nav on link click
-  mobileMenu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => mobileMenu.classList.remove("open"));
   });
 </script>
