@@ -874,6 +874,16 @@
       document.querySelectorAll('.pf').forEach(btn => {
         btn.onclick = function (e) {
           e.stopPropagation();
+
+          // Get top offset of #clients before filter collapse to avoid layout jump
+          const clientsSection = document.getElementById('clients');
+          let targetTop = 0;
+          if (clientsSection) {
+            const rect = clientsSection.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            targetTop = rect.top + scrollTop - 32;
+          }
+
           document.querySelectorAll('.pf').forEach(b => b.classList.remove('active'));
           this.classList.add('active');
           const cat = this.dataset.cat;
@@ -886,6 +896,14 @@
               c.style.display = 'none';
             }
           });
+
+          // Scroll to the top of the section instantly to prevent jumping
+          if (clientsSection) {
+            window.scrollTo({
+              top: targetTop,
+              behavior: 'auto'
+            });
+          }
         };
       });
     })();

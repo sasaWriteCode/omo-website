@@ -1,0 +1,1543 @@
+---
+const splitText = (text: string) => {
+  return text.split('').map((char, index) => ({
+    char: char === ' ' ? '\u00A0' : char,
+    index
+  }));
+};
+---
+<!-- ════════ ADVISORY & INCUBATION PROGRAMS ════════ -->
+<section id="programs" class="section">
+  <div class="page-wrap">
+    <div class="prog-header reveal">
+      <hr class="accent" />
+      <span class="label">Advisory & Incubation</span>
+      <h2 class="title">Advisory & Incubation Programs</h2>
+      <p class="subtitle">Structured growth support for founders, SMEs, scaling businesses, and APAC expansion-ready companies.</p>
+      <p class="body">
+        Choose the right level of support based on your business stage — from monthly advisory to structured incubation tracks with clear phases, deliverables, and milestones.
+      </p>
+    </div>
+
+    <!-- Main Page Program Cards -->
+    <div class="prog-cards reveal-stagger">
+      <!-- Card 1: Monthly Advisory Plans -->
+      <div class="prog-card">
+        <div class="prog-card-inner">
+          <span class="prog-card-label">Monthly Advisory</span>
+          <h3 class="prog-card-title">Monthly Advisory Plans</h3>
+          <p class="prog-card-desc">
+            For founders, startups, growing teams and established companies that need ongoing strategic advisory support.
+          </p>
+          <button class="prog-cta-btn" id="openAdvisoryBtn">
+            <span class="btn-text-wrapper">
+              {splitText("View Advisory Plans").map(({ char, index }) => (
+                <span class="char-wrapper" style={`--char-index: ${index}`}>
+                  <span class="char char-primary">{char}</span>
+                  <span class="char char-secondary">{char}</span>
+                </span>
+              ))}
+            </span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2: Incubation Program -->
+      <div class="prog-card">
+        <div class="prog-card-inner">
+          <span class="prog-card-label">Structured Incubation</span>
+          <h3 class="prog-card-title">Incubation Program</h3>
+          <p class="prog-card-desc">
+            For businesses that need structured launch or growth support with clear phases, deliverables, milestones and rebate structure.
+          </p>
+          <button class="prog-cta-btn" id="openIncubationBtn">
+            <span class="btn-text-wrapper">
+              {splitText("Explore Incubation Program").map(({ char, index }) => (
+                <span class="char-wrapper" style={`--char-index: ${index}`}>
+                  <span class="char char-primary">{char}</span>
+                  <span class="char char-secondary">{char}</span>
+                </span>
+              ))}
+            </span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────
+     MODAL 1: ADVISORY PLANS
+  ───────────────────────────────────────────── -->
+  <div id="advisoryModal" class="prog-modal" aria-hidden="true">
+    <div class="prog-modal-backdrop"></div>
+    <div class="prog-modal-content">
+      <button class="prog-modal-close" aria-label="Close modal">&times;</button>
+      <div class="prog-modal-header">
+        <span class="label">OMO Advisory Plan</span>
+        <h2 class="modal-title">Strategic Monthly Advisory Plans</h2>
+      </div>
+      <div class="prog-modal-body">
+        <div class="advisory-grid">
+          <!-- Plan 1: Foundation -->
+          <div class="adv-plan-card" style="--plan-color: #a28c37;">
+            <div class="adv-plan-hdr">
+              <h4>Foundation</h4>
+              <div class="price-row">
+                <span class="currency">RM</span>
+                <span class="amount">3,600</span>
+                <span class="period">/ month</span>
+              </div>
+            </div>
+            <div class="adv-plan-body">
+              <div class="adv-section">
+                <h5>Best For:</h5>
+                <ul>
+                  <li>Idea-stage entrepreneurs</li>
+                  <li>Pre-revenue startups</li>
+                  <li>First-time founders</li>
+                </ul>
+              </div>
+              <hr class="card-divider" />
+              <div class="adv-section">
+                <h5>Included:</h5>
+                <ul>
+                  <li>1× Monthly Strategy Session</li>
+                  <li>Business Health Diagnostic</li>
+                  <li>Market & Competitor Review</li>
+                  <li>Social Media Brand Review</li>
+                  <li>WhatsApp Support</li>
+                </ul>
+              </div>
+              <hr class="card-divider" />
+              <div class="adv-section">
+                <h5>Consultant Scope:</h5>
+                <ul>
+                  <li>2-4 Hours Advisory Monthly</li>
+                  <li>Max 2 Participants</li>
+                  <li>Advisory Only</li>
+                  <li>Templates & Resource Vault</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Plan 2: Growth Accelerator -->
+          <div class="adv-plan-card" style="--plan-color: #ed4823;">
+            <div class="adv-plan-hdr">
+              <h4>Growth Accelerator</h4>
+              <div class="price-row">
+                <span class="currency">RM</span>
+                <span class="amount">4,500</span>
+                <span class="period">/ month</span>
+              </div>
+            </div>
+            <div class="adv-plan-body">
+              <div class="adv-section">
+                <h5>Best For:</h5>
+                <ul>
+                  <li>Startups with product-market fit</li>
+                  <li>Businesses seeking first customers</li>
+                  <li>Early-stage growth</li>
+                </ul>
+              </div>
+              <hr class="card-divider" />
+              <div class="adv-section">
+                <h5>Included:</h5>
+                <ul>
+                  <li>2× Monthly Strategy Sessions</li>
+                  <li>Go-To-Market Strategy</li>
+                  <li>Lead Generation Setup</li>
+                  <li>Brand Positioning Review</li>
+                  <li>Sales Funnel & CRM Guidance</li>
+                  <li>KPI Growth Tracking</li>
+                  <li>Priority WhatsApp Support</li>
+                </ul>
+              </div>
+              <hr class="card-divider" />
+              <div class="adv-section">
+                <h5>Consultant Scope:</h5>
+                <ul>
+                  <li>4-6 Hours Advisory Monthly</li>
+                  <li>Max 4 Participants</li>
+                  <li>Light Execution Support</li>
+                  <li>KPI Monitoring</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Plan 3: Scale Builder -->
+          <div class="adv-plan-card" style="--plan-color: #e33e1c;">
+            <div class="adv-plan-hdr">
+              <h4>Scale Builder</h4>
+              <div class="price-row">
+                <span class="currency">RM</span>
+                <span class="amount">7,200</span>
+                <span class="period">/ month</span>
+              </div>
+            </div>
+            <div class="adv-plan-body">
+              <div class="adv-section">
+                <h5>Best For:</h5>
+                <ul>
+                  <li>Revenue-generating businesses</li>
+                  <li>Businesses ready to scale</li>
+                  <li>Growing teams</li>
+                </ul>
+              </div>
+              <hr class="card-divider" />
+              <div class="adv-section">
+                <h5>Included:</h5>
+                <ul>
+                  <li>4× Monthly Advisory Sessions</li>
+                  <li>Revenue Expansion Strategy</li>
+                  <li>Marketing Execution Planning</li>
+                  <li>Systems & Automation Roadmap</li>
+                  <li>Funnel Design Consultation</li>
+                  <li>Investor Readiness Review</li>
+                  <li>Dedicated Account Manager</li>
+                </ul>
+              </div>
+              <hr class="card-divider" />
+              <div class="adv-section">
+                <h5>Consultant Scope:</h5>
+                <ul>
+                  <li>6-8 Hours Advisory Monthly</li>
+                  <li>Max 8 Participants</li>
+                  <li>Strategic Support</li>
+                  <li>Dashboard Framework</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Plan 4: Expansion & Capital Track -->
+          <div class="adv-plan-card" style="--plan-color: #b31919;">
+            <div class="adv-plan-hdr">
+              <h4>Expansion & Capital Track</h4>
+              <div class="price-row">
+                <span class="currency">RM</span>
+                <span class="amount">9,900</span>
+                <span class="period">/ month</span>
+              </div>
+            </div>
+            <div class="adv-plan-body">
+              <div class="adv-section">
+                <h5>Best For:</h5>
+                <ul>
+                  <li>Established businesses</li>
+                  <li>APAC expansion plans</li>
+                  <li>Fundraising preparation</li>
+                </ul>
+              </div>
+              <hr class="card-divider" />
+              <div class="adv-section">
+                <h5>Included:</h5>
+                <ul>
+                  <li>6× Monthly Advisory Sessions</li>
+                  <li>APAC Market Expansion Plan</li>
+                  <li>Marketing Roadmap</li>
+                  <li>Systems & Automation Strategy</li>
+                  <li>Investor Readiness Assessment</li>
+                  <li>IPO Readiness Review</li>
+                  <li>VC & Strategic Network Access</li>
+                </ul>
+              </div>
+              <hr class="card-divider" />
+              <div class="adv-section">
+                <h5>Consultant Scope:</h5>
+                <ul>
+                  <li>10-12 Hours Advisory Monthly</li>
+                  <li>Max 8 Participants</li>
+                  <li>High-Touch Strategic Support</li>
+                  <li>Expansion & Fundraising Guidance</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────
+     MODAL 2: INCUBATION PROGRAM
+  ───────────────────────────────────────────── -->
+  <div id="incubationModal" class="prog-modal" aria-hidden="true">
+    <div class="prog-modal-backdrop"></div>
+    <div class="prog-modal-content">
+      <button class="prog-modal-close" aria-label="Close modal">&times;</button>
+      <div class="prog-modal-header">
+        <span class="label">OMO Incubation Program</span>
+        <h2 class="modal-title">Incubation Tracks & Core Services</h2>
+      </div>
+
+      <!-- Segment Tabs for Incubation Program -->
+      <div class="modal-segment-tabs">
+        <button class="segment-tab active" data-inc-tab="startup">Startup Launch Track (6M)</button>
+        <button class="segment-tab" data-inc-tab="growth">Business Growth Track (12M)</button>
+        <button class="segment-tab" data-inc-tab="services">6 Core Services</button>
+      </div>
+
+      <div class="prog-modal-body">
+        <!-- Tab A: Startup Launch Track -->
+        <div class="inc-tab-pane active" data-inc-pane="startup">
+          <div class="inc-pane-grid">
+            <!-- Details Column -->
+            <div class="inc-details-col">
+              <div class="inc-track-card">
+                <h3>Startup Launch Track</h3>
+                <span class="duration-badge">6 Months Program</span>
+                <div class="investment-box">
+                  <span class="inv-label">One-Time Investment</span>
+                  <span class="inv-price">RM 28,000</span>
+                </div>
+                <div class="net-cost-row">
+                  <div class="net-cost-item">
+                    <span>Performance Rebate</span>
+                    <strong>Up to RM 20,000</strong>
+                  </div>
+                  <div class="net-cost-item">
+                    <span>Net Cost Starts From</span>
+                    <strong>RM 8,000</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="inc-bullets-card">
+                <h4>What's Included</h4>
+                <ul class="checkmark-list">
+                  <li>Up to RM20,000 Performance Rebate</li>
+                  <li>3 Structured growth phases</li>
+                  <li>Business setup & validation</li>
+                  <li>Branding & market positioning</li>
+                  <li>Customer acquisition strategy</li>
+                  <li>Hands-on advisory support</li>
+                  <li>Installment options not available</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phases Column -->
+            <div class="inc-phases-col">
+              <h4>Program Phases & Milestones</h4>
+              <div class="phases-stack">
+                <!-- Phase 1 -->
+                <div class="phase-accordion">
+                  <div class="phase-acc-header">
+                    <span class="phase-num">Phase 1</span>
+                    <strong>Foundation (Month 1-2)</strong>
+                    <span class="phase-rebate">Rebate: RM 3,000</span>
+                  </div>
+                  <div class="phase-acc-body">
+                    <div class="phase-acc-inner">
+                      <div class="pane-sec">
+                        <h5>Key Deliverables</h5>
+                        <ul>
+                          <li>Business Model Design</li>
+                          <li>Legal & Licensing Setup</li>
+                          <li>Branding Framework</li>
+                          <li>Market Validation</li>
+                          <li>Launch Roadmap & KPI Planning</li>
+                        </ul>
+                      </div>
+                      <div class="pane-sec">
+                        <h5>Milestones Needed</h5>
+                        <p class="milestone-txt">Brand Live, Business Model Validated & Legal Setup Completed.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="phase-accordion">
+                  <div class="phase-acc-header">
+                    <span class="phase-num">Phase 2</span>
+                    <strong>Traction (Month 3-4)</strong>
+                    <span class="phase-rebate">Rebate: RM 8,000</span>
+                  </div>
+                  <div class="phase-acc-body">
+                    <div class="phase-acc-inner">
+                      <div class="pane-sec">
+                        <h5>Key Deliverables</h5>
+                        <ul>
+                          <li>GTM strategy execution</li>
+                          <li>Lead generation campaigns</li>
+                          <li>Sales funnel setup</li>
+                          <li>CRM tracking integration</li>
+                        </ul>
+                      </div>
+                      <div class="pane-sec">
+                        <h5>Milestones Needed</h5>
+                        <p class="milestone-txt">Secure 10 Paying Customers or hit RM15,000 Revenue.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="phase-accordion">
+                  <div class="phase-acc-header">
+                    <span class="phase-num">Phase 3</span>
+                    <strong>Scale (Month 5-6)</strong>
+                    <span class="phase-rebate">Rebate: RM 9,000</span>
+                  </div>
+                  <div class="phase-acc-body">
+                    <div class="phase-acc-inner">
+                      <div class="pane-sec">
+                        <h5>Key Deliverables</h5>
+                        <ul>
+                          <li>Standard Operating Procedures (SOPs) development</li>
+                          <li>Team structure planning</li>
+                          <li>Marketing channel expansion</li>
+                          <li>Investor & capital readiness assessment</li>
+                        </ul>
+                      </div>
+                      <div class="pane-sec">
+                        <h5>Milestones Needed</h5>
+                        <p class="milestone-txt">Achieve RM50,000 Monthly Revenue benchmark.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab B: Business Growth Track -->
+        <div class="inc-tab-pane" data-inc-pane="growth">
+          <div class="inc-pane-grid">
+            <!-- Details Column -->
+            <div class="inc-details-col">
+              <div class="inc-track-card">
+                <h3>Business Growth Track</h3>
+                <span class="duration-badge">12 Months Program</span>
+                <div class="investment-box">
+                  <span class="inv-label">One-Time Investment</span>
+                  <span class="inv-price">RM 38,000</span>
+                </div>
+                <div class="net-cost-row">
+                  <div class="net-cost-item">
+                    <span>Performance Rebate</span>
+                    <strong>Up to RM 30,000</strong>
+                  </div>
+                  <div class="net-cost-item">
+                    <span>Net Cost Starts From</span>
+                    <strong>RM 8,000</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="inc-bullets-card">
+                <h4>What's Included</h4>
+                <ul class="checkmark-list">
+                  <li>Up to RM30,000 Performance Rebate</li>
+                  <li>4 Structured growth phases</li>
+                  <li>Business scaling framework</li>
+                  <li>AI, Operations & Automation integration</li>
+                  <li>Investor & APAC expansion readiness</li>
+                  <li>Hands-on advisory support</li>
+                  <li>Installment options not available</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phases Column -->
+            <div class="inc-phases-col">
+              <h4>Program Phases & Milestones</h4>
+              <div class="phases-stack">
+                <!-- Phase 1 -->
+                <div class="phase-accordion">
+                  <div class="phase-acc-header">
+                    <span class="phase-num">Phase 1</span>
+                    <strong>Foundation (Month 1-3)</strong>
+                    <span class="phase-rebate">Rebate: RM 5,000</span>
+                  </div>
+                  <div class="phase-acc-body">
+                    <div class="phase-acc-inner">
+                      <div class="pane-sec">
+                        <h5>Key Deliverables</h5>
+                        <ul>
+                          <li>Business model & revenue optimization</li>
+                          <li>Legal setup & corporate compliance review</li>
+                          <li>Brand and messaging framework</li>
+                          <li>Market validation sprint</li>
+                          <li>90-day execution roadmap</li>
+                        </ul>
+                      </div>
+                      <div class="pane-sec">
+                        <h5>Milestones Needed</h5>
+                        <p class="milestone-txt">Brand Live, Business Model Validated & Legal Setup Completed.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="phase-accordion">
+                  <div class="phase-acc-header">
+                    <span class="phase-num">Phase 2</span>
+                    <strong>Traction (Month 4-6)</strong>
+                    <span class="phase-rebate">Rebate: RM 8,000</span>
+                  </div>
+                  <div class="phase-acc-body">
+                    <div class="phase-acc-inner">
+                      <div class="pane-sec">
+                        <h5>Key Deliverables</h5>
+                        <ul>
+                          <li>GTM strategy execution</li>
+                          <li>Lead generation campaign deployment</li>
+                          <li>Sales funnel and CRM integration</li>
+                        </ul>
+                      </div>
+                      <div class="pane-sec">
+                        <h5>Milestones Needed</h5>
+                        <p class="milestone-txt">Secure 10 Paying Customers or reach RM5,000 monthly revenue.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="phase-accordion">
+                  <div class="phase-acc-header">
+                    <span class="phase-num">Phase 3</span>
+                    <strong>Growth (Month 7-9)</strong>
+                    <span class="phase-rebate">Rebate: RM 10,000</span>
+                  </div>
+                  <div class="phase-acc-body">
+                    <div class="phase-acc-inner">
+                      <div class="pane-sec">
+                        <h5>Key Deliverables</h5>
+                        <ul>
+                          <li>Multi-channel ad expansion</li>
+                          <li>AI and CRM optimization</li>
+                          <li>E-commerce funnels implementation</li>
+                          <li>Investor pitch deck framework</li>
+                        </ul>
+                      </div>
+                      <div class="pane-sec">
+                        <h5>Milestones Needed</h5>
+                        <p class="milestone-txt">Achieve and sustain a RM20,000/month revenue benchmark.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Phase 4 -->
+                <div class="phase-accordion">
+                  <div class="phase-acc-header">
+                    <span class="phase-num">Phase 4</span>
+                    <strong>Scale (Month 10-12)</strong>
+                    <span class="phase-rebate">Rebate: RM 7,000</span>
+                  </div>
+                  <div class="phase-acc-body">
+                    <div class="phase-acc-inner">
+                      <div class="pane-sec">
+                        <h5>Key Deliverables</h5>
+                        <ul>
+                          <li>APAC market entry blueprint</li>
+                          <li>VC & strategic investor introductions</li>
+                          <li>IPO readiness sprints</li>
+                          <li>Strategic partnerships and joint ventures</li>
+                          <li>Pitch session on Demo Day</li>
+                        </ul>
+                      </div>
+                      <div class="pane-sec">
+                        <h5>Milestones Needed</h5>
+                        <p class="milestone-txt">APAC plan filed or strategic investor deck delivered.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab C: 6 Core Services -->
+        <div class="inc-tab-pane" data-inc-pane="services">
+          <div class="services-intro">
+            <h3>OMO 6 Core Services</h3>
+            <p>Our incubation tracks integrate these key components to build long-term, scalable success.</p>
+          </div>
+          <div class="services-grid">
+            <div class="service-card">
+              <span class="service-num">1</span>
+              <h4>Business Strategy & Model Design</h4>
+              <ul>
+                <li>Business Model Canvas</li>
+                <li>Revenue Model & Pricing Structure</li>
+                <li>90-Day Launch Roadmap</li>
+                <li>KPI Planning & Tracking</li>
+              </ul>
+            </div>
+            <div class="service-card">
+              <span class="service-num">2</span>
+              <h4>Legal, Licensing & Compliance</h4>
+              <ul>
+                <li>SSM Registration Guidance</li>
+                <li>Business Licensing Checklist</li>
+                <li>Corporate Governance Setup</li>
+                <li>Compliance Review</li>
+              </ul>
+            </div>
+            <div class="service-card">
+              <span class="service-num">3</span>
+              <h4>Branding & Market Positioning</h4>
+              <ul>
+                <li>Brand Direction</li>
+                <li>Value Proposition</li>
+                <li>Competitor Analysis</li>
+                <li>Customer Persona Development</li>
+              </ul>
+            </div>
+            <div class="service-card">
+              <span class="service-num">4</span>
+              <h4>Sales, Lead Generation & Marketing</h4>
+              <ul>
+                <li>Go-To-Market Strategy</li>
+                <li>Lead Generation Setup</li>
+                <li>Sales Funnel Design</li>
+                <li>Omnichannel Marketing Plan</li>
+              </ul>
+            </div>
+            <div class="service-card">
+              <span class="service-num">5</span>
+              <h4>Operations, AI & Technology</h4>
+              <ul>
+                <li>CRM Setup</li>
+                <li>AI & Automation Roadmap</li>
+                <li>SOP Development</li>
+                <li>KPI Dashboard</li>
+              </ul>
+            </div>
+            <div class="service-card">
+              <span class="service-num">6</span>
+              <h4>Investor Readiness & Capital Access</h4>
+              <ul>
+                <li>Pitch Deck Review</li>
+                <li>Financial Model Guidance</li>
+                <li>IPO Advisory Access</li>
+                <li>Capital Raising Support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Modal toggle selectors
+  const advBtn = document.getElementById('openAdvisoryBtn');
+  const incBtn = document.getElementById('openIncubationBtn');
+  const advModal = document.getElementById('advisoryModal');
+  const incModal = document.getElementById('incubationModal');
+  const closeBtns = document.querySelectorAll('.prog-modal-close');
+  const backdrops = document.querySelectorAll('.prog-modal-backdrop');
+
+  // Open Advisory Plans Modal
+  advBtn?.addEventListener('click', () => {
+    if (advModal) {
+      advModal.classList.add('open');
+      advModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  // Open Incubation Program Modal
+  incBtn?.addEventListener('click', () => {
+    if (incModal) {
+      incModal.classList.add('open');
+      incModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      // Reset segment tabs to first one
+      const startupTab = incModal.querySelector('[data-inc-tab="startup"]') as HTMLElement;
+      startupTab?.click();
+    }
+  });
+
+  // Close modals
+  const closeModal = (modalEl: HTMLElement) => {
+    modalEl.classList.remove('open');
+    modalEl.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  closeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const activeModal = btn.closest('.prog-modal') as HTMLElement;
+      if (activeModal) closeModal(activeModal);
+    });
+  });
+
+  backdrops.forEach(backdrop => {
+    backdrop.addEventListener('click', () => {
+      const activeModal = backdrop.closest('.prog-modal') as HTMLElement;
+      if (activeModal) closeModal(activeModal);
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const openModal = document.querySelector('.prog-modal.open') as HTMLElement;
+      if (openModal) closeModal(openModal);
+    }
+  });
+
+  // Incubation Modal tabs switching
+  const incTabs = document.querySelectorAll<HTMLElement>('[data-inc-tab]');
+  const incPanes = document.querySelectorAll<HTMLElement>('[data-inc-pane]');
+
+  incTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.dataset.incTab;
+      incTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      incPanes.forEach(pane => {
+        pane.classList.toggle('active', pane.dataset.incPane === targetId);
+      });
+    });
+  });
+
+  // Accordion triggers
+  const accHeaders = document.querySelectorAll('.phase-acc-header');
+  accHeaders.forEach(header => {
+    // Open phase 1 by default, toggle others
+    const accordion = header.parentElement;
+    header.addEventListener('click', () => {
+      const isOpen = accordion?.classList.contains('open');
+      // Close all accordions inside the active track pane
+      const pane = header.closest('.inc-tab-pane');
+      pane?.querySelectorAll('.phase-accordion').forEach(acc => acc.classList.remove('open'));
+      // Toggle
+      if (!isOpen) {
+        accordion?.classList.add('open');
+      }
+    });
+  });
+
+  // Automatically trigger phase 1 click inside active panes on tab switch or initialization
+  document.querySelectorAll('.inc-tab-pane').forEach(pane => {
+    const firstAcc = pane.querySelector('.phase-accordion');
+    firstAcc?.classList.add('open');
+  });
+</script>
+
+<style>
+  /* ─────────────────────────────────────
+     SECTION BASE STYLES
+  ───────────────────────────────────── */
+  #programs {
+    background: #fafaf8;
+    border-top: 1px solid var(--border);
+  }
+
+  .prog-header {
+    max-width: 680px;
+    margin-bottom: 4rem;
+  }
+
+  .prog-header .title {
+    font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-family: var(--serif);
+    color: var(--dark);
+    font-weight: 400;
+  }
+
+  .prog-header .subtitle {
+    font-family: var(--sans);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    color: var(--mid);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
+  .prog-header .body {
+    color: var(--mid);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Two Card Grid Layout */
+  .prog-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prog-card {
+    background: #ffffff;
+    border: 1px solid rgba(220, 224, 230, 0.7);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 
+      0 8px 30px rgba(0, 0, 0, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .prog-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(237, 72, 35, 0.35);
+    box-shadow: 
+      0 30px 60px -15px rgba(0, 0, 0, 0.08),
+      0 12px 24px -10px rgba(237, 72, 35, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+  .prog-card-label {
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
+  .prog-card-title {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    color: var(--dark);
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .prog-card-desc {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--mid);
+    margin-bottom: 2.5rem;
+    flex-grow: 1;
+  }
+
+  .prog-cta-btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.8rem 1.6rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--dark);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+
+  .prog-cta-btn svg.arrow {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Button text wrapper & domino stagger effect */
+  .btn-text-wrapper {
+    display: inline-flex;
+    overflow: hidden;
+    position: relative;
+    height: 1.25em;
+    line-height: 1.25;
+  }
+
+  .char-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+    transition-delay: calc(var(--char-index) * 0.018s);
+    height: 100%;
+  }
+
+  .char {
+    display: inline-block;
+  }
+
+  .char-secondary {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: #ffffff; /* Contrast on black bg hover */
+  }
+
+  /* Hover and active states */
+  .prog-card:hover .prog-cta-btn,
+  .prog-cta-btn:hover {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: #fff;
+    transform: scale(1.03);
+    box-shadow: 
+      0 12px 24px -8px rgba(15, 15, 15, 0.25),
+      0 4px 8px -4px rgba(15, 15, 15, 0.15);
+  }
+
+  .prog-card:hover .char-wrapper,
+  .prog-cta-btn:hover .char-wrapper {
+    transform: translateY(-100%);
+  }
+
+  .prog-card:hover .prog-cta-btn svg.arrow,
+  .prog-cta-btn:hover svg.arrow {
+    transform: translateX(5px);
+  }
+
+  /* ─────────────────────────────────────
+     MODAL LAYOUTS & TRANSITIONS
+  ───────────────────────────────────── */
+  .prog-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .prog-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .prog-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 15, 15, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .prog-modal-content {
+    position: relative;
+    background: #ffffff;
+    border-radius: 20px;
+    width: 92%;
+    max-width: 1180px;
+    height: 90vh;
+    box-shadow: 0 32px 72px rgba(0, 0, 0, 0.22);
+    transform: scale(0.96);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 2.2rem;
+    overflow: hidden;
+  }
+
+  .prog-modal.open .prog-modal-content {
+    transform: scale(1);
+  }
+
+  .prog-modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: #f1efeb;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 300;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: #444;
+    line-height: 1;
+    z-index: 5;
+  }
+
+  .prog-modal-close:hover {
+    background: var(--orange);
+    color: #fff;
+  }
+
+  .prog-modal-header {
+    margin-bottom: 1.8rem;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+    padding-bottom: 1rem;
+    padding-right: 50px;
+  }
+
+  .prog-modal-header .modal-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    color: var(--dark);
+    margin-top: 0.3rem;
+    font-weight: 400;
+  }
+
+  .prog-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 6px;
+  }
+
+  /* Scrollbar overrides inside modal */
+  .prog-modal-body::-webkit-scrollbar {
+    width: 6px;
+  }
+  .prog-modal-body::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+
+  /* ─────────────────────────────────────
+     ADVISORY PLANS LAYOUT (MODAL 1)
+  ───────────────────────────────────── */
+  .advisory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .adv-plan-card {
+    border: 1px solid rgba(220, 224, 230, 0.8);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  }
+
+  .adv-plan-hdr {
+    background: var(--plan-color);
+    color: #ffffff;
+    padding: 1.8rem 1.25rem;
+    text-align: center;
+  }
+
+  .adv-plan-hdr h4 {
+    font-family: var(--sans);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.01em;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+  }
+
+  .price-row .currency {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-right: 0.15rem;
+  }
+
+  .price-row .amount {
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .price-row .period {
+    font-size: 0.72rem;
+    opacity: 0.85;
+    margin-left: 0.2rem;
+  }
+
+  .adv-plan-body {
+    padding: 1.6rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    font-size: 0.88rem;
+  }
+
+  .adv-section h5 {
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.6rem;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .adv-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .adv-section ul li {
+    position: relative;
+    padding-left: 0.85rem;
+    line-height: 1.4;
+    color: var(--mid);
+  }
+
+  .adv-section ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--plan-color);
+    font-weight: bold;
+  }
+
+  .card-divider {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    margin: 0;
+  }
+
+  /* ─────────────────────────────────────
+     INCUBATION TRACKS LAYOUT (MODAL 2)
+  ───────────────────────────────────── */
+  .modal-segment-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.8rem;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+    padding-bottom: 0.8rem;
+  }
+
+  .segment-tab {
+    background: #f1efeb;
+    border: none;
+    border-radius: 8px;
+    padding: 0.65rem 1.25rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .segment-tab.active {
+    background: var(--dark);
+    color: #fff;
+  }
+
+  .segment-tab:hover:not(.active) {
+    background: #e7e5df;
+  }
+
+  .inc-tab-pane {
+    display: none;
+  }
+
+  .inc-tab-pane.active {
+    display: block;
+    animation: accFade 0.3s ease-out;
+  }
+
+  .inc-pane-grid {
+    display: grid;
+    grid-template-columns: 4fr 7fr;
+    gap: 2.2rem;
+  }
+
+  .inc-details-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .inc-track-card {
+    background: #0f0f0f;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 2rem 1.8rem;
+  }
+
+  .inc-track-card h3 {
+    font-family: var(--sans);
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .duration-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 1.6rem;
+  }
+
+  .investment-box {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 1.2rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .investment-box .inv-label {
+    display: block;
+    font-size: 0.78rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .investment-box .inv-price {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+  }
+
+  .net-cost-row {
+    display: flex;
+    gap: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 1.2rem;
+  }
+
+  .net-cost-item {
+    flex: 1;
+  }
+
+  .net-cost-item span {
+    display: block;
+    font-size: 0.72rem;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+  }
+
+  .net-cost-item strong {
+    font-size: 1.05rem;
+    color: var(--orange);
+    font-weight: 700;
+  }
+
+  .inc-bullets-card {
+    border: 1px solid rgba(220, 224, 230, 0.8);
+    border-radius: 12px;
+    padding: 1.8rem 1.6rem;
+    background: #fff;
+  }
+
+  .inc-bullets-card h4 {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .checkmark-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-size: 0.88rem;
+  }
+
+  .checkmark-list li {
+    position: relative;
+    padding-left: 1.45rem;
+    color: var(--mid);
+    line-height: 1.4;
+  }
+
+  .checkmark-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--orange);
+    font-weight: 800;
+    font-size: 1.05rem;
+  }
+
+  /* Phases accordions stacked list */
+  .inc-phases-col h4 {
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1.25rem;
+  }
+
+  .phases-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .phase-accordion {
+    border: 1px solid rgba(220, 224, 230, 0.8);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+    transition: all 0.3s ease;
+  }
+
+  .phase-acc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.4rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease;
+  }
+
+  .phase-acc-header:hover {
+    background: #f8f7f5;
+  }
+
+  .phase-num {
+    background: var(--dark);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .phase-acc-header strong {
+    flex: 1;
+    margin-left: 1rem;
+    font-size: 0.95rem;
+    color: var(--dark);
+  }
+
+  .phase-rebate {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--orange);
+  }
+
+  .phase-acc-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .phase-accordion.open .phase-acc-body {
+    max-height: 500px;
+  }
+
+  .phase-accordion.open {
+    border-color: rgba(237, 72, 35, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  }
+
+  .phase-acc-inner {
+    padding: 1.4rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background: #fafaf8;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    font-size: 0.88rem;
+  }
+
+  .pane-sec h5 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.03em;
+  }
+
+  .pane-sec ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--mid);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .milestone-txt {
+    color: var(--mid);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ─────────────────────────────────────
+     6 CORE SERVICES TAB (MODAL 2)
+  ───────────────────────────────────── */
+  .services-intro {
+    text-align: center;
+    max-width: 600px;
+    margin: 0.5rem auto 2.2rem auto;
+  }
+
+  .services-intro h3 {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .services-intro p {
+    color: var(--mid);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .service-card {
+    border: 1px solid rgba(220, 224, 230, 0.7);
+    border-radius: 12px;
+    padding: 2rem 1.6rem;
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+    position: relative;
+  }
+
+  .service-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--orange-t);
+    color: var(--orange);
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .service-card h4 {
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    line-height: 1.35;
+  }
+
+  .service-card ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--mid);
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    font-size: 0.85rem;
+  }
+
+  @keyframes accFade {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─────────────────────────────────────
+     RESPONSIVE STYLES
+  ───────────────────────────────────── */
+  @media (max-width: 992px) {
+    .advisory-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .inc-pane-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .prog-cards {
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+    }
+
+    .prog-card {
+      padding: 2.2rem 1.8rem;
+    }
+
+    .prog-card-desc {
+      margin-bottom: 2rem;
+    }
+
+    .prog-header {
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .advisory-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .prog-modal-content {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      padding: 1.5rem;
+    }
+
+    .prog-modal-close {
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .modal-segment-tabs {
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 1.25rem;
+    }
+
+    .segment-tab {
+      width: 100%;
+      text-align: center;
+    }
+
+    .inc-track-card {
+      padding: 1.5rem 1.25rem;
+    }
+
+    .investment-box .inv-price {
+      font-size: 1.85rem;
+    }
+  }
+</style>

@@ -124,6 +124,61 @@ const partners: PartnerDetail[] = [
         margin: 0 auto;
       }
 
+      .click-hint-wrapper {
+        margin-top: 1.5rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .click-hint {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #ed4823;
+        background: rgba(237, 72, 35, 0.05);
+        padding: 0.45rem 1.1rem;
+        border-radius: 100px;
+        border: 1px solid rgba(237, 72, 35, 0.15);
+        margin: 0;
+        position: relative;
+        animation: pillPulse 2s infinite ease-in-out;
+      }
+
+      @keyframes pillPulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(237, 72, 35, 0); }
+        50% { box-shadow: 0 0 10px 2px rgba(237, 72, 35, 0.12); }
+      }
+
+      .mouse-icon {
+        width: 14px !important;
+        height: 14px !important;
+        color: #ed4823;
+        display: inline-block;
+        flex-shrink: 0;
+        animation: mouseFloat 1.8s infinite ease-in-out;
+      }
+
+      .mouse-icon .wheel {
+        animation: mouseWheelMove 1.6s infinite ease-in-out;
+      }
+
+      @keyframes mouseFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-2px); }
+      }
+
+      @keyframes mouseWheelMove {
+        0% { transform: translateY(-2px); opacity: 0; }
+        20% { transform: translateY(0); opacity: 1; }
+        80% { transform: translateY(4px); opacity: 1; }
+        100% { transform: translateY(6px); opacity: 0; }
+      }
+
       .seven-partners-diagram-wrap {
         position: relative;
         width: 100%;
@@ -562,6 +617,15 @@ const partners: PartnerDetail[] = [
           A coordinated growth architecture connecting seven specialised partners across incorporation, marketing,
           technology, capital funding, operations, and business networks.
         </p>
+        <div class="click-hint-wrapper">
+          <p class="click-hint">
+            <svg class="mouse-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="3" width="12" height="18" rx="6"></rect>
+              <path d="M12 7v4" class="wheel"></path>
+            </svg>
+            Click the logo
+          </p>
+        </div>
       </div>
 
       <!-- Main Diagram Container -->
