@@ -3,44 +3,45 @@ interface Stat {
   target: number;
   suffix?: string;
   label: string;
-  icon: string;
 }
 
 const stats: Stat[] = [
-  { target: 9,  suffix: '+', label: 'ASEAN Markets',       icon: '🌏' },
-  { target: 7,  suffix: '',  label: 'Ecosystem Partners',  icon: '🤝' },
-  { target: 20, suffix: '+', label: 'Global Portfolios',   icon: '📈' },
-  { target: 3,  suffix: '',  label: 'Growth Stages',       icon: '🚀' },
+  { target: 9, suffix: "+", label: "ASEAN Markets" },
+  { target: 7, suffix: "", label: "Ecosystem Partners" },
+  { target: 20, suffix: "+", label: "Global Portfolios" },
+  { target: 3, suffix: "", label: "Growth Stages" },
 ];
 ---
 
 <section id="stats-row" aria-label="Key statistics">
   <div class="stats-glow-top"></div>
   <div class="stats-inner">
-    {stats.map(({ target, suffix = '', label, icon }, i) => (
-      <div class="stat-card" style={`--delay: ${i * 0.12}s`}>
-        {i > 0 && <div class="stat-divider" aria-hidden="true"></div>}
-        <div class="stat-icon" aria-hidden="true">{icon}</div>
-        <span
-          class="stat-num countup"
-          data-target={target}
-          data-suffix={suffix}
-        >
-          0{suffix}
-        </span>
-        <span class="stat-label">{label}</span>
-      </div>
-    ))}
+    {
+      stats.map(({ target, suffix = "", label }, i) => (
+        <div class="stat-card" style={`--delay: ${i * 0.12}s`}>
+          {i > 0 && <div class="stat-divider" aria-hidden="true" />}
+          <canvas class="stat-canvas" data-index={i} aria-hidden="true" />
+          <span
+            class="stat-num countup"
+            data-target={target}
+            data-suffix={suffix}
+          >
+            0{suffix}
+          </span>
+          <span class="stat-label">{label}</span>
+        </div>
+      ))
+    }
   </div>
 </section>
 
 <script>
   // ── Count-up on first intersection ──────────────────────
   function animateCountUp(el: Element) {
-    const target  = parseInt((el as HTMLElement).dataset.target  ?? '0', 10);
-    const suffix  =          (el as HTMLElement).dataset.suffix  ?? '';
+    const target = parseInt((el as HTMLElement).dataset.target ?? "0", 10);
+    const suffix = (el as HTMLElement).dataset.suffix ?? "";
     const duration = 1800;
-    const start   = performance.now();
+    const start = performance.now();
     const easeOut = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
     function tick(now: number) {
@@ -53,19 +54,22 @@ const stats: Stat[] = [
   }
 
   // ── Stagger card entrance ────────────────────────────────
-  const cards = document.querySelectorAll<HTMLElement>('.stat-card');
+  const cards = document.querySelectorAll<HTMLElement>(".stat-card");
 
   const entryObs = new IntersectionObserver(
     (entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
           const el = e.target as HTMLElement;
-          setTimeout(() => el.classList.add('visible'), parseFloat(el.style.getPropertyValue('--delay') || '0') * 1000);
+          setTimeout(
+            () => el.classList.add("visible"),
+            parseFloat(el.style.getPropertyValue("--delay") || "0") * 1000,
+          );
           entryObs.unobserve(el);
         }
       });
     },
-    { threshold: 0.3 }
+    { threshold: 0.3 },
   );
 
   cards.forEach((card) => entryObs.observe(card));
@@ -74,169 +78,512 @@ const stats: Stat[] = [
   const countObs = new IntersectionObserver(
     (entries) =>
       entries.forEach((e) => {
-        if (e.isIntersecting) { animateCountUp(e.target); countObs.unobserve(e.target); }
+        if (e.isIntersecting) {
+          animateCountUp(e.target);
+          countObs.unobserve(e.target);
+        }
       }),
-    { threshold: 0.4 }
+    { threshold: 0.4 },
   );
 
-  document.querySelectorAll('.countup').forEach((el) => countObs.observe(el));
+  document.querySelectorAll(".countup").forEach((el) => countObs.observe(el));
+
+  // ── Canvas Mosaic leaf ASCII-art photo effect renderer ────
+  class StatRenderer {
+    canvas: HTMLCanvasElement;
+    ctx: CanvasRenderingContext2D;
+    offscreen: HTMLCanvasElement;
+    offscreenCtx: CanvasRenderingContext2D;
+    index: number;
+    hovered: boolean = false;
+
+    constructor(canvas: HTMLCanvasElement, index: number) {
+      this.canvas = canvas;
+      this.ctx = canvas.getContext("2d")!;
+      this.index = index;
+
+      this.offscreen = document.createElement("canvas");
+      this.offscreenCtx = this.offscreen.getContext("2d")!;
+
+      this.resize();
+
+      // No hover listeners to keep animation static on hover
+    }
+
+    resize() {
+      const rect = this.canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+
+      this.canvas.width = rect.width * dpr;
+      this.canvas.height = rect.height * dpr;
+
+      this.offscreen.width = 120;
+      this.offscreen.height = 120;
+
+      this.drawSourceIcon();
+    }
+
+    drawSourceIcon() {
+      const ctx = this.offscreenCtx;
+      ctx.clearRect(0, 0, 120, 120);
+      ctx.fillStyle = "#ffffff";
+      ctx.strokeStyle = "#ffffff";
+
+      if (this.index === 0) {
+        // ASEAN Markets - Globe with target locator signal
+        const c = 60;
+        const r = 38;
+        ctx.lineWidth = 4.5;
+
+        // Globe boundary
+        ctx.beginPath();
+        ctx.arc(c, c, r, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Curved longitudinal line
+        ctx.beginPath();
+        ctx.ellipse(c, c, r * 0.45, r, 0, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Curved latitudinal line
+        ctx.beginPath();
+        ctx.ellipse(c, c, r, r * 0.38, 0, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Solid target hub in APAC quadrant (bottom right)
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(c + 14, c + 14, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Radiating radar pulse rings
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.arc(c + 14, c + 14, 14, 0, Math.PI * 2);
+        ctx.stroke();
+      } else if (this.index === 1) {
+        // Ecosystem Partners - Overlapping interlocking rings (Partnership)
+        const c = 60;
+        const r = 22;
+        ctx.lineWidth = 5.5;
+
+        // Left Ring
+        ctx.beginPath();
+        ctx.arc(c - 13, c, r, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Right Ring
+        ctx.beginPath();
+        ctx.arc(c + 13, c, r, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Connection dot in the overlap region
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(c, c, 5, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (this.index === 2) {
+        // Global Portfolios - Overlapping stacked documents representing assets
+        const c = 60;
+        ctx.lineWidth = 3.5;
+        ctx.lineJoin = "round";
+
+        const drawCard = (x: number, y: number, w: number, h: number) => {
+          ctx.fillStyle = "#111111";
+          ctx.beginPath();
+          ctx.rect(x, y, w, h);
+          ctx.fill();
+          ctx.stroke();
+
+          // Document content lines
+          ctx.beginPath();
+          ctx.moveTo(x + 8, y + 12);
+          ctx.lineTo(x + w - 8, y + 12);
+          ctx.moveTo(x + 8, y + 22);
+          ctx.lineTo(x + w - 18, y + 22);
+          ctx.stroke();
+        };
+
+        // 3 overlapping layers
+        ctx.strokeStyle = "rgba(255,255,255,0.4)";
+        drawCard(c - 28, c - 28, 38, 44);
+
+        ctx.strokeStyle = "rgba(255,255,255,0.7)";
+        drawCard(c - 16, c - 16, 38, 44);
+
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 4.5;
+        drawCard(c - 4, c - 4, 38, 44);
+      } else if (this.index === 3) {
+        // Growth Stages - Rocket Ship taking off (facing top-right)
+        const c = 60;
+        ctx.lineWidth = 4.5;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        ctx.save();
+        ctx.translate(c, c);
+        ctx.rotate(-Math.PI / 4);
+
+        // Rocket body
+        ctx.beginPath();
+        ctx.moveTo(0, -32);
+        ctx.quadraticCurveTo(12, -16, 12, 10);
+        ctx.lineTo(-12, 10);
+        ctx.quadraticCurveTo(-12, -16, 0, -32);
+        ctx.closePath();
+        ctx.stroke();
+
+        // Rocket fins
+        ctx.beginPath();
+        ctx.moveTo(-12, 0);
+        ctx.lineTo(-22, 12);
+        ctx.lineTo(-12, 10);
+
+        ctx.moveTo(12, 0);
+        ctx.lineTo(22, 12);
+        ctx.lineTo(12, 10);
+        ctx.stroke();
+
+        // Fire plume
+        ctx.strokeStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.moveTo(-6, 12);
+        ctx.lineTo(0, 26);
+        ctx.lineTo(6, 12);
+        ctx.stroke();
+
+        ctx.restore();
+      }
+    }
+
+    render(time: number) {
+      const ctx = this.ctx;
+      const w = this.canvas.width;
+      const h = this.canvas.height;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const cellSize = 11;
+      const cols = Math.ceil(this.offscreen.width / cellSize);
+      const rows = Math.ceil(this.offscreen.height / cellSize);
+
+      const scaleX = w / this.offscreen.width;
+      const scaleY = h / this.offscreen.height;
+      const scale = Math.min(scaleX, scaleY) * 0.75;
+      const offsetX = (w - this.offscreen.width * scale) / 2;
+      const offsetY = (h - this.offscreen.height * scale) / 2;
+
+      const imgData = this.offscreenCtx.getImageData(
+        0,
+        0,
+        this.offscreen.width,
+        this.offscreen.height,
+      );
+      const data = imgData.data;
+
+      const brightness = 12;
+      const contrast = 115;
+      const animSpeed = this.hovered ? 2.5 : 1.0;
+      const animIntensity = this.hovered ? 1.0 : 0.6;
+
+      ctx.save();
+      if (this.hovered) {
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = "#ff6847";
+      }
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          let sum = 0;
+          let count = 0;
+
+          const startX = c * cellSize;
+          const startY = r * cellSize;
+
+          for (let dy = 0; dy < cellSize; dy++) {
+            const py = startY + dy;
+            if (py >= this.offscreen.height) break;
+
+            for (let dx = 0; dx < cellSize; dx++) {
+              const px = startX + dx;
+              if (px >= this.offscreen.width) break;
+
+              const idx = (py * this.offscreen.width + px) * 4;
+              const val = data[idx + 3] / 255;
+              sum += val;
+              count++;
+            }
+          }
+
+          if (count === 0) continue;
+          let val = sum / count;
+
+          let finalVal = val + brightness / 100;
+          finalVal = (finalVal - 0.5) * (contrast / 100) + 0.5;
+          finalVal = Math.max(0, Math.min(1, finalVal));
+
+          if (finalVal > 0.05) {
+            const cx = offsetX + (startX + cellSize / 2) * scale;
+            const cy = offsetY + (startY + cellSize / 2) * scale;
+
+            const waveOffset =
+              Math.sin(time * 0.003 * animSpeed + (c + r) * 0.4) *
+              animIntensity;
+            const size =
+              cellSize * scale * finalVal * (0.85 + waveOffset * 0.18);
+            const angle =
+              (time * 0.0008 * animSpeed + (c - r) * 0.25) *
+              animIntensity *
+              0.3;
+
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(angle + Math.PI / 4);
+
+            const baseColor = this.hovered ? "#ff6847" : "#ed4823";
+            ctx.fillStyle = baseColor;
+
+            ctx.beginPath();
+            const half = size / 2;
+            ctx.moveTo(-half, 0);
+            ctx.quadraticCurveTo(0, -half * 0.5, half, 0);
+            ctx.quadraticCurveTo(0, half * 0.5, -half, 0);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.restore();
+          }
+        }
+      }
+      ctx.restore();
+    }
+  }
+
+  const renderers: StatRenderer[] = [];
+  document
+    .querySelectorAll<HTMLCanvasElement>(".stat-canvas")
+    .forEach((canvas) => {
+      const idx = parseInt(canvas.dataset.index || "0", 10);
+      renderers.push(new StatRenderer(canvas, idx));
+    });
+
+  const statsRow = document.getElementById("stats-row");
+  let isRowVisible = false;
+
+  const visibilityObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        isRowVisible = entry.isIntersecting;
+      });
+    },
+    { threshold: 0.05 },
+  );
+
+  if (statsRow) {
+    visibilityObs.observe(statsRow);
+  }
+
+  function tick(time: number) {
+    if (isRowVisible) {
+      renderers.forEach((r) => r.render(time));
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  window.addEventListener("resize", () => {
+    renderers.forEach((r) => r.resize());
+  });
 </script>
 
 <style>
-/* ── Dark Momentum Strip ───────────────────────────────── */
-#stats-row {
-  position: relative;
-  background: #111111;
-  border-top: 3px solid var(--orange);
-  overflow: hidden;
-}
+  /* ── Dark Momentum Strip ───────────────────────────────── */
+  #stats-row {
+    position: relative;
+    background: #111111;
+    border-top: 3px solid var(--orange);
+    overflow: hidden;
+  }
 
-/* Subtle radial orange glow behind the strip */
-.stats-glow-top {
-  position: absolute;
-  top: -80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 700px;
-  height: 260px;
-  background: radial-gradient(ellipse at center, rgba(237, 72, 35, 0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
+  /* Subtle radial orange glow behind the strip */
+  .stats-glow-top {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 260px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(237, 72, 35, 0.12) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
 
-/* Inner flex row */
-.stats-inner {
-  position: relative;
-  max-width: var(--max-wide);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-  display: flex;
-  align-items: stretch;
-  justify-content: space-around;
-}
-
-/* ── Single stat card ──────────────────────────────────── */
-.stat-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 44px 40px;
-  flex: 1;
-  gap: 6px;
-  text-align: center;
-  cursor: default;
-
-  /* Entrance animation state */
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 0.55s cubic-bezier(0.22, 0.68, 0, 1.2),
-    transform 0.55s cubic-bezier(0.22, 0.68, 0, 1.2),
-    background 0.3s ease;
-}
-
-.stat-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.stat-card:hover {
-  background: rgba(237, 72, 35, 0.06);
-}
-
-/* Vertical divider between cards */
-.stat-divider {
-  position: absolute;
-  left: 0;
-  top: 20%;
-  height: 60%;
-  width: 1px;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* Icon */
-.stat-icon {
-  font-size: 1.4rem;
-  line-height: 1;
-  margin-bottom: 4px;
-  filter: grayscale(0.1);
-}
-
-/* Big number */
-.stat-num {
-  font-family: var(--serif);
-  font-size: clamp(2.4rem, 4vw, 3.8rem);
-  font-weight: 400;
-  color: var(--orange);
-  line-height: 1;
-  letter-spacing: -0.01em;
-  /* Subtle text glow */
-  text-shadow: 0 0 32px rgba(237, 72, 35, 0.4);
-}
-
-/* Label */
-.stat-label {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.42);
-  line-height: 1.4;
-  margin-top: 2px;
-}
-
-/* ── Responsive ────────────────────────────────────────── */
-@media (max-width: 1023px) {
+  /* Inner flex row */
   .stats-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
+    position: relative;
+    max-width: var(--max-wide);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
   }
 
+  /* ── Single stat card ──────────────────────────────────── */
   .stat-card {
-    padding: 36px 28px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 44px 40px;
+    flex: 1;
+    gap: 6px;
+    text-align: center;
+    cursor: default;
+    overflow: hidden;
+
+    /* Subtle background dotted grid */
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px
+    );
+    background-size: 16px 16px;
+
+    /* Entrance animation state */
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 0.68, 0, 1.2),
+      transform 0.55s cubic-bezier(0.22, 0.68, 0, 1.2),
+      background-color 0.3s ease,
+      background-image 0.3s ease;
   }
 
-  /* Re-draw dividers as borders on the grid */
-  .stat-divider {
-    display: none;
-  }
-
-  .stat-card:nth-child(odd) {
-    border-right: 1px solid rgba(255, 255, 255, 0.07);
-  }
-
-  .stat-card:nth-child(-n+2) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  }
-}
-
-@media (max-width: 599px) {
-  .stats-inner {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .stat-card {
-    padding: 28px 16px;
-  }
-
-  .stat-num {
-    font-size: 2.2rem;
-  }
-
-  .stat-label {
-    font-size: 0.58rem;
-    letter-spacing: 0.14em;
-  }
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .stat-card {
+  .stat-card.visible {
     opacity: 1;
-    transform: none;
-    transition: none;
+    transform: translateY(0);
   }
-}
+
+  .stat-card:hover {
+    background-color: rgba(237, 72, 35, 0.03);
+    background-image: radial-gradient(
+      rgba(237, 72, 35, 0.08) 1.5px,
+      transparent 1.5px
+    );
+  }
+
+  /* Vertical divider between cards */
+  .stat-divider {
+    position: absolute;
+    left: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Infused ASCII Mosaic Canvas Background */
+  .stat-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+    opacity: 0.22;
+    transition: opacity 0.3s ease;
+  }
+
+  .stat-card:hover .stat-canvas {
+    opacity: 0.85;
+  }
+
+  /* Big number */
+  .stat-num {
+    position: relative;
+    z-index: 2;
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    font-weight: 400;
+    color: var(--orange);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    /* Subtle text glow */
+    text-shadow: 0 0 32px rgba(237, 72, 35, 0.4);
+  }
+
+  /* Label */
+  .stat-label {
+    position: relative;
+    z-index: 2;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.42);
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  /* ── Responsive ────────────────────────────────────────── */
+  @media (max-width: 1023px) {
+    .stats-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .stat-card {
+      padding: 36px 28px;
+    }
+
+    /* Re-draw dividers as borders on the grid */
+    .stat-divider {
+      display: none;
+    }
+
+    .stat-card:nth-child(odd) {
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .stat-card:nth-child(-n + 2) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+  }
+
+  @media (max-width: 599px) {
+    .stats-inner {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-card {
+      padding: 28px 16px;
+    }
+
+    .stat-num {
+      font-size: 2.2rem;
+    }
+
+    .stat-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+    }
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .stat-card {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
 </style>

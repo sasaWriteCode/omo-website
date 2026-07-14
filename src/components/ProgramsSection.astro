@@ -1,11 +1,12 @@
 ---
 const splitText = (text: string) => {
-  return text.split('').map((char, index) => ({
-    char: char === ' ' ? '\u00A0' : char,
-    index
+  return text.split("").map((char, index) => ({
+    char: char === " " ? "\u00A0" : char,
+    index,
   }));
 };
 ---
+
 <!-- ════════ ADVISORY & INCUBATION PROGRAMS ════════ -->
 <section id="programs" class="section">
   <div class="page-wrap">
@@ -13,54 +14,89 @@ const splitText = (text: string) => {
       <hr class="accent" />
       <span class="label">Advisory & Incubation</span>
       <h2 class="title">Advisory & Incubation Programs</h2>
-      <p class="subtitle">Structured growth support for founders, SMEs, scaling businesses, and APAC expansion-ready companies.</p>
+      <p class="subtitle">
+        Structured growth support for founders, SMEs, scaling businesses, and
+        APAC expansion-ready companies.
+      </p>
       <p class="body">
-        Choose the right level of support based on your business stage — from monthly advisory to structured incubation tracks with clear phases, deliverables, and milestones.
+        Choose the right level of support based on your business stage — from
+        monthly advisory to structured incubation tracks with clear phases,
+        deliverables, and milestones.
       </p>
     </div>
 
     <!-- Main Page Program Cards -->
-    <div class="prog-cards reveal-stagger">
+    <div class="prog-cards">
       <!-- Card 1: Monthly Advisory Plans -->
       <div class="prog-card">
+        <div class="prog-aurora-bg" aria-hidden="true">
+          <span class="aurora-beam aurora-beam-1"></span>
+          <span class="aurora-beam aurora-beam-2"></span>
+          <span class="aurora-beam aurora-beam-3"></span>
+        </div>
         <div class="prog-card-inner">
           <span class="prog-card-label">Monthly Advisory</span>
           <h3 class="prog-card-title">Monthly Advisory Plans</h3>
           <p class="prog-card-desc">
-            For founders, startups, growing teams and established companies that need ongoing strategic advisory support.
+            For founders, startups, growing teams and established companies that
+            need ongoing strategic advisory support.
           </p>
           <button class="prog-cta-btn" id="openAdvisoryBtn">
             <span class="btn-text-wrapper">
-              {splitText("View Advisory Plans").map(({ char, index }) => (
-                <span class="char-wrapper" style={`--char-index: ${index}`}>
-                  <span class="char char-primary">{char}</span>
-                  <span class="char char-secondary">{char}</span>
-                </span>
-              ))}
+              {
+                splitText("View Advisory Plans").map(({ char, index }) => (
+                  <span class="char-wrapper" style={`--char-index: ${index}`}>
+                    <span class="char char-primary">{char}</span>
+                    <span class="char char-secondary">{char}</span>
+                  </span>
+                ))
+              }
             </span>
-            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg
+              class="arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg
+            >
           </button>
         </div>
       </div>
 
       <!-- Card 2: Incubation Program -->
       <div class="prog-card">
+        <div class="prog-aurora-bg" aria-hidden="true">
+          <span class="aurora-beam aurora-beam-1" style="--delay: 1.5s"></span>
+          <span class="aurora-beam aurora-beam-2" style="--delay: 0.8s"></span>
+          <span class="aurora-beam aurora-beam-3" style="--delay: 2.2s"></span>
+        </div>
         <div class="prog-card-inner">
           <span class="prog-card-label">Structured Incubation</span>
           <h3 class="prog-card-title">Incubation Program</h3>
           <p class="prog-card-desc">
-            For businesses that need structured launch or growth support with clear phases, deliverables, milestones and rebate structure.
+            For businesses that need structured launch or growth support with
+            clear phases, deliverables, milestones and rebate structure.
           </p>
           <button class="prog-cta-btn" id="openIncubationBtn">
             <span class="btn-text-wrapper">
-              {splitText("Explore Incubation Program").map(({ char, index }) => (
-                <span class="char-wrapper" style={`--char-index: ${index}`}>
-                  <span class="char char-primary">{char}</span>
-                  <span class="char char-secondary">{char}</span>
-                </span>
-              ))}
+              {
+                splitText("Explore Incubation Program").map(
+                  ({ char, index }) => (
+                    <span class="char-wrapper" style={`--char-index: ${index}`}>
+                      <span class="char char-primary">{char}</span>
+                      <span class="char char-secondary">{char}</span>
+                    </span>
+                  ),
+                )
+              }
             </span>
-            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg
+              class="arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg
+            >
           </button>
         </div>
       </div>
@@ -72,13 +108,13 @@ const splitText = (text: string) => {
   ───────────────────────────────────────────── -->
   <div id="advisoryModal" class="prog-modal" aria-hidden="true">
     <div class="prog-modal-backdrop"></div>
-    <div class="prog-modal-content">
+    <div class="prog-modal-content" data-lenis-prevent>
       <button class="prog-modal-close" aria-label="Close modal">&times;</button>
       <div class="prog-modal-header">
         <span class="label">OMO Advisory Plan</span>
         <h2 class="modal-title">Strategic Monthly Advisory Plans</h2>
       </div>
-      <div class="prog-modal-body">
+      <div class="prog-modal-body" data-lenis-prevent>
         <div class="advisory-grid">
           <!-- Plan 1: Foundation -->
           <div class="adv-plan-card" style="--plan-color: #a28c37;">
@@ -267,7 +303,7 @@ const splitText = (text: string) => {
   ───────────────────────────────────────────── -->
   <div id="incubationModal" class="prog-modal" aria-hidden="true">
     <div class="prog-modal-backdrop"></div>
-    <div class="prog-modal-content">
+    <div class="prog-modal-content" data-lenis-prevent>
       <button class="prog-modal-close" aria-label="Close modal">&times;</button>
       <div class="prog-modal-header">
         <span class="label">OMO Incubation Program</span>
@@ -276,14 +312,93 @@ const splitText = (text: string) => {
 
       <!-- Segment Tabs for Incubation Program -->
       <div class="modal-segment-tabs">
-        <button class="segment-tab active" data-inc-tab="startup">Startup Launch Track (6M)</button>
-        <button class="segment-tab" data-inc-tab="growth">Business Growth Track (12M)</button>
-        <button class="segment-tab" data-inc-tab="services">6 Core Services</button>
+        <button class="segment-tab active" data-inc-tab="services"
+          >6 Core Services</button
+        >
+        <button class="segment-tab" data-inc-tab="startup"
+          >6 Months - Startup Launch Track</button
+        >
+        <button class="segment-tab" data-inc-tab="growth"
+          >12 Months - Business Growth Track</button
+        >
       </div>
 
-      <div class="prog-modal-body">
-        <!-- Tab A: Startup Launch Track -->
-        <div class="inc-tab-pane active" data-inc-pane="startup">
+      <div class="prog-modal-body" data-lenis-prevent>
+        <!-- Tab A: 6 Core Services -->
+        <div class="inc-tab-pane active" data-inc-pane="services">
+          <div class="services-intro">
+            <h3>OMO 6 Core Services</h3>
+            <p>
+              Our incubation tracks integrate these key components to build
+              long-term, scalable success.
+            </p>
+          </div>
+          <div class="services-grid">
+            <div class="service-card">
+              <span class="service-num">1</span>
+              <h4>Business Strategy & Model Design</h4>
+              <ul>
+                <li>Business Model Canvas</li>
+                <li>Revenue Model & Pricing Structure</li>
+                <li>90-Day Launch Roadmap</li>
+                <li>KPI Planning & Tracking</li>
+              </ul>
+            </div>
+            <div class="service-card">
+              <span class="service-num">2</span>
+              <h4>Legal, Licensing & Compliance</h4>
+              <ul>
+                <li>SSM Registration Guidance</li>
+                <li>Business Licensing Checklist</li>
+                <li>Corporate Governance Setup</li>
+                <li>Compliance Review</li>
+              </ul>
+            </div>
+            <div class="service-card">
+              <span class="service-num">3</span>
+              <h4>Branding & Market Positioning</h4>
+              <ul>
+                <li>Brand Direction</li>
+                <li>Value Proposition</li>
+                <li>Competitor Analysis</li>
+                <li>Customer Persona Development</li>
+              </ul>
+            </div>
+            <div class="service-card">
+              <span class="service-num">4</span>
+              <h4>Sales, Lead Generation & Marketing</h4>
+              <ul>
+                <li>Go-To-Market Strategy</li>
+                <li>Lead Generation Setup</li>
+                <li>Sales Funnel Design</li>
+                <li>Omnichannel Marketing Plan</li>
+              </ul>
+            </div>
+            <div class="service-card">
+              <span class="service-num">5</span>
+              <h4>Operations, AI & Technology</h4>
+              <ul>
+                <li>CRM Setup</li>
+                <li>AI & Automation Roadmap</li>
+                <li>SOP Development</li>
+                <li>KPI Dashboard</li>
+              </ul>
+            </div>
+            <div class="service-card">
+              <span class="service-num">6</span>
+              <h4>Investor Readiness & Capital Access</h4>
+              <ul>
+                <li>Pitch Deck Review</li>
+                <li>Financial Model Guidance</li>
+                <li>IPO Advisory Access</li>
+                <li>Capital Raising Support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab B: Startup Launch Track -->
+        <div class="inc-tab-pane" data-inc-pane="startup">
           <div class="inc-pane-grid">
             <!-- Details Column -->
             <div class="inc-details-col">
@@ -345,7 +460,10 @@ const splitText = (text: string) => {
                       </div>
                       <div class="pane-sec">
                         <h5>Milestones Needed</h5>
-                        <p class="milestone-txt">Brand Live, Business Model Validated & Legal Setup Completed.</p>
+                        <p class="milestone-txt">
+                          Brand Live, Business Model Validated & Legal Setup
+                          Completed.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -371,7 +489,9 @@ const splitText = (text: string) => {
                       </div>
                       <div class="pane-sec">
                         <h5>Milestones Needed</h5>
-                        <p class="milestone-txt">Secure 10 Paying Customers or hit RM15,000 Revenue.</p>
+                        <p class="milestone-txt">
+                          Secure 10 Paying Customers or hit RM15,000 Revenue.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -389,7 +509,9 @@ const splitText = (text: string) => {
                       <div class="pane-sec">
                         <h5>Key Deliverables</h5>
                         <ul>
-                          <li>Standard Operating Procedures (SOPs) development</li>
+                          <li>
+                            Standard Operating Procedures (SOPs) development
+                          </li>
                           <li>Team structure planning</li>
                           <li>Marketing channel expansion</li>
                           <li>Investor & capital readiness assessment</li>
@@ -397,7 +519,9 @@ const splitText = (text: string) => {
                       </div>
                       <div class="pane-sec">
                         <h5>Milestones Needed</h5>
-                        <p class="milestone-txt">Achieve RM50,000 Monthly Revenue benchmark.</p>
+                        <p class="milestone-txt">
+                          Achieve RM50,000 Monthly Revenue benchmark.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -470,7 +594,10 @@ const splitText = (text: string) => {
                       </div>
                       <div class="pane-sec">
                         <h5>Milestones Needed</h5>
-                        <p class="milestone-txt">Brand Live, Business Model Validated & Legal Setup Completed.</p>
+                        <p class="milestone-txt">
+                          Brand Live, Business Model Validated & Legal Setup
+                          Completed.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -495,7 +622,10 @@ const splitText = (text: string) => {
                       </div>
                       <div class="pane-sec">
                         <h5>Milestones Needed</h5>
-                        <p class="milestone-txt">Secure 10 Paying Customers or reach RM5,000 monthly revenue.</p>
+                        <p class="milestone-txt">
+                          Secure 10 Paying Customers or reach RM5,000 monthly
+                          revenue.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -521,7 +651,10 @@ const splitText = (text: string) => {
                       </div>
                       <div class="pane-sec">
                         <h5>Milestones Needed</h5>
-                        <p class="milestone-txt">Achieve and sustain a RM20,000/month revenue benchmark.</p>
+                        <p class="milestone-txt">
+                          Achieve and sustain a RM20,000/month revenue
+                          benchmark.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -548,7 +681,9 @@ const splitText = (text: string) => {
                       </div>
                       <div class="pane-sec">
                         <h5>Milestones Needed</h5>
-                        <p class="milestone-txt">APAC plan filed or strategic investor deck delivered.</p>
+                        <p class="milestone-txt">
+                          APAC plan filed or strategic investor deck delivered.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -558,75 +693,7 @@ const splitText = (text: string) => {
           </div>
         </div>
 
-        <!-- Tab C: 6 Core Services -->
-        <div class="inc-tab-pane" data-inc-pane="services">
-          <div class="services-intro">
-            <h3>OMO 6 Core Services</h3>
-            <p>Our incubation tracks integrate these key components to build long-term, scalable success.</p>
-          </div>
-          <div class="services-grid">
-            <div class="service-card">
-              <span class="service-num">1</span>
-              <h4>Business Strategy & Model Design</h4>
-              <ul>
-                <li>Business Model Canvas</li>
-                <li>Revenue Model & Pricing Structure</li>
-                <li>90-Day Launch Roadmap</li>
-                <li>KPI Planning & Tracking</li>
-              </ul>
-            </div>
-            <div class="service-card">
-              <span class="service-num">2</span>
-              <h4>Legal, Licensing & Compliance</h4>
-              <ul>
-                <li>SSM Registration Guidance</li>
-                <li>Business Licensing Checklist</li>
-                <li>Corporate Governance Setup</li>
-                <li>Compliance Review</li>
-              </ul>
-            </div>
-            <div class="service-card">
-              <span class="service-num">3</span>
-              <h4>Branding & Market Positioning</h4>
-              <ul>
-                <li>Brand Direction</li>
-                <li>Value Proposition</li>
-                <li>Competitor Analysis</li>
-                <li>Customer Persona Development</li>
-              </ul>
-            </div>
-            <div class="service-card">
-              <span class="service-num">4</span>
-              <h4>Sales, Lead Generation & Marketing</h4>
-              <ul>
-                <li>Go-To-Market Strategy</li>
-                <li>Lead Generation Setup</li>
-                <li>Sales Funnel Design</li>
-                <li>Omnichannel Marketing Plan</li>
-              </ul>
-            </div>
-            <div class="service-card">
-              <span class="service-num">5</span>
-              <h4>Operations, AI & Technology</h4>
-              <ul>
-                <li>CRM Setup</li>
-                <li>AI & Automation Roadmap</li>
-                <li>SOP Development</li>
-                <li>KPI Dashboard</li>
-              </ul>
-            </div>
-            <div class="service-card">
-              <span class="service-num">6</span>
-              <h4>Investor Readiness & Capital Access</h4>
-              <ul>
-                <li>Pitch Deck Review</li>
-                <li>Financial Model Guidance</li>
-                <li>IPO Advisory Access</li>
-                <li>Capital Raising Support</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -634,99 +701,123 @@ const splitText = (text: string) => {
 
 <script>
   // Modal toggle selectors
-  const advBtn = document.getElementById('openAdvisoryBtn');
-  const incBtn = document.getElementById('openIncubationBtn');
-  const advModal = document.getElementById('advisoryModal');
-  const incModal = document.getElementById('incubationModal');
-  const closeBtns = document.querySelectorAll('.prog-modal-close');
-  const backdrops = document.querySelectorAll('.prog-modal-backdrop');
+  const advBtn = document.getElementById("openAdvisoryBtn");
+  const incBtn = document.getElementById("openIncubationBtn");
+  const advModal = document.getElementById("advisoryModal");
+  const incModal = document.getElementById("incubationModal");
+  const closeBtns = document.querySelectorAll(".prog-modal-close");
+  const backdrops = document.querySelectorAll(".prog-modal-backdrop");
 
   // Open Advisory Plans Modal
-  advBtn?.addEventListener('click', () => {
+  advBtn?.addEventListener("click", () => {
     if (advModal) {
-      advModal.classList.add('open');
-      advModal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
+      advModal.classList.add("open");
+      advModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      if ((window as any).lenis) {
+        (window as any).lenis.stop();
+      }
     }
   });
 
   // Open Incubation Program Modal
-  incBtn?.addEventListener('click', () => {
+  incBtn?.addEventListener("click", () => {
     if (incModal) {
-      incModal.classList.add('open');
-      incModal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
+      incModal.classList.add("open");
+      incModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      if ((window as any).lenis) {
+        (window as any).lenis.stop();
+      }
       // Reset segment tabs to first one
-      const startupTab = incModal.querySelector('[data-inc-tab="startup"]') as HTMLElement;
-      startupTab?.click();
+      const servicesTab = incModal.querySelector(
+        '[data-inc-tab="services"]',
+      ) as HTMLElement;
+      servicesTab?.click();
     }
   });
 
   // Close modals
   const closeModal = (modalEl: HTMLElement) => {
-    modalEl.classList.remove('open');
-    modalEl.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    modalEl.classList.remove("open");
+    modalEl.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if ((window as any).lenis) {
+      (window as any).lenis.start();
+    }
   };
 
-  closeBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const activeModal = btn.closest('.prog-modal') as HTMLElement;
+  closeBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const activeModal = btn.closest(".prog-modal") as HTMLElement;
       if (activeModal) closeModal(activeModal);
     });
   });
 
-  backdrops.forEach(backdrop => {
-    backdrop.addEventListener('click', () => {
-      const activeModal = backdrop.closest('.prog-modal') as HTMLElement;
+  backdrops.forEach((backdrop) => {
+    backdrop.addEventListener("click", () => {
+      const activeModal = backdrop.closest(".prog-modal") as HTMLElement;
       if (activeModal) closeModal(activeModal);
     });
   });
 
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      const openModal = document.querySelector('.prog-modal.open') as HTMLElement;
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const openModal = document.querySelector(
+        ".prog-modal.open",
+      ) as HTMLElement;
       if (openModal) closeModal(openModal);
     }
   });
 
   // Incubation Modal tabs switching
-  const incTabs = document.querySelectorAll<HTMLElement>('[data-inc-tab]');
-  const incPanes = document.querySelectorAll<HTMLElement>('[data-inc-pane]');
+  const incTabs = document.querySelectorAll<HTMLElement>("[data-inc-tab]");
+  const incPanes = document.querySelectorAll<HTMLElement>("[data-inc-pane]");
 
-  incTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
+  incTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
       const targetId = tab.dataset.incTab;
-      incTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
+      incTabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
 
-      incPanes.forEach(pane => {
-        pane.classList.toggle('active', pane.dataset.incPane === targetId);
+      incPanes.forEach((pane) => {
+        pane.classList.toggle("active", pane.dataset.incPane === targetId);
       });
     });
   });
 
   // Accordion triggers
-  const accHeaders = document.querySelectorAll('.phase-acc-header');
-  accHeaders.forEach(header => {
+  const accHeaders = document.querySelectorAll(".phase-acc-header");
+  accHeaders.forEach((header) => {
     // Open phase 1 by default, toggle others
     const accordion = header.parentElement;
-    header.addEventListener('click', () => {
-      const isOpen = accordion?.classList.contains('open');
+    header.addEventListener("click", () => {
+      const isOpen = accordion?.classList.contains("open");
       // Close all accordions inside the active track pane
-      const pane = header.closest('.inc-tab-pane');
-      pane?.querySelectorAll('.phase-accordion').forEach(acc => acc.classList.remove('open'));
+      const pane = header.closest(".inc-tab-pane");
+      pane
+        ?.querySelectorAll(".phase-accordion")
+        .forEach((acc) => acc.classList.remove("open"));
       // Toggle
       if (!isOpen) {
-        accordion?.classList.add('open');
+        accordion?.classList.add("open");
       }
     });
   });
 
   // Automatically trigger phase 1 click inside active panes on tab switch or initialization
-  document.querySelectorAll('.inc-tab-pane').forEach(pane => {
-    const firstAcc = pane.querySelector('.phase-accordion');
-    firstAcc?.classList.add('open');
+  document.querySelectorAll(".inc-tab-pane").forEach((pane) => {
+    const firstAcc = pane.querySelector(".phase-accordion");
+    firstAcc?.classList.add("open");
+  });
+
+  // Listen to cross-component drawer CTA open requests
+  window.addEventListener("open-incubation-modal-request", () => {
+    incBtn?.click();
+  });
+
+  window.addEventListener("open-advisory-modal-request", () => {
+    advBtn?.click();
   });
 </script>
 
@@ -773,30 +864,169 @@ const splitText = (text: string) => {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem;
-    margin-bottom: 1.5rem;
   }
 
+  /* ── Aurora Keyframes ──────────────────────── */
+  @keyframes aurora-drift {
+    0% {
+      opacity: 0.18;
+      transform: translateX(-4%) scaleX(0.9) rotate(-1.5deg) translateY(2%);
+    }
+    50% {
+      opacity: 0.55;
+      transform: translateX(8%) scaleX(1.15) rotate(2deg) translateY(-2%);
+    }
+    100% {
+      opacity: 0.18;
+      transform: translateX(-4%) scaleX(0.9) rotate(-1.5deg) translateY(2%);
+    }
+  }
+
+  @keyframes aurora-pulse {
+    0%,
+    100% {
+      opacity: 0.12;
+    }
+    50% {
+      opacity: 0.55;
+    }
+  }
+
+  /* ── Card dark container ───────────────────── */
   .prog-card {
-    background: #ffffff;
-    border: 1px solid rgba(220, 224, 230, 0.7);
-    border-radius: 16px;
+    position: relative;
+    background: #0d0d10;
+    border: 1px solid rgba(237, 72, 35, 0.18);
+    border-radius: 20px;
     padding: 3rem 2.5rem;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 
-      0 8px 30px rgba(0, 0, 0, 0.03),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition:
+      border-color 0.4s ease,
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.4s ease;
+    box-shadow:
+      0 0 0 1px rgba(237, 72, 35, 0.06),
+      0 20px 60px rgba(0, 0, 0, 0.45);
   }
 
   .prog-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(237, 72, 35, 0.35);
-    box-shadow: 
-      0 30px 60px -15px rgba(0, 0, 0, 0.08),
-      0 12px 24px -10px rgba(237, 72, 35, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 1);
+    transform: translateY(-6px);
+    border-color: rgba(237, 72, 35, 0.45);
+    box-shadow:
+      0 0 0 1px rgba(237, 72, 35, 0.2),
+      0 30px 80px rgba(0, 0, 0, 0.55),
+      0 0 60px rgba(237, 72, 35, 0.12);
+  }
+
+  /* ── Aurora background layer ───────────────── */
+  .prog-aurora-bg {
+    position: absolute;
+    inset: -30px; /* Bleed to keep blur from clipping at card edges */
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    filter: blur(
+      35px
+    ); /* Apply the heavy blur filter once on the composited container layer */
+    will-change: transform;
+  }
+
+  /* Base noise/gradient floor */
+  .prog-aurora-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        ellipse 80% 60% at 50% 110%,
+        rgba(237, 72, 35, 0.22) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 40% 30% at 20% 90%,
+        rgba(255, 120, 60, 0.12) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 50% 40% at 80% 95%,
+        rgba(180, 40, 10, 0.1) 0%,
+        transparent 60%
+      );
+    animation: aurora-pulse 8s ease-in-out infinite;
+  }
+
+  /* ── Individual light beams ─────────────────── */
+  .aurora-beam {
+    position: absolute;
+    bottom: -10%;
+    width: 28%;
+    height: 130%;
+    border-radius: 50% 50% 0 0 / 20% 20% 0 0;
+    /* No filter here — delegates to parent to prevent GPU lag and keep animation fluid */
+    animation: aurora-drift var(--beam-dur, 9s) var(--delay, 0s) ease-in-out
+      infinite;
+    transform-origin: bottom center;
+    /* Transition only opacity to avoid overriding transform animation keyframes */
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+  }
+
+  .aurora-beam-1 {
+    left: 12%;
+    background: linear-gradient(
+      to top,
+      rgba(255, 120, 60, 0.45) 0%,
+      rgba(255, 180, 110, 0.22) 50%,
+      transparent 100%
+    );
+    --beam-dur: 6s;
+    --delay: 0s;
+  }
+
+  .aurora-beam-2 {
+    left: 42%;
+    width: 22%;
+    background: linear-gradient(
+      to top,
+      rgba(255, 205, 75, 0.4) 0%,
+      rgba(255, 235, 150, 0.18) 50%,
+      transparent 100%
+    );
+    --beam-dur: 8s;
+    --delay: 3s;
+  }
+
+  .aurora-beam-3 {
+    right: 8%;
+    width: 30%;
+    background: linear-gradient(
+      to top,
+      rgba(255, 95, 60, 0.38) 0%,
+      rgba(255, 170, 120, 0.18) 50%,
+      transparent 100%
+    );
+    --beam-dur: 10s;
+    --delay: 5s;
+  }
+
+  /* Hover: intensify aurora */
+  .prog-card:hover .aurora-beam-1 {
+    opacity: 0.85;
+  }
+  .prog-card:hover .aurora-beam-2 {
+    opacity: 0.75;
+  }
+  .prog-card:hover .aurora-beam-3 {
+    opacity: 0.8;
+  }
+
+  /* ── Content sits above aurora ──────────────── */
+  .prog-card-inner {
+    position: relative;
+    z-index: 1;
   }
 
   .prog-card-label {
@@ -804,7 +1034,7 @@ const splitText = (text: string) => {
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     font-weight: 700;
-    color: var(--orange);
+    color: rgba(255, 140, 80, 0.95);
     margin-bottom: 1rem;
     display: inline-block;
   }
@@ -812,7 +1042,7 @@ const splitText = (text: string) => {
   .prog-card-title {
     font-family: var(--serif);
     font-size: clamp(1.6rem, 2.6vw, 2.1rem);
-    color: var(--dark);
+    color: rgba(255, 255, 255, 0.95);
     margin-bottom: 1rem;
     font-weight: 400;
   }
@@ -820,9 +1050,18 @@ const splitText = (text: string) => {
   .prog-card-desc {
     font-size: 0.98rem;
     line-height: 1.6;
-    color: var(--mid);
+    color: rgba(255, 255, 255, 0.55);
     margin-bottom: 2.5rem;
     flex-grow: 1;
+  }
+
+  @keyframes prog-shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
   }
 
   .prog-cta-btn {
@@ -830,17 +1069,31 @@ const splitText = (text: string) => {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    background: transparent;
-    border: 1px solid var(--border);
+
+    /* Sweeping metallic shimmer */
+    background: linear-gradient(
+      110deg,
+      var(--orange) 0%,
+      #f86240 40%,
+      #ffd0b0 50%,
+      #f86240 60%,
+      var(--orange) 100%
+    );
+    background-size: 200% auto;
+    animation: prog-shimmer 3s linear infinite;
+
+    border: 1.5px solid transparent;
     border-radius: 100px;
     padding: 0.8rem 1.6rem;
     font-family: var(--sans);
     font-size: 0.9rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--white);
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(237, 72, 35, 0.2);
   }
 
   .prog-cta-btn svg.arrow {
@@ -875,19 +1128,27 @@ const splitText = (text: string) => {
     position: absolute;
     top: 100%;
     left: 0;
-    color: #ffffff; /* Contrast on black bg hover */
+    color: #ffffff;
   }
 
   /* Hover and active states */
   .prog-card:hover .prog-cta-btn,
   .prog-cta-btn:hover {
-    background: var(--dark);
-    border-color: var(--dark);
+    background: linear-gradient(
+      110deg,
+      var(--orange) 0%,
+      #f86240 40%,
+      #ffd0b0 50%,
+      #f86240 60%,
+      var(--orange) 100%
+    );
+    background-size: 200% auto;
+    border-color: transparent;
     color: #fff;
-    transform: scale(1.03);
-    box-shadow: 
-      0 12px 24px -8px rgba(15, 15, 15, 0.25),
-      0 4px 8px -4px rgba(15, 15, 15, 0.15);
+    transform: scale(1.04);
+    box-shadow:
+      0 12px 28px -6px rgba(237, 72, 35, 0.4),
+      0 4px 12px -4px rgba(237, 72, 35, 0.25);
   }
 
   .prog-card:hover .char-wrapper,
@@ -1372,12 +1633,29 @@ const splitText = (text: string) => {
   }
 
   .pane-sec ul {
+    list-style: none;
     margin: 0;
-    padding-left: 1.1rem;
+    padding: 0;
     color: var(--mid);
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+  }
+
+  .pane-sec ul li {
+    position: relative;
+    padding-left: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .pane-sec ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--orange);
+    font-weight: bold;
+    font-size: 0.9rem;
+    line-height: 1.45;
   }
 
   .milestone-txt {
@@ -1459,8 +1737,14 @@ const splitText = (text: string) => {
   }
 
   @keyframes accFade {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* ─────────────────────────────────────

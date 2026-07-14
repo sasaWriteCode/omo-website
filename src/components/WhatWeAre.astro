@@ -68,10 +68,6 @@ const cards: Card[] = [
       <span class="wwa-title-accent">STEP by STEP</span><br/> 
       in Malaysia and APAC
     </h2>
-    <p class="wwa-sub">
-      Why Us? We combine incubation, diagnosis, and acceleration into
-      <strong> one integrated growth system.</strong>
-    </p>
   </div>
 
   <!-- Waterfall cards -->
@@ -88,8 +84,7 @@ const cards: Card[] = [
         <div class="wwa-step-inner">
           <!-- Left: icon block -->
           <div class="wwa-step-icon-wrap" aria-hidden="true">
-            <div class="wwa-step-icon" set:html={icon} />
-            <span class="wwa-step-num">{tagNum}</span>
+            <div class="wwa-step-icon">{tagNum}</div>
           </div>
 
           <!-- Right: content -->
@@ -113,31 +108,6 @@ const cards: Card[] = [
       </article>
     ))}
   </div>
-
-  <!-- Why OMO Integration bar -->
-  <div class="wwa-why-bar reveal">
-    <div class="wwa-why-inner">
-      <span class="wwa-why-label">One integrated approach</span>
-      <div class="wwa-why-steps">
-        <span class="wwa-why-step">Incubation</span>
-        <svg class="wwa-why-arrow" width="20" height="12" viewBox="0 0 20 12" fill="none" aria-hidden="true">
-          <path d="M1 6h18M13 1l6 5-6 5" stroke="#ed4823" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="wwa-why-step">Diagnosis</span>
-        <svg class="wwa-why-arrow" width="20" height="12" viewBox="0 0 20 12" fill="none" aria-hidden="true">
-          <path d="M1 6h18M13 1l6 5-6 5" stroke="#ed4823" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="wwa-why-step">Acceleration</span>
-      </div>
-      <a href="#growth-framework" class="wwa-why-link">
-        Explore the OMO Framework
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-  </div>
-
 </section>
 
 <!-- ══════════════════════════════════════════════
@@ -155,6 +125,7 @@ const cards: Card[] = [
   aria-modal="true"
   aria-label="Business Incubator details"
   tabindex="-1"
+  data-lenis-prevent
 >
   <div class="wwa-drawer-inner">
     <div class="wwa-drawer-head">
@@ -218,7 +189,7 @@ const cards: Card[] = [
       </div>
     </div>
     <div class="wwa-drawer-footer">
-      <a href="#cta" class="wwa-drawer-cta" data-close>Book a Consultation</a>
+      <a href="#programs" class="wwa-drawer-cta" data-action="open-incubation" data-close>Learn More</a>
     </div>
   </div>
 </aside>
@@ -231,6 +202,7 @@ const cards: Card[] = [
   aria-modal="true"
   aria-label="Company Doctor details"
   tabindex="-1"
+  data-lenis-prevent
 >
   <div class="wwa-drawer-inner">
     <div class="wwa-drawer-head">
@@ -302,7 +274,7 @@ const cards: Card[] = [
       </div>
     </div>
     <div class="wwa-drawer-footer">
-      <a href="#cta" class="wwa-drawer-cta" data-close>Book a Consultation</a>
+      <a href="#programs" class="wwa-drawer-cta" data-action="open-advisory" data-close>Learn More</a>
     </div>
   </div>
 </aside>
@@ -315,6 +287,7 @@ const cards: Card[] = [
   aria-modal="true"
   aria-label="Growth Accelerator details"
   tabindex="-1"
+  data-lenis-prevent
 >
   <div class="wwa-drawer-inner">
     <div class="wwa-drawer-head">
@@ -378,7 +351,7 @@ const cards: Card[] = [
       </div>
     </div>
     <div class="wwa-drawer-footer">
-      <a href="#cta" class="wwa-drawer-cta" data-close>Book a Consultation</a>
+      <a href="#programs" class="wwa-drawer-cta" data-action="open-advisory" data-close>Learn More</a>
     </div>
   </div>
 </aside>
@@ -403,6 +376,9 @@ const cards: Card[] = [
     drawer.classList.add('is-open');
     backdrop.classList.add('is-visible');
     document.body.style.overflow = 'hidden';
+    if ((window as any).lenis) {
+      (window as any).lenis.stop();
+    }
 
     // Focus the drawer for accessibility
     drawer.focus();
@@ -413,6 +389,9 @@ const cards: Card[] = [
     activeDrawer.classList.remove('is-open');
     backdrop.classList.remove('is-visible');
     document.body.style.overflow = '';
+    if ((window as any).lenis) {
+      (window as any).lenis.start();
+    }
 
     if (returnFocus && triggerEl) triggerEl.focus();
     activeDrawer = null;
@@ -424,9 +403,32 @@ const cards: Card[] = [
     btn.addEventListener('click', () => openDrawer(btn.dataset.drawer!, btn));
   });
 
+  // Listen to open requests from hero section
+  window.addEventListener('open-drawer-request', (e: any) => {
+    const id = e.detail?.id;
+    if (id) {
+      const btn = document.querySelector<HTMLButtonElement>(`[data-drawer="${id}"]`);
+      if (btn) {
+        openDrawer(id, btn);
+      }
+    }
+  });
+
   // Close buttons (data-close attr)
   document.querySelectorAll<HTMLElement>('[data-close]').forEach((el) => {
     el.addEventListener('click', () => closeDrawer());
+  });
+
+  // Handle drawer CTA actions (triggers modal opening across components)
+  document.querySelectorAll<HTMLElement>('.wwa-drawer-cta').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const action = btn.getAttribute('data-action');
+      if (action === 'open-incubation') {
+        window.dispatchEvent(new CustomEvent('open-incubation-modal-request'));
+      } else if (action === 'open-advisory') {
+        window.dispatchEvent(new CustomEvent('open-advisory-modal-request'));
+      }
+    });
   });
 
   // Backdrop click
@@ -928,26 +930,22 @@ const cards: Card[] = [
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(237, 72, 35, 0.06);
+  background: rgba(237, 72, 35, 0.05);
+  border: 1px solid rgba(237, 72, 35, 0.15);
   border-radius: 50%;
-  transition: background 0.3s ease;
+  font-family: var(--sans);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ed4823;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .wwa-step:hover .wwa-step-icon {
-  background: rgba(237, 72, 35, 0.12);
-}
-
-/* Override SVG size inside the icon circle */
-.wwa-step-icon svg {
-  width: 26px;
-  height: 26px;
-}
-
-.wwa-step-num {
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: rgba(237, 72, 35, 0.7);
+  background: #ed4823;
+  color: #fff;
+  border-color: #ed4823;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(237, 72, 35, 0.25);
 }
 
 /* Content column */
@@ -1539,9 +1537,12 @@ const cards: Card[] = [
 }
 
 .wwa-step.is-active .wwa-step-icon {
-  background: rgba(237, 72, 35, 0.12);
-  transform:  scale(1.04);
-  transition: background 0.35s ease, transform 0.35s ease;
+  background: #ed4823;
+  color: #fff;
+  border-color: #ed4823;
+  transform: scale(1.04);
+  box-shadow: 0 4px 12px rgba(237, 72, 35, 0.25);
+  transition: all 0.35s ease;
 }
 
 /* ── Drawer Services List (Incubator card details) ───────────────────── */

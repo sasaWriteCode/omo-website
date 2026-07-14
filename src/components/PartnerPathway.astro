@@ -8,6 +8,8 @@ interface PartnerDetail {
   desc: string;
   accent?: string;
   logoDark?: boolean;
+  url?: string;
+  btnText?: string;
 }
 
 const partners: PartnerDetail[] = [
@@ -19,6 +21,8 @@ const partners: PartnerDetail[] = [
     name: 'Business Formation, Compliance & Corporate Secretarial',
     desc: 'Streamlined company incorporation, licensing, regulatory compliance, and corporate secretarial services. Provides the foundation for businesses entering ASEAN markets.',
     accent: '#a855f7',
+    url: 'https://onekeybiz.com',
+    btnText: 'Visit Website',
   },
   {
     id: 'omo',
@@ -28,6 +32,8 @@ const partners: PartnerDetail[] = [
     name: 'Corporate Advisory, Design & Strategy',
     desc: 'The central hub of the OMO ecosystem — providing strategic advisory, market entry facilitation, and cross-border expansion support, design-led advertising, and brand growth solutions across ASEAN.',
     accent: '#ec4899',
+    url: 'https://omomarketingads.com/',
+    btnText: 'Visit Website',
   },
   {
     id: 'comm21',
@@ -38,6 +44,8 @@ const partners: PartnerDetail[] = [
     name: 'Media, PR & Brand Amplification',
     desc: 'Integrated media relations, digital PR, and brand storytelling to build awareness and credibility across Southeast Asian markets. Leverages AI systems and solutions with 22 Million ASEAN database resources.',
     accent: '#3b82f6',
+    url: 'https://www.communication21.com',
+    btnText: 'Visit Website',
   },
   {
     id: 'tikstar',
@@ -47,16 +55,20 @@ const partners: PartnerDetail[] = [
     name: 'Influencer, Social Commerce & E-commerce Hub',
     desc: 'Performance-driven influencer marketing, social commerce strategy, and creator partnerships to fuel brand growth on TikTok and beyond. Operates as an integrated e-commerce hub.',
     accent: '#06b6d4',
+    url: 'https://www.facebook.com/share/v/187S5ozFuf/?mibextid=wwXIfr',
+    btnText: 'Watch Facebook Video',
   },
   {
     id: 'ot21',
     num: '05',
     logoSrc: '/assets/OT21_Black.png',
     logoDark: true,
-    brand: 'OT21 (ct21)',
+    brand: 'OT21',
     name: 'Technology, Digital Infrastructure & AI Academy',
     desc: 'Enterprise technology solutions, AI integration, and digital transformation services to modernise operations and unlock scalable growth. Integrates SKM digital marketing and AI academy.',
     accent: '#f97316',
+    url: 'https://asiaoceanacademy.com.my',
+    btnText: 'Visit Website',
   },
   {
     id: 'gladiolus',
@@ -66,6 +78,8 @@ const partners: PartnerDetail[] = [
     name: 'Funder & VC Ecosystem Collaboration',
     desc: 'Venture capital access, investor relations, and fund structuring support to connect high-growth businesses with the right capital partners.',
     accent: '#cfa126',
+    url: 'https://gladioluscapital.com/',
+    btnText: 'Visit Website',
   },
   {
     id: 'ycm',
@@ -75,6 +89,8 @@ const partners: PartnerDetail[] = [
     name: 'Creative Production, Content & Network Resources',
     desc: 'Full-service creative production — from photography and videography to brand content strategies that resonate with regional audiences. Connected with extensive organisation and business network resources.',
     accent: '#eab308',
+    url: 'https://www.facebook.com/share/1D2cU6uSfh/?mibextid=wwXIfr',
+    btnText: 'Visit Facebook Page',
   },
 ];
 ---
@@ -83,13 +99,13 @@ const partners: PartnerDetail[] = [
       /* --- Custom CSS for Seven Partners Section --- */
       #seven-partners {
         background-color: #ffffff;
-        padding: 5rem 1.5rem;
+        padding: 5rem 1.5rem 9rem 1.5rem; /* Extra bottom padding for mobile overlap */
         overflow: hidden;
       }
 
       @media (min-width: 1024px) {
         #seven-partners {
-          padding: 7rem 3rem;
+          padding: 7rem 3rem 13rem 3rem; /* Extra bottom padding for desktop overlap */
         }
       }
 
@@ -120,7 +136,7 @@ const partners: PartnerDetail[] = [
         /* 14px to 16px */
         color: #6f6f6f;
         line-height: 1.75;
-        max-width: 580px;
+        max-width: 760px;
         margin: 0 auto;
       }
 
@@ -578,6 +594,36 @@ const partners: PartnerDetail[] = [
         margin: 0;
       }
 
+      /* Link Style (Italic Text Link) */
+      .partner-card-link-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-top: 1.25rem;
+        color: var(--card-accent-label, #ed4823);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.92rem;
+        text-decoration: none;
+        transition: color 0.25s ease;
+      }
+      .partner-card-link-btn em {
+        font-style: italic;
+        font-weight: 500;
+      }
+      .partner-card-link-btn .arrow-symbol {
+        font-family: system-ui, -apple-system, sans-serif;
+        font-style: normal;
+        font-size: 0.95rem;
+        transition: transform 0.25s ease;
+        display: inline-block;
+      }
+      .partner-card-link-btn:hover {
+        color: #ffffff;
+      }
+      .partner-card-link-btn:hover .arrow-symbol {
+        transform: translateX(4px);
+      }
+
       /* --- Rolling Sphere Animation --- */
       .rolling-sphere-group {
         offset-path: path("M 0 380 H 420 C 540 380, 840 330, 840 210 C 840 -10, 520 -10, 520 210 C 520 330, 820 380, 940 380 H 1600");
@@ -781,16 +827,16 @@ const partners: PartnerDetail[] = [
               </g>
             </g>
 
-            <!-- Hex node 5 — Orange (ct21 / rocket) -->
+            <!-- Hex node 5 — Orange (OT21 / rocket) -->
             <g transform="translate(1056,352)" class="partner-trigger" data-partner-id="ot21">
               <g class="pop-card delay-p5" filter="url(#node-shadow)">
                 <polygon points="24,0 48,14 48,42 24,56 0,42 0,14" fill="#f97316" stroke="#ffffff" stroke-width="3"
                   stroke-linejoin="round" />
-                <!-- White Rocket Icon -->
-                <g transform="translate(12, 12)" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
-                  <path d="M12 2 C15 5 17 9 17 14 L17 19 L7 19 L7 14 C7 9 9 5 12 2 Z" />
-                  <path d="M9 19 L7 22 L11 20" />
-                  <path d="M15 19 L17 22 L13 20" />
+                <!-- White Graduation Hat Icon -->
+                <g transform="translate(12, 12)" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 L22 8 L12 13 L2 8 Z" />
+                  <path d="M6 10 v4 c0 2.5 2.7 4 6 4 s6 -1.5 6 -4 v-4" />
+                  <path d="M20 9 v5.5" />
                 </g>
               </g>
             </g>
@@ -899,11 +945,11 @@ const partners: PartnerDetail[] = [
                 Resources</text>
             </g>
 
-            <!-- ── PARTNER 5: ct21 ── -->
+            <!-- ── PARTNER 5: OT21 ── -->
             <g class="pop-card delay-p5 partner-trigger" data-partner-id="ot21">
               <image class="card-logo" href="assets/OT21_Black.png" x="1050" y="130" width="60" height="60"
                 preserveAspectRatio="xMidYMid meet" />
-              <text x="1080" y="215" text-anchor="middle" font-size="14" font-weight="900" fill="#111111">ct21</text>
+              <text x="1080" y="215" text-anchor="middle" font-size="14" font-weight="900" fill="#111111">OT21</text>
               <text x="1080" y="235" text-anchor="middle" font-size="11.5" font-weight="500" fill="#111111">SKM Digital
                 Marketing</text>
               <text x="1080" y="250" text-anchor="middle" font-size="11.5" font-weight="500" fill="#111111">&amp; AI
@@ -957,6 +1003,12 @@ const partners: PartnerDetail[] = [
               </div>
               <p class="partner-card-name" id="cardName"></p>
               <p class="partner-card-desc" id="cardDesc"></p>
+              
+              <!-- Partner website link (italic text link) -->
+              <a href="#" target="_blank" rel="noopener noreferrer" class="partner-card-link-btn" id="cardLinkBtn">
+                <em id="cardLinkText">Learn more</em>
+                <span class="arrow-symbol">→</span>
+              </a>
             </div>
           </div>
           <!-- Backdrop for mobile viewport modal centering -->
@@ -988,6 +1040,8 @@ const partners: PartnerDetail[] = [
       const mBrand = document.getElementById('cardBrand');
       const mName = document.getElementById('cardName');
       const mDesc = document.getElementById('cardDesc');
+      const mLinkBtn = document.getElementById('cardLinkBtn');
+      const mLinkText = document.getElementById('cardLinkText');
 
       const innerContainer = document.querySelector('.seven-partners-diagram-inner');
       const wrapContainer = document.querySelector('.seven-partners-diagram-wrap');
@@ -1078,6 +1132,16 @@ const partners: PartnerDetail[] = [
         if (mBrand) mBrand.textContent = data.brand;
         if (mName) mName.textContent = data.name;
         if (mDesc) mDesc.textContent = data.desc;
+
+        if (mLinkBtn && mLinkText) {
+          if (data.url) {
+            mLinkBtn.href = data.url;
+            mLinkText.textContent = data.btnText || 'Learn more';
+            mLinkBtn.style.display = 'inline-flex';
+          } else {
+            mLinkBtn.style.display = 'none';
+          }
+        }
 
         if (data.accent) {
           card.style.setProperty('--card-accent', data.accent + '25');

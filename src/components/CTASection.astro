@@ -1,78 +1,375 @@
 ---
-
+// CTA SECTION — Premium Web Design & Form Aesthetics
 ---
 
 <section id="cta">
   <div class="cta-wrap">
-    <div class="cta-tag reveal">Ready to Scale</div>
+    <div class="cta-tag reveal">Book A Free Strategy Call</div>
 
     <h2 class="cta-headline reveal">
       Let's Build Your<br /><em>ASEAN</em> Future Together
     </h2>
 
     <p class="cta-sub reveal">
-      Whether you're entering a new market, scaling an existing business, or
-      building the systems for exponential growth — OMO is your strategic
-      partner.
+      Tell us about your business and growth goals. Our team will review your submission and get back to you within 1 business day.
     </p>
 
-    <div class="reveal cta-btn-container">
-      <div class="cta-primary-group">
-        <a href="mailto:hello@omomarketingads.com" class="cta-main-btn">
-          Book Diagnose Consultation
-        </a>
-        <p class="cta-support-label">
-          Start with a 30-minute complimentary strategy session.
-        </p>
+    <!-- Glowing Form Wrapper -->
+    <div class="cta-form-wrapper reveal">
+      <!-- Glow ambient backdrops -->
+      <div class="cta-glow-bg cta-glow-1"></div>
+      <div class="cta-glow-bg cta-glow-2"></div>
+
+      <!-- Glassmorphic Form Container -->
+      <div class="cta-form-container">
+        <form id="ctaForm" class="cta-form" action="#" method="POST">
+          <div class="cta-form-grid">
+            <!-- Full Name -->
+            <div class="cta-form-group">
+              <label for="fullName" class="cta-label">Full Name</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="e.g. John Doe"
+                required
+                class="cta-input"
+              />
+            </div>
+
+            <!-- Company Name -->
+            <div class="cta-form-group">
+              <label for="companyName" class="cta-label">Company Name</label>
+              <input
+                type="text"
+                id="companyName"
+                name="companyName"
+                placeholder="e.g. OMO Group"
+                required
+                class="cta-input"
+              />
+            </div>
+
+            <!-- Email Address -->
+            <div class="cta-form-group">
+              <label for="email" class="cta-label">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="e.g. john@company.com"
+                required
+                class="cta-input"
+              />
+            </div>
+
+            <!-- Phone Number -->
+            <div class="cta-form-group">
+              <label for="phone" class="cta-label">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="e.g. +60 12-345 6789"
+                required
+                class="cta-input"
+              />
+            </div>
+
+            <!-- Service Dropdown -->
+            <div class="cta-form-group cta-full-width">
+              <label for="service" class="cta-label">What would you like help with?</label>
+              <div class="cta-select-wrapper">
+                <select id="service" name="service" required class="cta-select">
+                  <option value="" disabled selected>Select a service...</option>
+                  <option value="branding">Branding & Identity</option>
+                  <option value="performance">Performance Marketing (Meta / Google)</option>
+                  <option value="social">Social Media Management</option>
+                  <option value="content">Content Production</option>
+                  <option value="seo">SEO & Digital Presence</option>
+                  <option value="consultation">Growth Consultation</option>
+                  <option value="full-package">Full Package / Not Sure Yet</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="cta-submit-btn">
+            <span>Schedule My Free Consultation</span>
+          </button>
+        </form>
       </div>
-      <a href="#growth-framework" class="cta-sec-btn">Explore Our Framework</a>
     </div>
   </div><!-- /cta-wrap -->
 </section>
 
 <style>
-  .cta-btn-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 3.5rem;
+  /* ── Form Wrapper & Glow Ambient ── */
+  .cta-form-wrapper {
+    position: relative;
+    max-width: 680px;
+    margin: 3.5rem auto 0;
   }
 
-  .cta-primary-group {
+  .cta-glow-bg {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(237, 72, 35, 0.16) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(50px);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .cta-glow-1 {
+    top: -60px;
+    left: -60px;
+  }
+  .cta-glow-2 {
+    bottom: -80px;
+    right: -80px;
+  }
+
+  /* ── Glassmorphic Form Container ── */
+  .cta-form-container {
+    position: relative;
+    z-index: 2;
+    background: rgba(18, 18, 18, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 20px;
+    padding: 3.5rem 3rem;
+    box-shadow:
+      0 30px 60px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+
+  /* Thin premium top orange indicator line */
+  .cta-form-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ed4823 50%, transparent);
+  }
+
+  .cta-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
+    gap: 2.2rem;
   }
 
-  .cta-support-label {
+  .cta-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem 1.5rem;
+    text-align: left;
+  }
+
+  .cta-form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+
+  .cta-full-width {
+    grid-column: span 2;
+  }
+
+  /* Form Labels & Focus Indicators */
+  .cta-label {
     font-family: var(--sans);
-    font-size: 0.85rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: rgba(255, 255, 255, 0.55);
-    margin: 0;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s ease;
+  }
+  .cta-form-group:focus-within .cta-label {
+    color: #ed4823;
+  }
+  .cta-label::after {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+  .cta-form-group:focus-within .cta-label::after {
+    background: #ed4823;
+    transform: scale(1.3);
   }
 
-  #cta .cta-main-btn {
-    margin-bottom: 0;
-    border-radius: 4px;
-    box-shadow: 0 4px 15px rgba(237, 72, 35, 0.25);
+  /* Inputs & Select Elements */
+  .cta-input,
+  .cta-select {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1.05rem 1.25rem;
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-sizing: border-box;
   }
 
-  #cta .cta-sec-btn {
-    margin-left: 0;
-    margin-bottom: 0;
-    margin-top: 4px;
-    border-radius: 4px;
+  .cta-input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .cta-input:hover,
+  .cta-select:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .cta-input:focus,
+  .cta-select:focus {
+    outline: none;
+    border-color: #ed4823;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow:
+      0 0 16px rgba(237, 72, 35, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.01);
+  }
+
+  /* Dropdown Select customization */
+  .cta-select-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .cta-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 3rem;
+    cursor: pointer;
+  }
+
+  /* Custom dropdown arrow icon */
+  .cta-select-wrapper::after {
+    content: "";
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    transform: translateY(-70%) rotate(45deg);
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+  .cta-select-wrapper:focus-within::after {
+    border-color: #ed4823;
+    transform: translateY(-30%) rotate(-135deg);
+  }
+
+  /* Premium Shimmering Button styling */
+  .cta-submit-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 1.25rem 2.5rem;
+    font-family: var(--sans);
+    font-size: 1.02rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    /* Metallic shimmer sweep gradient */
+    background: linear-gradient(
+      110deg,
+      #ed4823 0%,
+      #f86240 35%,
+      #ffe1cc 48%,
+      #f86240 60%,
+      #ed4823 100%
+    );
+    background-size: 200% auto;
+    animation: cta-shimmer 3.5s linear infinite;
+    box-shadow:
+      0 8px 30px rgba(237, 72, 35, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .cta-submit-btn::after {
+    content: "→";
+    font-size: 1.15rem;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: inline-block;
+    line-height: 1;
+  }
+
+  .cta-submit-btn:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 16px 40px rgba(237, 72, 35, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    filter: brightness(1.08);
+  }
+
+  .cta-submit-btn:hover::after {
+    transform: translateX(5px);
+  }
+
+  .cta-submit-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(237, 72, 35, 0.35);
+  }
+
+  @keyframes cta-shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  /* Option items layout styling inside native select dropdowns */
+  .cta-select option {
+    background: #151515;
+    color: #fff;
+    padding: 12px;
   }
 
   @media (max-width: 768px) {
-    .cta-btn-container {
-      flex-direction: column;
-      align-items: center;
+    .cta-form-grid {
+      grid-template-columns: 1fr;
       gap: 1.5rem;
+    }
+    .cta-full-width {
+      grid-column: span 1;
+    }
+    .cta-form-container {
+      padding: 2.5rem 1.75rem;
+    }
+    .cta-submit-btn {
+      width: 100%;
     }
   }
 </style>

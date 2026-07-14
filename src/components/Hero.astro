@@ -51,9 +51,9 @@ import "../styles/hero.css";
 
       <!-- Mobile layout labels list (Flex container styled in CSS) -->
       <div class="hero-premium-mobile-pills">
-        <a href="#services" class="mobile-pill">Business Incubator</a>
-        <a href="#services" class="mobile-pill">Company Doctor</a>
-        <a href="#services" class="mobile-pill">Growth Accelerator</a>
+        <a href="#what-we-are" class="mobile-pill" data-target="incubator">Business Incubator</a>
+        <a href="#what-we-are" class="mobile-pill" data-target="doctor">Company Doctor</a>
+        <a href="#what-we-are" class="mobile-pill" data-target="accelerator">Growth Accelerator</a>
       </div>
     </div>
 
@@ -213,4 +213,42 @@ import "../styles/hero.css";
       });
     }
   }
+
+  // Click handler for mobile pills and hero visual labels to scroll and open drawers
+  const handlePillClick = (e: Event) => {
+    const target = e.currentTarget as HTMLAnchorElement;
+    const drawerId = target.getAttribute('data-target');
+    if (!drawerId) return;
+
+    e.preventDefault();
+
+    const targetSection = document.getElementById('what-we-are');
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+
+      let openTriggered = false;
+      const triggerOpen = () => {
+        if (openTriggered) return;
+        openTriggered = true;
+        window.dispatchEvent(
+          new CustomEvent('open-drawer-request', { detail: { id: drawerId } })
+        );
+      };
+
+      if ('onscrollend' in window) {
+        const handleScrollEnd = () => {
+          triggerOpen();
+          window.removeEventListener('scrollend', handleScrollEnd);
+        };
+        window.addEventListener('scrollend', handleScrollEnd);
+        setTimeout(triggerOpen, 1000);
+      } else {
+        setTimeout(triggerOpen, 800);
+      }
+    }
+  };
+
+  document.querySelectorAll('.mobile-pill, .hero-pill-label').forEach((pill) => {
+    pill.addEventListener('click', handlePillClick);
+  });
 </script>
