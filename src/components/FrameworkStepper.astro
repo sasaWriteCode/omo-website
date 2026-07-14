@@ -179,6 +179,25 @@ const stages = [
         ))}
       </svg>
     </div>
+
+    {/* Mobile: Stage info display below SVG — one stage shown at a time */}
+    <div class="mobile-stage-display" id="mobileStageDisplay" aria-live="polite">
+      {stages.map((stage, idx) => (
+        <div
+          class="mobile-stage-slide"
+          id={`mobile-slide-${stage.id}`}
+          aria-hidden={idx !== 0 ? "true" : "false"}
+        >
+          <div class="stage-badge" style={`background-color: ${stage.color};`}>
+            <Fragment set:html={stage.iconSvg} />
+          </div>
+          <div class="stage-list-content">
+            <h3 class="stage-list-title">{stage.title}</h3>
+            <p class="stage-list-desc">{stage.subtitle}</p>
+          </div>
+        </div>
+      ))}
+    </div>
   </div>
 
   {/* RIGHT COLUMN: Stage List */}
@@ -437,7 +456,7 @@ const stages = [
   /* ── Mobile Viewport Spec ───────────────────────────────────────────── */
   @media (max-width: 767px) {
     .svg-visual-container {
-      height: 340px;
+      height: 280px;
     }
 
     .gf-title-text {
@@ -465,6 +484,69 @@ const stages = [
     .stage-list-item {
       gap: 16px;
       transform: none !important;
+    }
+
+    /* Hide desktop right-column stage list on mobile */
+    .gf-right-column {
+      display: none;
+    }
+
+    /* Mobile stage display wrapper — directly below SVG arc */
+    .mobile-stage-display {
+      position: relative;
+      width: 100%;
+      min-height: 90px;
+      margin-top: -80px;
+    }
+
+    /* Each slide is absolutely stacked, only one visible at a time */
+    .mobile-stage-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition:
+        opacity 0.4s ease,
+        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      pointer-events: none;
+    }
+
+    .mobile-stage-slide.is-active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Badge sizing inside mobile slides */
+    .mobile-stage-slide .stage-badge {
+      width: 64px;
+      height: 64px;
+      flex-shrink: 0;
+    }
+
+    .mobile-stage-slide .stage-badge svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .mobile-stage-slide .stage-list-title {
+      font-size: 22px;
+    }
+
+    .mobile-stage-slide .stage-list-desc {
+      font-size: 14px;
+    }
+  }
+
+  /* On non-mobile: hide mobile-stage-display */
+  @media (min-width: 768px) {
+    .mobile-stage-display {
+      display: none;
     }
   }
 
@@ -529,17 +611,33 @@ const stages = [
       }
     });
 
-    /* ── Mobile: Auto-reveal timeline without scroll-pin scrub ──────── */
+    /* ── Mobile: Scroll-pinned scrub timeline (mirrors desktop) ────── */
     if (isMobile) {
-      const mobileTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '#growth-framework',
-          start: 'top 70%',
-          once: true
-        }
-      });
+      const mobileTl = gsap.timeline();
 
-      stages.forEach((id) => {
+      // Track currently active mobile slide
+      let activeMobileSlideId: string | null = null;
+
+      function showMobileSlide(id: string) {
+        if (activeMobileSlideId === id) return;
+        // Fade out previous
+        if (activeMobileSlideId) {
+          const prev = document.getElementById(`mobile-slide-${activeMobileSlideId}`);
+          if (prev) {
+            prev.classList.remove('is-active');
+            prev.setAttribute('aria-hidden', 'true');
+          }
+        }
+        // Fade in new
+        const next = document.getElementById(`mobile-slide-${id}`) as HTMLElement | null;
+        if (next) {
+          next.classList.add('is-active');
+          next.setAttribute('aria-hidden', 'false');
+        }
+        activeMobileSlideId = id;
+      }
+
+      stages.forEach((id, idx) => {
         const p = paths[id];
         const arrow = document.getElementById(`arrow-group-${id}`);
         const num = document.getElementById(`num-${id}`);
@@ -547,23 +645,60 @@ const stages = [
 
         if (!p) return;
 
+        // Draw the arc band path
         mobileTl.to(p, {
           strokeDashoffset: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-          onComplete: () => {
+          duration: 1.0,
+          ease: 'power2.inOut',
+          onStart: () => {
+            // Show the slide as soon as this arc starts drawing
+            showMobileSlide(id);
             if (item) item.classList.add('is-active');
+          },
+          onReverseComplete: () => {
+            const prevId = idx === 0 ? null : stages[idx - 1];
+            if (prevId) {
+              showMobileSlide(prevId);
+            } else {
+              // All bands reversed — hide all slides
+              if (activeMobileSlideId) {
+                const prev = document.getElementById(`mobile-slide-${activeMobileSlideId}`);
+                if (prev) {
+                  prev.classList.remove('is-active');
+                  prev.setAttribute('aria-hidden', 'true');
+                }
+                activeMobileSlideId = null;
+              }
+            }
+            if (item) item.classList.remove('is-active');
           }
         });
 
+        // Activate arrow tip and number
         mobileTl.to([arrow, num], {
           opacity: 1,
-          duration: 0.15,
+          duration: 0.2,
+          ease: 'power2.out',
           onStart: () => {
             if (arrow) arrow.classList.add('is-active');
             if (num) num.classList.add('is-active');
+          },
+          onReverseComplete: () => {
+            if (arrow) arrow.classList.remove('is-active');
+            if (num) num.classList.remove('is-active');
           }
-        }, '-=0.1');
+        }, '-=0.2');
+      });
+
+      // Pin the section and scrub through the timeline on mobile
+      ScrollTrigger.create({
+        trigger: '#growth-framework',
+        start: 'center center',
+        end: '+=1200',
+        pin: true,
+        scrub: 1.2,
+        animation: mobileTl,
+        invalidateOnRefresh: true
       });
 
       return;
@@ -584,7 +719,8 @@ const stages = [
         strokeDashoffset: 0,
         duration: 1.0,
         ease: 'power2.inOut',
-        onComplete: () => {
+        onStart: () => {
+          // Activate stage as soon as this arc starts drawing
           setActiveStage(id);
         },
         onReverseComplete: () => {

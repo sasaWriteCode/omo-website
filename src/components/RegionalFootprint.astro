@@ -1832,7 +1832,6 @@ const MY = countries.find((c) => c.id === "malaysia")!;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: var(--col-hub);
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -1842,17 +1841,51 @@ const MY = countries.find((c) => c.id === "malaysia")!;
     font-weight: 700;
     cursor: pointer;
     margin-top: 0.4rem;
-    transition: all 0.2s ease;
     align-self: flex-start;
+    position: relative;
+    overflow: hidden;
+
+    /* Metallic shimmer sweep gradient */
+    background: linear-gradient(
+      110deg,
+      #ed4823 0%,
+      #f86240 35%,
+      #ffe1cc 48%,
+      #f86240 60%,
+      #ed4823 100%
+    );
+    background-size: 200% auto;
+    animation: rf-shimmer 3.5s linear infinite;
+    box-shadow:
+      0 4px 12px rgba(237, 72, 35, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .rf-tour-btn:hover {
-    background: #c33a1b;
-    transform: translateY(-1.5px);
-    box-shadow: 0 4px 12px rgba(237, 72, 35, 0.25);
+    transform: translateY(-2.5px);
+    box-shadow:
+      0 8px 20px rgba(237, 72, 35, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    filter: brightness(1.06);
+  }
+  .rf-tour-btn:active {
+    transform: translateY(-0.5px);
+    box-shadow: 0 4px 10px rgba(237, 72, 35, 0.25);
   }
   .rf-tour-icon {
     width: 16px;
     height: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  @keyframes rf-shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
   }
 
   /* ── Modal overlay ── */

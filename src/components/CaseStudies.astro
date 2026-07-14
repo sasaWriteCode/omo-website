@@ -5,6 +5,9 @@
 ═══════════════════════════════════════════════ */
 import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
+import omoLogo from "../assets/omo_logo.png";
+
+const omoLogoSrc = (await getImage({ src: omoLogo, format: "webp" })).src;
 
 const clienteleGlob = import.meta.glob<{ default: ImageMetadata }>(
   "../assets/Clientele/*.png",
@@ -98,9 +101,9 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
         </h2>
       </div>
 
-      <!-- The O ring -->
-      <div class="cl-o-ring">
-        <div class="cl-o-inner"></div>
+      <!-- OMO logo — the scroll zoom flies through the outlined last "O" -->
+      <div class="cl-o-ring" aria-hidden="true">
+        <img class="cl-o-logo" src={omoLogoSrc} alt="" />
       </div>
 
       <!-- Kaleidoscope container (inside the O) -->
@@ -168,7 +171,9 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
     overflow: clip;
   }
   .cl-scroll-spacer {
-    height: 220vh;
+    /* Tall spacer = heavy scroll: the pinned animation is spread over
+       ~5 viewport-heights of scrolling for a slow, immersive scrub */
+    height: 620vh;
     position: relative;
   }
 
@@ -272,32 +277,30 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
     color: #ed4823;
   }
 
-  /* ── O Ring ─────────────────────────────────── */
+  /* ── OMO logo ───────────────────────────────── */
   .cl-o-ring {
     position: absolute;
-    top: calc(50% - 120px);
-    left: calc(50% - 120px);
-    width: 240px;
-    height: 240px;
-    border-radius: 50%;
-    border: 28px solid #ed4823;
+    top: calc(50% - 89px);
+    left: calc(50% - 210px);
+    width: 420px;
     z-index: 5;
-    /* No will-change here: the ring scales up to 26x, and pinning it to a
+    /* Zoom pivots on the centre of the outlined last "O" in the logo
+       (measured at 84% / 38% of the logo image) */
+    transform-origin: 84% 38%;
+    /* No will-change here: the logo scales up to 34x, and pinning it to a
        cached GPU layer leaves a giant stale raster that breaks (jagged /
-       partial circle) when scrolling back after the kaleidoscope starts.
-       Letting the browser re-rasterize keeps the circle crisp. */
+       partial artwork) when scrolling back after the kaleidoscope starts.
+       Letting the browser re-rasterize keeps the logo crisp. */
     transition:
       opacity 0.4s ease,
       visibility 0.4s;
-    box-shadow:
-      0 0 40px rgba(237, 72, 35, 0.2),
-      inset 0 0 30px rgba(237, 72, 35, 0.1);
   }
-  .cl-o-inner {
+  .cl-o-logo {
+    display: block;
     width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: transparent;
+    height: auto;
+    user-select: none;
+    pointer-events: none;
   }
   .cl-section.phase-kaleidoscope .cl-o-ring,
   .cl-section.phase-blackhole .cl-o-ring,
@@ -489,14 +492,12 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
   /* ── Mobile ─────────────────────────────────── */
   @media (max-width: 767px) {
     .cl-scroll-spacer {
-      height: 180vh;
+      height: 450vh;
     }
     .cl-o-ring {
-      width: 160px;
-      height: 160px;
-      border-width: 20px;
-      top: calc(50% - 80px);
-      left: calc(50% - 80px);
+      width: 280px;
+      top: calc(50% - 59px);
+      left: calc(50% - 140px);
     }
     .cl-header {
       top: 8vh;
@@ -536,8 +537,9 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
 </style>
 
 <script>
-  const section = document.getElementById("clients");
-  if (section) {
+  const clientsSection = document.getElementById("clients");
+  if (clientsSection) {
+    const section = clientsSection;
     const spacer = section.querySelector(".cl-scroll-spacer") as HTMLElement;
     const oRing = section.querySelector(".cl-o-ring") as HTMLElement;
 
@@ -550,6 +552,17 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
     // Ease function: cubic ease-in for the black-hole collapse
     function easeInCubic(t: number) {
       return t * t * t;
+    }
+
+    // Zoom transform for the OMO logo: scales about the outlined last "O"
+    // (transform-origin 84% / 38%) while drifting it to the viewport centre,
+    // so the fly-through passes through the middle of the screen.
+    const O_X = 0.84;
+    const O_Y = 0.38;
+    function oZoomTransform(p: number) {
+      const dx = (0.5 - O_X) * oRing.offsetWidth * p;
+      const dy = (0.5 - O_Y) * oRing.offsetHeight * p;
+      return `translate(${dx}px, ${dy}px) scale(${1 + p * 33})`;
     }
 
     function updatePhase() {
@@ -567,15 +580,17 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
 
       const progress = Math.max(0, Math.min(1, scrolled / totalScroll));
 
-      // Determine new phase
+      // Determine new phase.
+      // Dwell budget: intro 4% / zoom 32% / kaleidoscope 38% / blackhole 16% / grid 10%
+      // — the kaleidoscope (clientele showcase) holds the longest.
       let newPhase = "";
-      if (progress < 0.05) {
+      if (progress < 0.04) {
         newPhase = "initial";
-      } else if (progress < 0.45) {
+      } else if (progress < 0.36) {
         newPhase = "zoom";
-      } else if (progress < 0.67) {
+      } else if (progress < 0.74) {
         newPhase = "kaleidoscope";
-      } else if (progress < 0.87) {
+      } else if (progress < 0.9) {
         newPhase = "blackhole";
       } else {
         newPhase = "grid";
@@ -615,8 +630,8 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
 
       } else if (newPhase === "zoom") {
         // ── Phase: O zoom in ─────────────────────────
-        const zp = (progress - 0.05) / 0.4;
-        oRing.style.transform = `scale(${1 + zp * 25})`;
+        const zp = (progress - 0.04) / 0.32;
+        oRing.style.transform = oZoomTransform(zp);
         section.style.setProperty("--bh", "0");
         kDisc.style.setProperty("--bh-scale", "1");
         kDisc.style.setProperty("--bh-spin", "0deg");
@@ -625,7 +640,7 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
 
       } else if (newPhase === "kaleidoscope") {
         // ── Phase: Kaleidoscope idle ─────────────────
-        oRing.style.transform = "scale(26)";
+        oRing.style.transform = oZoomTransform(1);
         section.style.setProperty("--bh", "0");
         kDisc.style.setProperty("--bh-scale", "1");
         kDisc.style.setProperty("--bh-spin", "0deg");
@@ -634,8 +649,8 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
 
       } else if (newPhase === "blackhole") {
         // ── Phase: Black-hole fly-through ───────────
-        const bhP = easeInCubic((progress - 0.67) / 0.2);
-        oRing.style.transform = "scale(26)";
+        const bhP = easeInCubic((progress - 0.74) / 0.16);
+        oRing.style.transform = oZoomTransform(1);
 
         // Disc scales UP to fly past the viewer: scale 1 → 9, spin 0 → 180deg
         const bhScale = 1 + bhP * 8;
@@ -651,7 +666,7 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
 
       } else {
         // ── Phase: Grid ──────────────────────────────
-        oRing.style.transform = "scale(26)";
+        oRing.style.transform = oZoomTransform(1);
         kDisc.style.setProperty("--bh-scale", "0");
         kDisc.style.opacity = "0";
         bhVortex.style.background = "#000";
