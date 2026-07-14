@@ -1,4 +1,21 @@
 ---
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+// ── Office gallery images (optimized to WebP at build time) ────────────
+const officeGlob = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/{kuala-lumpur,puchong,china}/*.png",
+  { eager: true },
+);
+const officeImg = Object.fromEntries(
+  await Promise.all(
+    Object.entries(officeGlob).map(async ([path, mod]) => [
+      path.replace("../assets/", ""),
+      (await getImage({ src: mod.default, format: "webp" })).src,
+    ]),
+  ),
+) as Record<string, string>;
+
 // ── Geographic projection helpers ──────────────────────────────────────
 // Bounds: lon 88–180, lat –50–55. ViewBox 0 0 800 550
 // x(lon) = (lon - 88) / 92 * 800
@@ -1071,22 +1088,22 @@ const MY = countries.find((c) => c.id === "malaysia")!;
           </div>
           <div class="rf-gallery-masonry">
             <div class="rf-gallery-item">
-              <img src="/assets/kuala-lumpur/kl-office-building-exterior.png" alt="Building Exterior - Menara Tan & Tan" />
+              <img src={officeImg["kuala-lumpur/kl-office-building-exterior.png"]} alt="Building Exterior - Menara Tan & Tan" />
             </div>
             <div class="rf-gallery-item">
-              <img src="/assets/kuala-lumpur/kl-office-lobby.png" alt="Office Lobby" />
+              <img src={officeImg["kuala-lumpur/kl-office-lobby.png"]} alt="Office Lobby" />
             </div>
             <div class="rf-gallery-item">
-              <img src="/assets/kuala-lumpur/kl-office-workspace.png" alt="Main Workspace" />
+              <img src={officeImg["kuala-lumpur/kl-office-workspace.png"]} alt="Main Workspace" />
             </div>
             <div class="rf-gallery-item">
-              <img src="/assets/kuala-lumpur/kl-office-workspace2.png" alt="Workspace Area" />
+              <img src={officeImg["kuala-lumpur/kl-office-workspace2.png"]} alt="Workspace Area" />
             </div>
             <div class="rf-gallery-item">
-              <img src="/assets/kuala-lumpur/kl-office-meeting-room.png" alt="Boardroom & Meeting Room" />
+              <img src={officeImg["kuala-lumpur/kl-office-meeting-room.png"]} alt="Boardroom & Meeting Room" />
             </div>
             <div class="rf-gallery-item">
-              <img src="/assets/kuala-lumpur/kl-office-training-room.png" alt="Training & Workshop Area" />
+              <img src={officeImg["kuala-lumpur/kl-office-training-room.png"]} alt="Training & Workshop Area" />
             </div>
           </div>
         </div>
@@ -1104,16 +1121,16 @@ const MY = countries.find((c) => c.id === "malaysia")!;
           </div>
           <div class="rf-gallery-masonry">
             <div class="rf-gallery-item">
-              <img src="/assets/puchong/puchong-office-building-exterior.png" alt="Building Exterior" />
+              <img src={officeImg["puchong/puchong-office-building-exterior.png"]} alt="Building Exterior" />
             </div>
             <div class="rf-gallery-item">
-              <img src="/assets/puchong/puchong-office-meeting-lounge.png" alt="Meeting Lounge" />
+              <img src={officeImg["puchong/puchong-office-meeting-lounge.png"]} alt="Meeting Lounge" />
             </div>
             <div class="rf-gallery-item">
-              <img src="/assets/puchong/puchong-office-boardroom.png" alt="Executive Boardroom" />
+              <img src={officeImg["puchong/puchong-office-boardroom.png"]} alt="Executive Boardroom" />
             </div>
             <div class="rf-gallery-item">
-              <img src="/assets/puchong/puchong-office-director-room.png" alt="Director's Suite" />
+              <img src={officeImg["puchong/puchong-office-director-room.png"]} alt="Director's Suite" />
             </div>
           </div>
         </div>
@@ -1131,19 +1148,19 @@ const MY = countries.find((c) => c.id === "malaysia")!;
           </div>
           <div class="rf-gallery-masonry">
             <div class="rf-gallery-item">
-              <img src="/assets/china/china-office-reception-lounge.png" alt="Reception Lounge" />
+              <img src={officeImg["china/china-office-reception-lounge.png"]} alt="Reception Lounge" />
             </div>
             <div class="rf-gallery-item">
-              <img src="/assets/china/china-office-workspace.png" alt="Workspace" />
+              <img src={officeImg["china/china-office-workspace.png"]} alt="Workspace" />
             </div>
             <div class="rf-gallery-item">
-              <img src="/assets/china/china-office-boardroom.png" alt="Boardroom" />
+              <img src={officeImg["china/china-office-boardroom.png"]} alt="Boardroom" />
             </div>
             <div class="rf-gallery-item">
-              <img src="/assets/china/china-office-executive-suite.png" alt="Executive Suite" />
+              <img src={officeImg["china/china-office-executive-suite.png"]} alt="Executive Suite" />
             </div>
             <div class="rf-gallery-item">
-              <img src="/assets/china/china-office-tea-corner.png" alt="Tea Corner" />
+              <img src={officeImg["china/china-office-tea-corner.png"]} alt="Tea Corner" />
             </div>
           </div>
         </div>

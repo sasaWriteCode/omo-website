@@ -1,10 +1,14 @@
 ---
+import { getImage } from "astro:assets";
+import omoLogo from "../assets/omo_logo.png";
+
+const omoLogoSrc = (await getImage({ src: omoLogo, format: "webp" })).src;
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="footer-brand">
-    <img src="assets/omo_logo.png" alt="OMO Group" class="footer-mark-img" />
+    <img src={omoLogoSrc} alt="OMO Group" class="footer-mark-img" />
   </div>
 
   <div class="footer-contacts">

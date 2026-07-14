@@ -1,4 +1,22 @@
 ---
+import { getImage } from "astro:assets";
+import onebizLogo from "../assets/ONEBiz_Logo.png";
+import omoLogo from "../assets/omo_logo.png";
+import comm21Logo from "../assets/Communication21-LOGO_ICON-RED.png";
+import tikstarLogo from "../assets/tikstar_logo.png";
+import ot21Logo from "../assets/OT21_Black.png";
+import ycmLogo from "../assets/YCM_logo.png";
+
+/* Resolved to plain URL strings — logoSrc is serialized into the client
+   script via define:vars and also used by SVG <image href>. */
+const onebizLogoSrc = (await getImage({ src: onebizLogo, format: "webp" })).src;
+const omoLogoSrc = (await getImage({ src: omoLogo, format: "webp" })).src;
+const comm21LogoSrc = (await getImage({ src: comm21Logo, format: "webp" })).src;
+const tikstarLogoSrc = (await getImage({ src: tikstarLogo, format: "webp" }))
+  .src;
+const ot21LogoSrc = (await getImage({ src: ot21Logo, format: "webp" })).src;
+const ycmLogoSrc = (await getImage({ src: ycmLogo, format: "webp" })).src;
+
 interface PartnerDetail {
   id: string;
   num: string;
@@ -16,7 +34,7 @@ const partners: PartnerDetail[] = [
   {
     id: 'onebiz',
     num: '01',
-    logoSrc: '/assets/ONEBiz_Logo.png',
+    logoSrc: onebizLogoSrc,
     brand: 'ONEBiz',
     name: 'Business Formation, Compliance & Corporate Secretarial',
     desc: 'Streamlined company incorporation, licensing, regulatory compliance, and corporate secretarial services. Provides the foundation for businesses entering ASEAN markets.',
@@ -27,7 +45,7 @@ const partners: PartnerDetail[] = [
   {
     id: 'omo',
     num: '02',
-    logoSrc: '/assets/omo_logo.png',
+    logoSrc: omoLogoSrc,
     brand: 'OMO Group',
     name: 'Corporate Advisory, Design & Strategy',
     desc: 'The central hub of the OMO ecosystem — providing strategic advisory, market entry facilitation, and cross-border expansion support, design-led advertising, and brand growth solutions across ASEAN.',
@@ -38,7 +56,7 @@ const partners: PartnerDetail[] = [
   {
     id: 'comm21',
     num: '03',
-    logoSrc: '/assets/Communication21-LOGO_ICON-RED.png',
+    logoSrc: comm21LogoSrc,
     logoDark: true,
     brand: 'Communication 21',
     name: 'Media, PR & Brand Amplification',
@@ -50,7 +68,7 @@ const partners: PartnerDetail[] = [
   {
     id: 'tikstar',
     num: '04',
-    logoSrc: '/assets/tikstar_logo.png',
+    logoSrc: tikstarLogoSrc,
     brand: 'TikStar',
     name: 'Influencer, Social Commerce & E-commerce Hub',
     desc: 'Performance-driven influencer marketing, social commerce strategy, and creator partnerships to fuel brand growth on TikTok and beyond. Operates as an integrated e-commerce hub.',
@@ -61,7 +79,7 @@ const partners: PartnerDetail[] = [
   {
     id: 'ot21',
     num: '05',
-    logoSrc: '/assets/OT21_Black.png',
+    logoSrc: ot21LogoSrc,
     logoDark: true,
     brand: 'OT21',
     name: 'Technology, Digital Infrastructure & AI Academy',
@@ -84,7 +102,7 @@ const partners: PartnerDetail[] = [
   {
     id: 'ycm',
     num: '07',
-    logoSrc: '/assets/YCM_logo.png',
+    logoSrc: ycmLogoSrc,
     brand: 'YCM (Young Corporate Malaysians)',
     name: 'Creative Production, Content & Network Resources',
     desc: 'Full-service creative production — from photography and videography to brand content strategies that resonate with regional audiences. Connected with extensive organisation and business network resources.',
@@ -897,7 +915,7 @@ const partners: PartnerDetail[] = [
             <!-- ── BARE STANDALONE LOGOS (Top Half) ── -->
             <!-- ── PARTNER 1: ONEKEY BIZ ── -->
             <g class="pop-card delay-p1 partner-trigger" data-partner-id="onebiz">
-              <image class="card-logo" href="assets/ONEBiz_Logo.png" x="70" y="130" width="60" height="60"
+              <image class="card-logo" href={onebizLogoSrc} x="70" y="130" width="60" height="60"
                 preserveAspectRatio="xMidYMid meet" />
               <text x="100" y="215" text-anchor="middle" font-size="13" font-weight="800" fill="#111111"
                 letter-spacing="0.5">ONEKEY BIZ</text>
@@ -909,7 +927,7 @@ const partners: PartnerDetail[] = [
 
             <!-- ── PARTNER 2: OMO DESIGN ── -->
             <g class="pop-card delay-p2 partner-trigger" data-partner-id="omo">
-              <image class="card-logo" href="assets/omo_logo.png" x="245" y="130" width="70" height="60"
+              <image class="card-logo" href={omoLogoSrc} x="245" y="130" width="70" height="60"
                 preserveAspectRatio="xMidYMid meet" />
               <text x="280" y="215" text-anchor="middle" font-size="13" font-weight="800" fill="#111111"
                 letter-spacing="0.5">OMO</text>
@@ -923,7 +941,7 @@ const partners: PartnerDetail[] = [
 
             <!-- ── PARTNER 3: TIKSTAR ── -->
             <g class="pop-card delay-p3 partner-trigger" data-partner-id="tikstar">
-              <image class="card-logo" href="assets/tikstar_logo.png" x="890" y="50" width="60" height="60"
+              <image class="card-logo" href={tikstarLogoSrc} x="890" y="50" width="60" height="60"
                 preserveAspectRatio="xMidYMid meet" />
               <text x="920" y="135" text-anchor="middle" font-size="13" font-weight="800" fill="#111111"
                 letter-spacing="0.5">TIKSTAR</text>
@@ -933,7 +951,7 @@ const partners: PartnerDetail[] = [
 
             <!-- ── PARTNER 4: COMMUNICATION 21 ── -->
             <g class="pop-card delay-p4 partner-trigger" data-partner-id="comm21">
-              <image class="card-logo" href="assets/Communication21-LOGO_ICON-RED.png" x="410" y="20"
+              <image class="card-logo" href={comm21LogoSrc} x="410" y="20"
                 width="60" height="60" preserveAspectRatio="xMidYMid meet" />
               <text x="440" y="105" text-anchor="middle" font-size="13" font-weight="800" fill="#111111">Communication
                 21</text>
@@ -947,7 +965,7 @@ const partners: PartnerDetail[] = [
 
             <!-- ── PARTNER 5: OT21 ── -->
             <g class="pop-card delay-p5 partner-trigger" data-partner-id="ot21">
-              <image class="card-logo" href="assets/OT21_Black.png" x="1050" y="130" width="60" height="60"
+              <image class="card-logo" href={ot21LogoSrc} x="1050" y="130" width="60" height="60"
                 preserveAspectRatio="xMidYMid meet" />
               <text x="1080" y="215" text-anchor="middle" font-size="14" font-weight="900" fill="#111111">OT21</text>
               <text x="1080" y="235" text-anchor="middle" font-size="11.5" font-weight="500" fill="#111111">SKM Digital
@@ -969,7 +987,7 @@ const partners: PartnerDetail[] = [
 
             <!-- ── PARTNER 7: YOUNG CORPORATE MALAYSIANS ── -->
             <g class="pop-card delay-p7 partner-trigger" data-partner-id="ycm">
-              <image class="card-logo" href="assets/YCM_logo.png" x="1450" y="130" width="60" height="60"
+              <image class="card-logo" href={ycmLogoSrc} x="1450" y="130" width="60" height="60"
                 preserveAspectRatio="xMidYMid meet" />
               <text x="1480" y="215" text-anchor="middle" font-size="13" font-weight="800" fill="#111111">Young
                 Corporate</text>

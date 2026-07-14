@@ -1,4 +1,23 @@
 ---
+import { getImage } from "astro:assets";
+import omoLogo from "../assets/omo_logo.png";
+import onebizLogo from "../assets/ONEBiz_Logo.png";
+import comm21Logo from "../assets/Communication21-LOGO_ICON-RED.png";
+import ot21Logo from "../assets/OT21_Black.png";
+import ventureLogo from "../assets/113Venture_logo.png";
+import tikstarLogo from "../assets/tikstar_logo.png";
+import ycmLogo from "../assets/YCM_logo.png";
+
+const omoLogoSrc = (await getImage({ src: omoLogo, format: "webp" })).src;
+const onebizLogoSrc = (await getImage({ src: onebizLogo, format: "webp" })).src;
+const comm21LogoSrc = (await getImage({ src: comm21Logo, format: "webp" })).src;
+const ot21LogoSrc = (await getImage({ src: ot21Logo, format: "webp" })).src;
+const ventureLogoSrc = (await getImage({ src: ventureLogo, format: "webp" }))
+  .src;
+const tikstarLogoSrc = (await getImage({ src: tikstarLogo, format: "webp" }))
+  .src;
+const ycmLogoSrc = (await getImage({ src: ycmLogo, format: "webp" })).src;
+
 interface Partner {
   num: string;
   logoSrc: string;
@@ -12,14 +31,14 @@ interface Partner {
 const partners: Partner[] = [
   {
     num: '01',
-    logoSrc: '/assets/omo_logo.png',
+    logoSrc: omoLogoSrc,
     brand: 'OMO Group',
     name: 'Corporate Advisory & Strategy',
     desc: 'The central hub of the OMO ecosystem — providing strategic advisory, market entry facilitation, and cross-border expansion support across ASEAN.',
   },
   {
     num: '02',
-    logoSrc: '/assets/ONEBiz_Logo.png',
+    logoSrc: onebizLogoSrc,
     brand: 'ONEBiz',
     name: 'Business Formation & Compliance',
     desc: 'Streamlined company incorporation, licensing, regulatory compliance, and corporate secretarial services for businesses entering ASEAN markets.',
@@ -27,7 +46,7 @@ const partners: Partner[] = [
   },
   {
     num: '03',
-    logoSrc: '/assets/Communication21-LOGO_ICON-RED.png',
+    logoSrc: comm21LogoSrc,
     logoDark: true,
     brand: 'Communication 21',
     name: 'Media, PR & Brand Amplification',
@@ -36,7 +55,7 @@ const partners: Partner[] = [
   },
   {
     num: '04',
-    logoSrc: '/assets/OT21_Black.png',
+    logoSrc: ot21LogoSrc,
     logoDark: true,
     brand: 'OT21',
     name: 'Technology & Digital Infrastructure',
@@ -45,7 +64,7 @@ const partners: Partner[] = [
   },
   {
     num: '05',
-    logoSrc: '/assets/113Venture_logo.png',
+    logoSrc: ventureLogoSrc,
     brand: '113 Venture',
     name: 'Investment & Capital Solutions',
     desc: 'Venture capital access, investor relations, and fund structuring support to connect high-growth businesses with the right capital partners.',
@@ -53,7 +72,7 @@ const partners: Partner[] = [
   },
   {
     num: '06',
-    logoSrc: '/assets/tikstar_logo.png',
+    logoSrc: tikstarLogoSrc,
     brand: 'TikStar',
     name: 'Influencer & Social Commerce',
     desc: 'Performance-driven influencer marketing, social commerce strategy, and creator partnerships to fuel brand growth on TikTok and beyond.',
@@ -61,7 +80,7 @@ const partners: Partner[] = [
   },
   {
     num: '07',
-    logoSrc: '/assets/YCM_logo.png',
+    logoSrc: ycmLogoSrc,
     brand: 'YCM',
     name: 'Creative Production & Content',
     desc: 'Full-service creative production — from photography and videography to brand content strategies that resonate with regional audiences.',

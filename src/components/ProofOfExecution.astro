@@ -1,5 +1,17 @@
 ---
+import { getImage } from "astro:assets";
+import poeManufacturing from "../assets/poe_manufacturing.png";
+import poeEducation from "../assets/poe_education.png";
+import poeSemiconductor from "../assets/poe_semiconductor.png";
 
+const poeManufacturingSrc = (
+  await getImage({ src: poeManufacturing, format: "webp" })
+).src;
+const poeEducationSrc = (await getImage({ src: poeEducation, format: "webp" }))
+  .src;
+const poeSemiconductorSrc = (
+  await getImage({ src: poeSemiconductor, format: "webp" })
+).src;
 ---
 
 <!-- ════════ PORTFOLIO ════════ -->
@@ -134,7 +146,7 @@
         <div class="port-card">
           <div class="port-card-img">
             <img
-              src="/assets/poe_manufacturing.png"
+              src={poeManufacturingSrc}
               alt="Greenway Eco Technology China"
             />
             <div class="port-card-flag">
@@ -157,7 +169,7 @@
         <!-- APE Academy Malaysia -->
         <div class="port-card">
           <div class="port-card-img">
-            <img src="/assets/poe_education.png" alt="APE Academy Malaysia" />
+            <img src={poeEducationSrc} alt="APE Academy Malaysia" />
             <div class="port-card-flag">
               <img src="https://flagcdn.com/w40/my.png" alt="Malaysia" />
               <span>Malaysia</span>
@@ -181,7 +193,7 @@
         <div class="port-card">
           <div class="port-card-img">
             <img
-              src="/assets/poe_semiconductor.png"
+              src={poeSemiconductorSrc}
               alt="JINXIN Technology China"
             />
             <div class="port-card-flag">

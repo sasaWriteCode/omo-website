@@ -3,51 +3,82 @@
    CLIENTELE GALLERY — Immersive "O" Kaleidoscope
    Replaces the old CaseStudies section.
 ═══════════════════════════════════════════════ */
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
-const malaysiaLogos = [
-  { src: "/assets/Clientele/Toyota.png", alt: "Toyota" },
-  { src: "/assets/Clientele/Yamaha.png", alt: "Yamaha" },
-  { src: "/assets/Clientele/Maxis.png", alt: "Maxis" },
-  { src: "/assets/Clientele/FarmFresh.png", alt: "Farm Fresh" },
-  { src: "/assets/Clientele/Li-Ning.png", alt: "Li-Ning" },
-  { src: "/assets/Clientele/UTAR.png", alt: "UTAR" },
-  { src: "/assets/Clientele/TARUMT.png", alt: "TARUMT" },
+const clienteleGlob = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/Clientele/*.png",
+  { eager: true },
+);
+const apacGlob = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/APAC_Clientele/*.png",
+  { eager: true },
+);
+
+const clientele = (file: string) =>
+  clienteleGlob[`../assets/Clientele/${file}`].default;
+const apac = (file: string) =>
+  apacGlob[`../assets/APAC_Clientele/${file}`].default;
+
+/* Optimize to hashed WebP at build time; keeps plain <img> tags in the
+   template so the scoped styles (.cl-k-item img, .cl-grid-item img) still apply. */
+const optimize = (logos: { src: ImageMetadata; alt: string }[]) =>
+  Promise.all(
+    logos.map(async ({ src, alt }) => ({
+      src: (await getImage({ src, format: "webp" })).src,
+      alt,
+    })),
+  );
+
+const malaysiaSources = [
+  { src: clientele("Toyota.png"), alt: "Toyota" },
+  { src: clientele("Yamaha.png"), alt: "Yamaha" },
+  { src: clientele("Maxis.png"), alt: "Maxis" },
+  { src: clientele("FarmFresh.png"), alt: "Farm Fresh" },
+  { src: clientele("Li-Ning.png"), alt: "Li-Ning" },
+  { src: clientele("UTAR.png"), alt: "UTAR" },
+  { src: clientele("TARUMT.png"), alt: "TARUMT" },
   {
-    src: "/assets/Clientele/OUM_OpenUniversityMalaysia.png",
+    src: clientele("OUM_OpenUniversityMalaysia.png"),
     alt: "Open University Malaysia",
   },
-  { src: "/assets/Clientele/redONE.png", alt: "redONE" },
-  { src: "/assets/Clientele/BzuBzu.png", alt: "BzuBzu" },
-  { src: "/assets/Clientele/JambanKing.png", alt: "Jamban King" },
-  { src: "/assets/Clientele/RekaSetia.png", alt: "Reka Setia" },
+  { src: clientele("redONE.png"), alt: "redONE" },
+  { src: clientele("BzuBzu.png"), alt: "BzuBzu" },
+  { src: clientele("JambanKing.png"), alt: "Jamban King" },
+  { src: clientele("RekaSetia.png"), alt: "Reka Setia" },
 ];
 
-const apacLogos = [
-  { src: "/assets/APAC_Clientele/joy_group.png", alt: "Joy Group" },
-  { src: "/assets/APAC_Clientele/JinxinTechnology.png", alt: "Jinxin Technology" },
-  { src: "/assets/APAC_Clientele/KeerKeji.png", alt: "Keer Keji" },
-  { src: "/assets/APAC_Clientele/HuakangClean.png", alt: "Huakang Clean" },
-  { src: "/assets/APAC_Clientele/HubeiKingballLawFirm.png", alt: "Hubei Kingball Law Firm" },
-  { src: "/assets/APAC_Clientele/JCEX.png", alt: "JCEX" },
-  { src: "/assets/APAC_Clientele/SANY.png", alt: "SANY" },
-  { src: "/assets/APAC_Clientele/ChenxinShipping.png", alt: "Chenxin Shipping" },
-  { src: "/assets/APAC_Clientele/FigtonMedical.png", alt: "Figton Medical" },
-  { src: "/assets/APAC_Clientele/QingtianTech.png", alt: "Qingtian Tech" },
-  { src: "/assets/APAC_Clientele/RUIXUE.png", alt: "RUIXUE" },
-  { src: "/assets/APAC_Clientele/ShengjieLogistics.png", alt: "Shengjie Logistics" },
-  { src: "/assets/APAC_Clientele/SuperConstruction.png", alt: "Super Construction" },
-  { src: "/assets/APAC_Clientele/xjt.png", alt: "XJT" },
-  { src: "/assets/APAC_Clientele/YIHAI.png", alt: "YIHAI" },
-  { src: "/assets/APAC_Clientele/ZhentianJianshe_ZCIGC.png", alt: "ZCIGC" },
-  { src: "/assets/APAC_Clientele/ZCretechModularHouse.png", alt: "ZCretech Modular House" },
-  { src: "/assets/APAC_Clientele/ZhengqiyanBuildingMaterials.png", alt: "Zhengqiyan Building Materials" },
-  { src: "/assets/APAC_Clientele/ZhentianConstruction.png", alt: "Zhentian Construction" },
-  { src: "/assets/APAC_Clientele/ZhongshunJierou.png", alt: "Zhongshun Jierou" },
-  { src: "/assets/APAC_Clientele/ChengEtech.png", alt: "ChengE tech" },
-  { src: "/assets/APAC_Clientele/QiCaiYing.png", alt: "QiCaiYing" },
-  { src: "/assets/APAC_Clientele/LingdongZhimenxin.png", alt: "Lingdong Zhimenxin" },
+const apacSources = [
+  { src: apac("joy_group.png"), alt: "Joy Group" },
+  { src: apac("JinxinTechnology.png"), alt: "Jinxin Technology" },
+  { src: apac("KeerKeji.png"), alt: "Keer Keji" },
+  { src: apac("HuakangClean.png"), alt: "Huakang Clean" },
+  { src: apac("HubeiKingballLawFirm.png"), alt: "Hubei Kingball Law Firm" },
+  { src: apac("JCEX.png"), alt: "JCEX" },
+  { src: apac("SANY.png"), alt: "SANY" },
+  { src: apac("ChenxinShipping.png"), alt: "Chenxin Shipping" },
+  { src: apac("FigtonMedical.png"), alt: "Figton Medical" },
+  { src: apac("QingtianTech.png"), alt: "Qingtian Tech" },
+  { src: apac("RUIXUE.png"), alt: "RUIXUE" },
+  { src: apac("ShengjieLogistics.png"), alt: "Shengjie Logistics" },
+  { src: apac("SuperConstruction.png"), alt: "Super Construction" },
+  { src: apac("xjt.png"), alt: "XJT" },
+  { src: apac("YIHAI.png"), alt: "YIHAI" },
+  { src: apac("ZhentianJianshe_ZCIGC.png"), alt: "ZCIGC" },
+  { src: apac("ZCretechModularHouse.png"), alt: "ZCretech Modular House" },
+  {
+    src: apac("ZhengqiyanBuildingMaterials.png"),
+    alt: "Zhengqiyan Building Materials",
+  },
+  { src: apac("ZhentianConstruction.png"), alt: "Zhentian Construction" },
+  { src: apac("ZhongshunJierou.png"), alt: "Zhongshun Jierou" },
+  { src: apac("ChengEtech.png"), alt: "ChengE tech" },
+  { src: apac("QiCaiYing.png"), alt: "QiCaiYing" },
+  { src: apac("LingdongZhimenxin.png"), alt: "Lingdong Zhimenxin" },
 ];
 
+const malaysiaLogos = await optimize(malaysiaSources);
+const apacLogos = await optimize(apacSources);
 const allLogos = [...malaysiaLogos, ...apacLogos];
 ---
 

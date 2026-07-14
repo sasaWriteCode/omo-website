@@ -1,11 +1,14 @@
 ---
+import { getImage } from "astro:assets";
+import omoLogo from "../assets/omo_logo.png";
 
+const omoLogoSrc = (await getImage({ src: omoLogo, format: "webp" })).src;
 ---
 
 <nav id="nav">
   <div class="nav-wrap">
     <a href="#" class="nav-logo">
-      <img src="assets/omo_logo.png" alt="OMO Group" />
+      <img src={omoLogoSrc} alt="OMO Group" />
     </a>
 
     <ul class="nav-links">
