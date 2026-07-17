@@ -23,7 +23,25 @@
 
       <!-- Glassmorphic Form Container -->
       <div class="cta-form-container">
-        <form id="ctaForm" class="cta-form" action="#" method="POST">
+        <form id="ctaForm" class="cta-form" method="POST">
+          <!-- Honeypot — invisible to humans, catches spam bots -->
+          <input
+            type="text"
+            name="_honey"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+            style="position:absolute;left:-9999px;height:0;width:0;opacity:0;"
+          />
+          <!-- FormSubmit config (also used by the classic fallback flow) -->
+          <input
+            type="hidden"
+            name="_subject"
+            value="New Strategy Call Request — OMO Website"
+          />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="" />
           <div class="cta-form-grid">
             <!-- Full Name -->
             <div class="cta-form-group">
@@ -105,7 +123,24 @@
           <button type="submit" class="cta-submit-btn">
             <span>Schedule My Free Consultation</span>
           </button>
+
+          <p class="cta-form-status" id="ctaFormStatus" role="status"></p>
         </form>
+
+        <!-- Success toast (balloon pop, auto-dismisses) -->
+        <div
+          class="cta-toast"
+          id="ctaToast"
+          role="status"
+          aria-live="polite"
+          hidden
+        >
+          <span class="cta-toast-icon">✓</span>
+          <div>
+            <strong>Thank you — request received!</strong>
+            <p>We'll get back to you within 1 business day.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div><!-- /cta-wrap -->
@@ -385,3 +420,169 @@
     }
   }
 </style>
+
+<style>
+  /* ── Form status & success state ── */
+  .cta-form-status {
+    margin-top: 0.9rem;
+    font-size: 0.82rem;
+    text-align: center;
+    color: #ffb4a3;
+    min-height: 1.2em;
+  }
+
+  /* ── Success toast — balloon pop, bottom-right ── */
+  .cta-toast {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    max-width: 340px;
+    background: rgba(21, 21, 21, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    animation: cta-toast-pop 0.45s cubic-bezier(0.2, 1.2, 0.35, 1) both;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
+  }
+  /* display:flex must not defeat the hidden attribute */
+  .cta-toast[hidden] {
+    display: none;
+  }
+  .cta-toast.cta-toast-out {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  @keyframes cta-toast-pop {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.85);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @media (max-width: 767px) {
+    .cta-toast {
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      max-width: none;
+    }
+  }
+  .cta-toast-icon {
+    flex: 0 0 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(237, 72, 35, 0.15);
+    border: 1.5px solid #ed4823;
+    color: #ed4823;
+    font-size: 1rem;
+    line-height: 35px;
+    text-align: center;
+  }
+  .cta-toast strong {
+    display: block;
+    font-size: 0.9rem;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  .cta-toast p {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>
+
+<script>
+  const ctaForm = document.getElementById("ctaForm") as HTMLFormElement | null;
+  const ctaStatus = document.getElementById("ctaFormStatus");
+  const ctaToast = document.getElementById("ctaToast");
+
+  if (ctaForm && ctaStatus && ctaToast) {
+    const submitBtn = ctaForm.querySelector(
+      ".cta-submit-btn",
+    ) as HTMLButtonElement;
+    const btnLabel = submitBtn.querySelector("span") as HTMLElement;
+
+    const FS_EMAIL = "advisory@omogroup.my";
+
+    let toastTimer: ReturnType<typeof setTimeout> | undefined;
+
+    function showSuccess() {
+      // Restore the form to its ready state (button label included —
+      // otherwise it would sit on "Sending…" forever)
+      submitBtn.disabled = false;
+      btnLabel.textContent = "Schedule My Free Consultation";
+      ctaForm?.reset();
+
+      // Balloon pop, auto-dismiss after 6s
+      if (!ctaToast) return;
+      ctaToast.hidden = false;
+      ctaToast.classList.remove("cta-toast-out");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        ctaToast.classList.add("cta-toast-out");
+        setTimeout(() => {
+          ctaToast.hidden = true;
+        }, 400);
+      }, 6000);
+    }
+
+    // Returning from the classic FormSubmit fallback flow
+    if (new URLSearchParams(location.search).get("submitted") === "1") {
+      showSuccess();
+    }
+
+    ctaForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = new FormData(ctaForm);
+      // Spam honeypot filled → silently drop
+      if (data.get("_honey")) return;
+
+      submitBtn.disabled = true;
+      btnLabel.textContent = "Sending…";
+      ctaStatus.textContent = "";
+
+      try {
+        // 15s timeout so the button can never hang on "Sending…"
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 15000);
+        const res = await fetch(`https://formsubmit.co/ajax/${FS_EMAIL}`, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: data,
+          signal: ctrl.signal,
+        });
+        clearTimeout(timer);
+
+        // FormSubmit answers HTTP 200 even on failure — trust only the
+        // JSON success flag
+        const json = await res.json().catch(() => null);
+        if (!json || String(json.success) !== "true") throw new Error();
+
+        showSuccess();
+      } catch {
+        // AJAX endpoint blocked (localhost origin, ad-blocker, CORS…) —
+        // fall back to FormSubmit's classic POST flow, which redirects
+        // back here with ?submitted=1
+        const nextInput = ctaForm.querySelector(
+          'input[name="_next"]',
+        ) as HTMLInputElement;
+        nextInput.value = `${location.origin}${location.pathname}?submitted=1#cta`;
+        ctaForm.action = `https://formsubmit.co/${FS_EMAIL}`;
+        ctaForm.submit();
+      }
+    });
+  }
+</script>

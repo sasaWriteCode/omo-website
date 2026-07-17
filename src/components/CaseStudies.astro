@@ -83,6 +83,95 @@ const apacSources = [
 const malaysiaLogos = await optimize(malaysiaSources);
 const apacLogos = await optimize(apacSources);
 const allLogos = [...malaysiaLogos, ...apacLogos];
+
+/* ── Advisory board — shown inside the immersive phase ──────────────── */
+const advisorGlob = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/advisor/*.png",
+  { eager: true },
+);
+const advisorPhoto = async (file: string) =>
+  (
+    await getImage({
+      src: advisorGlob[`../assets/advisor/${file}`].default,
+      format: "webp",
+      width: 720,
+    })
+  ).src;
+
+/* Chapter order: Rachel (founder) leads the board. */
+const advisors = [
+  {
+    src: await advisorPhoto("Founder_Managing_Partner.png"),
+    name: "Rachel Gui",
+    role: "Founder & Managing Partner",
+    tag: "Entrepreneur. Business Strategist. Growth Architect.",
+    founder: true,
+    points: [
+      "Advises SMEs and growth companies on strategy, operational excellence, governance and AI adoption, with branding and lead generation systems designed to drive measurable sales and revenue growth",
+      "Works closely with founders, investors and strategic buyers on fundraising, mergers & acquisitions (M&A), succession planning and regional expansion, supported by an active network of qualified buyers and consistent deal flow",
+      "Supports cross-border business expansion across APAC, with experience helping Chinese, Japanese and Taiwanese companies establish and scale their operations in Malaysia",
+      "Founder of ventures spanning corporate advisory, strategic marketing, AI & technology, professional education, healthcare and consumer businesses, bringing hands-on entrepreneurial experience across diverse industries",
+      "President of Young Corporate Malaysians (YCM), leading a national platform dedicated to developing the next generation of business leaders and professionals",
+      "Holds an LL.B (Hons), Executive MBA (EMBA) and VTO certification, and is a licensed Traditional Chinese Medicine (TCM) Therapist, bringing together legal, commercial and operational expertise with a multidisciplinary perspective",
+    ],
+  },
+  {
+    src: await advisorPhoto("Legal_Advisor_Esther.png"),
+    name: "Esther Ong",
+    role: "Legal Advisor",
+    tag: "Three decades of courtroom authority and commercial legal insight.",
+    founder: false,
+    points: [
+      "Founder of Messrs Esther Ong Tengku Saiful & Sree (est. 1999), a firm built around strategic legal advisory for SMEs and SMIs",
+      "Appears regularly before all levels of the Malaysian courts, including the Federal Court, in complex commercial, employment and intellectual property disputes",
+      "Finalist, ALB Malaysia Woman Lawyer of the Year — four consecutive years (2021–2025)",
+      "Registered Patent, Trademark and Industrial Design Agent; certified mediator, arbitrator and ESG assessor",
+      "Legal Counsel to the Federation of Malaysian Businesses' Association (FMBA)",
+      "Founder of the Wholistic Family Foundation (WFF), reflecting a lifelong commitment to community leadership",
+    ],
+  },
+  {
+    src: await advisorPhoto("Academy_Advisor_Alex.png"),
+    name: "Alex Hoo Chek Kuan 符庆源",
+    role: "Academy Advisor",
+    tag: "Connecting academia, industry and international partners.",
+    founder: false,
+    points: [
+      "Business executive with 30+ years of leadership across business management, international education, strategic partnerships and organisational development",
+      "International Executive MBA, with expertise in business strategy, cross-border collaboration, university partnerships and workforce transformation",
+      "A proven bridge between universities, industry and international partners driving education, innovation and growth across Asia-Pacific",
+      "Leads the development of professional training and executive education programmes in AI, Blockchain, Future Banking and Digital Transformation for future-ready organisations",
+    ],
+  },
+  {
+    src: await advisorPhoto("Regional_Advisor_Tonie.png"),
+    name: "Tonie Natnawat",
+    role: "Regional Advisor — Thailand & RCEP Markets",
+    tag: "Opening doors across Thailand and the wider RCEP bloc.",
+    founder: false,
+    points: [
+      "Chief Executive Officer, MagicSeed Asia Co., Ltd.",
+      "Business leader with 25 years of experience in education development, science and technology, professional training and international collaboration",
+      "MBA in Marketing, George Washington University (USA), with expertise in education partnerships, strategic business development and cross-border collaboration",
+      "Extensive network across schools, universities, government agencies and private organisations throughout Asia-Pacific",
+      "President of OBORSEANA Thailand, connecting businesses, investors and institutions across the 15 RCEP member countries to advance education, investment and regional economic cooperation",
+    ],
+  },
+  {
+    src: await advisorPhoto("Financial_Advisor_John.png"),
+    name: "John Hew",
+    role: "Finance Advisor",
+    tag: "Bringing institutional financial discipline to a growing business.",
+    founder: false,
+    points: [
+      "ACCA-qualified finance professional with 11 years of experience spanning FMCG, logistics, trading, audit and taxation",
+      "Deep expertise in accounting, FP&A, business analysis and performance management",
+      "Career built across leading names including Assa Abloy, CMA CGM, PappaRich and Beacon Hospital",
+      "Currently supports the Greater China & Southeast Asia (GCSEA) region in FP&A, partnering with business leaders to drive strategic decisions and sustainable growth",
+    ],
+  },
+];
+
 ---
 
 <!-- Tall scroll container drives the animation -->
@@ -106,23 +195,78 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
         <img class="cl-o-logo" src={omoLogoSrc} alt="" />
       </div>
 
-      <!-- Kaleidoscope container (inside the O) -->
+      <!-- Advisory Board — editorial chapters, panned by the scroll scrub -->
       <div class="cl-kaleidoscope">
-        <!-- Black-hole vortex overlay -->
-        <div class="cl-bh-vortex"></div>
         <div class="cl-k-disc">
-          <div class="cl-k-rotor">
+          <div class="cl-adv-track">
+            <!-- Chapter 00 — the board -->
+            <section class="cl-adv-panel cl-adv-panel-intro" style="--pi: 0">
+              <div class="cl-adv-intro-inner">
+                <p class="cl-adv-eyebrow">Advisory Board</p>
+                <h3 class="cl-adv-intro-title">
+                  The minds behind<br /><em>the trust.</em>
+                </h3>
+                <p class="cl-adv-quote">
+                  "A board of senior advisors drawn from across industries and
+                  markets — decades of practical experience, brought to bear on
+                  how we build, govern and grow."
+                </p>
+                <p class="cl-adv-hint">Keep scrolling <span>→</span></p>
+              </div>
+            </section>
+
             {
-              allLogos.map((logo, i) => (
-                <div
-                  class="cl-k-item"
-                  style={`--k-i: ${i}; --k-total: ${allLogos.length};`}
+              advisors.map((a, i) => (
+                <section
+                  class={`cl-adv-panel${i % 2 === 0 ? " cl-adv-panel-flip" : ""}`}
+                  style={`--pi: ${i + 1}`}
                 >
-                  <img src={logo.src} alt={logo.alt} loading="lazy" />
-                </div>
+                  <span class="cl-adv-num" aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div class="cl-adv-panel-inner">
+                    <div class="cl-adv-copy">
+                      <p class="cl-adv-eyebrow">
+                        Advisory Board — {String(i + 1).padStart(2, "0")} / 05
+                      </p>
+                      <h3 class="cl-adv-name">{a.name}</h3>
+                      <p class="cl-adv-role">{a.role}</p>
+                      <p class="cl-adv-tagline">{a.tag}</p>
+                      <button class="cl-adv-view" type="button" data-adv={i}>
+                        View profile <span>+</span>
+                      </button>
+                    </div>
+                    <div class="cl-adv-portrait">
+                      <img src={a.src} alt={a.name} loading="lazy" />
+                    </div>
+                  </div>
+                </section>
               ))
             }
           </div>
+
+          <!-- Progress rail — jump to any advisor -->
+          <div class="cl-adv-rail">
+            <div class="cl-adv-rail-bar"><span></span></div>
+            <div class="cl-adv-rail-names">
+              {
+                advisors.map((a, i) => (
+                  <button
+                    type="button"
+                    class="cl-adv-rail-tick"
+                    data-tick={i}
+                    aria-label={`Go to ${a.name}`}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                    <em>{a.name.split(" ")[0]}</em>
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+
+          <!-- Film grain -->
+          <div class="cl-adv-grain" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -162,6 +306,38 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
       </div>
     </div>
   </div>
+
+  <!-- Advisor detail modal (fixed overlay; outside the transformed stage) -->
+  <div class="cl-adv-modal" aria-hidden="true">
+    <div class="cl-adv-modal-backdrop" data-adv-close></div>
+    <div class="cl-adv-modal-panel" role="dialog" aria-modal="true">
+      <button
+        class="cl-adv-modal-close"
+        type="button"
+        data-adv-close
+        aria-label="Close">&times;</button
+      >
+      {
+        advisors.map((a, i) => (
+          <article class="cl-adv-detail" data-detail={i} hidden>
+            <div class="cl-adv-detail-media">
+              <img src={a.src} alt={a.name} loading="lazy" />
+            </div>
+            <div class="cl-adv-detail-body">
+              <h3>{a.name}</h3>
+              <p class="cl-adv-detail-role">{a.role}</p>
+              <p class="cl-adv-detail-tag">{a.tag}</p>
+              <ul>
+                {a.points.map((p) => (
+                  <li>{p}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
 </section>
 
 <style>
@@ -191,9 +367,7 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
     transition: background 0.5s ease;
   }
   .cl-section.phase-zoom .cl-sticky,
-  .cl-section.phase-kaleidoscope .cl-sticky,
-  .cl-section.phase-blackhole .cl-sticky,
-  .cl-section.phase-grid .cl-sticky {
+  .cl-section.phase-kaleidoscope .cl-sticky {
     background: #0a0a0a;
   }
 
@@ -208,8 +382,7 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
     pointer-events: none;
   }
   .cl-section.phase-zoom .cl-bg-overlay,
-  .cl-section.phase-kaleidoscope .cl-bg-overlay,
-  .cl-section.phase-blackhole .cl-bg-overlay {
+  .cl-section.phase-kaleidoscope .cl-bg-overlay {
     opacity: 1;
   }
 
@@ -226,9 +399,7 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
       transform 0.5s ease;
   }
   .cl-section.phase-zoom .cl-header,
-  .cl-section.phase-kaleidoscope .cl-header,
-  .cl-section.phase-blackhole .cl-header,
-  .cl-section.phase-grid .cl-header {
+  .cl-section.phase-kaleidoscope .cl-header {
     opacity: 0;
     transform: translateX(-50%) translateY(-30px);
     pointer-events: none;
@@ -302,9 +473,7 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
     user-select: none;
     pointer-events: none;
   }
-  .cl-section.phase-kaleidoscope .cl-o-ring,
-  .cl-section.phase-blackhole .cl-o-ring,
-  .cl-section.phase-grid .cl-o-ring {
+  .cl-section.phase-kaleidoscope .cl-o-ring {
     opacity: 0;
     /* visibility:hidden releases the huge scaled raster from GPU memory */
     visibility: hidden;
@@ -327,90 +496,434 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
       opacity 0.8s ease,
       visibility 0.8s;
   }
-  .cl-section.phase-kaleidoscope .cl-kaleidoscope,
-  .cl-section.phase-blackhole .cl-kaleidoscope {
+  /* Clickable while the advisory phase holds */
+  .cl-section.phase-kaleidoscope .cl-kaleidoscope {
     opacity: 1;
     visibility: visible;
-    pointer-events: none;
+    pointer-events: auto;
   }
 
-  /* Black-hole vortex radial overlay — grows from centre */
-  .cl-bh-vortex {
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-    /* radial dark gradient, size driven by --bh CSS var (0 → 1) */
-    background: radial-gradient(
-      circle at center,
-      #000 calc(var(--bh, 0) * 30%),
-      transparent calc(var(--bh, 0) * 30% + 4px)
-    );
-    pointer-events: none;
-  }
-
+  /* ── Advisory chapters — editorial horizontal storytelling ──────────
+     JS sets --tx (0 → 5) on the stage; the track pans one full viewport
+     per chapter while numerals and portraits drift at their own depths. */
   .cl-k-disc {
     position: relative;
-    width: 90vmin;
-    height: 90vmin;
-    max-width: 700px;
-    max-height: 700px;
-    /* Scroll-driven black-hole collapse (scale + spiral spin).
-       The infinite autoplay rotation lives on .cl-k-rotor below so the
-       CSS animation never overrides this scrubbed inline transform. */
-    transform: scale(var(--bh-scale, 1)) rotate(var(--bh-spin, 0deg));
-    will-change: transform;
-  }
-
-  /* Autoplay rotation layer — separate from the scrubbed disc transform */
-  .cl-k-rotor {
-    position: absolute;
-    inset: 0;
-    animation: k-rotate 30s linear infinite;
-    animation-play-state: paused;
-    will-change: transform;
-  }
-  .cl-section.phase-kaleidoscope .cl-k-rotor,
-  .cl-section.phase-blackhole .cl-k-rotor {
-    animation-play-state: running;
-  }
-
-  @keyframes k-rotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .cl-k-item {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    top: 50%;
-    left: 50%;
-    transform-origin: center center;
-    /* Place each item in a circle using polar coordinates */
-    transform: translate(-50%, -50%)
-      rotate(calc(360deg / var(--k-total) * var(--k-i)))
-      translateY(calc(-1 * clamp(120px, 30vmin, 260px)))
-      rotate(calc(-360deg / var(--k-total) * var(--k-i)));
-  }
-  .cl-k-item img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: 0.85;
+    overflow: hidden;
   }
 
-  /* Mirror layer — reflected copies for kaleidoscope symmetry */
-  .cl-k-item:nth-child(even) {
-    transform: translate(-50%, -50%)
-      rotate(calc(360deg / var(--k-total) * var(--k-i) + 9deg))
-      translateY(calc(-1 * clamp(80px, 20vmin, 180px)))
-      rotate(calc(-360deg / var(--k-total) * var(--k-i) - 9deg)) scaleX(-1);
-    opacity: 0.5;
+  .cl-adv-track {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    transform: translateX(calc(var(--tx, 0) * -100%));
+    will-change: transform;
+  }
+
+  .cl-adv-panel {
+    flex: 0 0 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8vw;
+  }
+
+  /* Ghost chapter numeral — drifts slower than the pan (depth layer) */
+  .cl-adv-num {
+    position: absolute;
+    top: 50%;
+    right: 2vw;
+    font-family: var(--serif, "DM Serif Display", Georgia, serif);
+    font-size: 36vw;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    user-select: none;
+    transform: translateY(-50%)
+      translateX(calc((var(--tx, 0) - var(--pi, 0)) * 16vw));
+  }
+
+  .cl-adv-panel-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(2rem, 6vw, 7rem);
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .cl-adv-copy {
+    max-width: 580px;
+    position: relative;
+    z-index: 2;
+    opacity: 0.2;
+    transform: translateY(16px);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+  .cl-adv-panel.is-active .cl-adv-copy {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cl-adv-eyebrow {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #ed4823;
+    margin-bottom: 1rem;
+  }
+  .cl-adv-name {
+    font-family: var(--serif, "DM Serif Display", Georgia, serif);
+    font-size: clamp(2.2rem, 4.8vw, 4.4rem);
+    font-weight: 400;
+    line-height: 1.04;
+    color: #fff;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+  }
+  .cl-adv-role {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ed4823;
+    margin-bottom: 0.9rem;
+  }
+  .cl-adv-tagline {
+    font-family: var(--serif, "DM Serif Display", Georgia, serif);
+    font-style: italic;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 460px;
+  }
+  .cl-adv-view {
+    margin-top: 1.7rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 100px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    cursor: pointer;
+    transition:
+      background 0.3s ease,
+      border-color 0.3s ease,
+      transform 0.3s ease;
+  }
+  .cl-adv-view:hover,
+  .cl-adv-view:focus-visible {
+    background: #ed4823;
+    border-color: #ed4823;
+    transform: translateY(-2px);
+  }
+  .cl-adv-view span {
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+
+  /* Portrait — free-standing cut-out figure, never cropped. The photos
+     have transparent backgrounds, so the advisor stands at near-full
+     height, grounded on the bottom edge, overlapping the ghost numeral. */
+  .cl-adv-portrait {
+    position: absolute;
+    right: clamp(2vw, 7vw, 9vw);
+    /* Figures sit dropped ~20vh below the viewport edge, so their lower
+       body bleeds off-screen — editorial "rising into frame" look */
+    bottom: -20vh;
+    height: min(76vh, 860px);
+    pointer-events: none;
+    opacity: 0.45;
+    transition: opacity 0.5s ease;
+  }
+  .cl-adv-panel.is-active .cl-adv-portrait {
+    opacity: 1;
+  }
+  /* Alternating chapters — Rachel / Alex / John flip: figure stands on
+     the left, copy (and ghost numeral) move to the right */
+  .cl-adv-panel-flip .cl-adv-portrait {
+    right: auto;
+    left: clamp(2vw, 7vw, 9vw);
+  }
+  .cl-adv-panel-flip .cl-adv-num {
+    right: auto;
+    left: 2vw;
+  }
+  .cl-adv-panel-flip .cl-adv-panel-inner {
+    justify-content: flex-end;
+  }
+
+  .cl-adv-portrait img {
+    display: block;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    object-position: bottom;
+    /* Soft grounding shadow on the figure itself (follows the cut-out) */
+    filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.5));
+    /* Horizontal parallax against the pan */
+    transform: translateX(calc((var(--tx, 0) - var(--pi, 0)) * -4vw));
+  }
+
+  /* Intro chapter */
+  .cl-adv-panel-intro {
+    text-align: center;
+  }
+  .cl-adv-intro-inner {
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cl-adv-intro-title {
+    font-family: var(--serif, "DM Serif Display", Georgia, serif);
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 1.4rem;
+  }
+  .cl-adv-intro-title em {
+    font-style: italic;
+    color: #ed4823;
+  }
+  .cl-adv-quote {
+    font-family: var(--serif, "DM Serif Display", Georgia, serif);
+    font-style: italic;
+    font-size: clamp(0.98rem, 1.5vw, 1.3rem);
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 640px;
+  }
+  .cl-adv-hint {
+    margin-top: 2.2rem;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ed4823;
+  }
+  .cl-adv-hint span {
+    display: inline-block;
+    animation: adv-hint-nudge 1.6s ease-in-out infinite;
+  }
+  @keyframes adv-hint-nudge {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(6px);
+    }
+  }
+
+  /* Progress rail */
+  .cl-adv-rail {
+    position: absolute;
+    left: 50%;
+    bottom: 4.5vh;
+    transform: translateX(-50%);
+    width: min(720px, 84vw);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    z-index: 3;
+  }
+  .cl-adv-rail-bar {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .cl-adv-rail-bar span {
+    display: block;
+    height: 100%;
+    width: calc(var(--tx, 0) / 5 * 100%);
+    background: #ed4823;
+  }
+  .cl-adv-rail-names {
+    display: flex;
+    justify-content: space-between;
+  }
+  .cl-adv-rail-tick {
+    background: none;
+    border: 0;
+    padding: 0.2rem 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    transition: color 0.3s ease;
+  }
+  .cl-adv-rail-tick em {
+    font-style: normal;
+  }
+  .cl-adv-rail-tick:hover,
+  .cl-adv-rail-tick.is-active {
+    color: #fff;
+  }
+  .cl-adv-rail-tick.is-active {
+    color: #ed4823;
+  }
+
+  /* Film grain over the whole stage */
+  .cl-adv-grain {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0.055;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='140'%20height='140'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.8'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='140'%20height='140'%20filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cl-adv-copy,
+    .cl-adv-portrait {
+      transition: none;
+    }
+    .cl-adv-hint span {
+      animation: none;
+    }
+  }
+
+  /* ── Advisor detail modal ───────────────────── */
+  .cl-adv-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s;
+  }
+  .cl-adv-modal.open {
+    opacity: 1;
+    visibility: visible;
+  }
+  .cl-adv-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 5, 5, 0.82);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .cl-adv-modal-panel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(880px, 92vw);
+    max-height: 86vh;
+    overflow-y: auto;
+    /* Internal scrolling must not chain to the page behind */
+    overscroll-behavior: contain;
+    background: #151515;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7);
+  }
+  .cl-adv-modal-close {
+    position: sticky;
+    top: 0.8rem;
+    margin-left: calc(100% - 3rem);
+    margin-right: 0.8rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .cl-adv-detail {
+    display: flex;
+    gap: 2rem;
+    padding: 0 2.2rem 2.2rem;
+  }
+  /* Only the clicked advisor's article is shown — without this, the
+     display:flex above would override the [hidden] attribute and all
+     five bios would render stacked in one panel */
+  .cl-adv-detail[hidden] {
+    display: none;
+  }
+  .cl-adv-detail-media {
+    flex: 0 0 240px;
+  }
+  .cl-adv-detail-media img {
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+  }
+  .cl-adv-detail-body h3 {
+    font-family: var(--serif, "DM Serif Display", Georgia, serif);
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 0.3rem;
+  }
+  .cl-adv-detail-role {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #ed4823;
+    margin-bottom: 0.7rem;
+  }
+  .cl-adv-detail-tag {
+    font-family: var(--serif, "DM Serif Display", Georgia, serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 1.1rem;
+  }
+  .cl-adv-detail-body ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .cl-adv-detail-body li {
+    position: relative;
+    padding-left: 1.1rem;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .cl-adv-detail-body li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ed4823;
   }
 
   /* ── Final Grid ─────────────────────────────── */
@@ -506,9 +1019,64 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
       white-space: normal;
       padding: 0 1rem;
     }
-    .cl-k-item {
-      width: 40px;
-      height: 40px;
+    .cl-adv-panel {
+      padding: 0 7vw;
+    }
+    .cl-adv-panel-inner {
+      flex-direction: column-reverse;
+      justify-content: center;
+      gap: 1.4rem;
+      text-align: center;
+    }
+    /* Flip has no meaning in the stacked mobile layout */
+    .cl-adv-panel-flip .cl-adv-panel-inner {
+      justify-content: center;
+    }
+    .cl-adv-copy {
+      max-width: none;
+    }
+    .cl-adv-name {
+      font-size: clamp(1.7rem, 8vw, 2.4rem);
+      margin-bottom: 0.6rem;
+    }
+    .cl-adv-tagline {
+      margin: 0 auto;
+      font-size: 0.95rem;
+    }
+    .cl-adv-view {
+      margin-top: 1.1rem;
+      padding: 0.6rem 1.2rem;
+    }
+    .cl-adv-portrait {
+      position: static;
+      height: 34vh;
+    }
+    .cl-adv-portrait img {
+      margin: 0 auto;
+    }
+    .cl-adv-num {
+      font-size: 74vw;
+      right: -8vw;
+      top: 42%;
+    }
+    .cl-adv-quote {
+      font-size: 0.92rem;
+    }
+    .cl-adv-rail-tick em {
+      display: none;
+    }
+    .cl-adv-rail {
+      bottom: 3vh;
+    }
+    .cl-adv-detail {
+      flex-direction: column;
+      padding: 0 1.2rem 1.4rem;
+      gap: 1.2rem;
+    }
+    .cl-adv-detail-media {
+      flex: none;
+      width: 55%;
+      margin: 0 auto;
     }
     .cl-grid {
       grid-template-columns: repeat(3, 1fr);
@@ -547,12 +1115,132 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
     let currentPhase = "";
 
     const kDisc = section.querySelector(".cl-k-disc") as HTMLElement;
-    const bhVortex = section.querySelector(".cl-bh-vortex") as HTMLElement;
 
-    // Ease function: cubic ease-in for the black-hole collapse
-    function easeInCubic(t: number) {
-      return t * t * t;
+    // ── Advisory chapters: horizontal pan + detail modal ─────────────
+    const advPanels = Array.from(
+      section.querySelectorAll(".cl-adv-panel"),
+    ) as HTMLElement[];
+    const advTicks = Array.from(
+      section.querySelectorAll(".cl-adv-rail-tick"),
+    ) as HTMLElement[];
+    const advViews = Array.from(
+      section.querySelectorAll(".cl-adv-view"),
+    ) as HTMLElement[];
+    const advModal = section.querySelector(".cl-adv-modal") as HTMLElement;
+    const advDetails = Array.from(
+      section.querySelectorAll(".cl-adv-detail"),
+    ) as HTMLElement[];
+
+    // ── Magnetic chapter mapping ─────────────────────────────────────
+    // Each chapter owns a dwell plateau (track sits EXACTLY on that
+    // chapter — photo and copy always aligned) followed by a short eased
+    // transition to the next. The intro dwells longest so the manifesto
+    // can be read; resting between two chapters is impossible.
+    const DWELLS = [1.7, 1, 1, 1, 1, 1.2]; // intro, 5 advisors
+    const TRANSITION = 0.5;
+    type Seg = { start: number; len: number; move: boolean; i: number };
+    const segs: Seg[] = [];
+    let segAcc = 0;
+    DWELLS.forEach((d, i) => {
+      segs.push({ start: segAcc, len: d, move: false, i });
+      segAcc += d;
+      if (i < DWELLS.length - 1) {
+        segs.push({ start: segAcc, len: TRANSITION, move: true, i });
+        segAcc += TRANSITION;
+      }
+    });
+    const SEG_TOTAL = segAcc;
+
+    function chapterTrack(kp: number) {
+      const u = Math.max(0, Math.min(1, kp)) * SEG_TOTAL;
+      for (const s of segs) {
+        if (u <= s.start + s.len) {
+          if (!s.move) return s.i;
+          const t = (u - s.start) / s.len;
+          return s.i + t * t * (3 - 2 * t); // smoothstep = magnetic snap
+        }
+      }
+      return DWELLS.length - 1;
     }
+
+    function setAdvProgress(kp: number) {
+      const tx = chapterTrack(kp);
+      kDisc.style.setProperty("--tx", String(tx));
+      const active = Math.round(tx);
+      advPanels.forEach((p, i) => {
+        p.classList.toggle("is-active", i === active);
+      });
+      advTicks.forEach((t, i) => {
+        t.classList.toggle("is-active", i + 1 === active);
+      });
+    }
+
+    // Rail tick → scroll the page to the middle of that advisor's dwell
+    function scrollToChapter(i: number) {
+      const dwell = segs.find((s) => !s.move && s.i === i + 1);
+      if (!dwell) return;
+      const kp = (dwell.start + dwell.len / 2) / SEG_TOTAL;
+      const spacerTop = spacer.getBoundingClientRect().top + window.scrollY;
+      const total = spacer.offsetHeight - window.innerHeight;
+      window.scrollTo({
+        top: spacerTop + (0.36 + kp * 0.64) * total,
+        behavior: "smooth",
+      });
+    }
+    advTicks.forEach((tick) => {
+      tick.addEventListener("click", () => {
+        scrollToChapter(Number(tick.dataset.tick));
+      });
+    });
+
+    // Hard scroll lock: fixing the body freezes the page (wheel, touch
+    // and momentum scrolling included) at its exact position, so the
+    // pinned phase can't shift while a bio is open.
+    let lockedScrollY = 0;
+    function lockScroll() {
+      lockedScrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${lockedScrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+    }
+    function unlockScroll() {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      window.scrollTo(0, lockedScrollY);
+    }
+
+    function openAdvisor(i: number) {
+      // Show only the clicked advisor's bio
+      advDetails.forEach((d, j) => {
+        d.hidden = j !== i;
+      });
+      advModal.classList.add("open");
+      advModal.setAttribute("aria-hidden", "false");
+      lockScroll();
+    }
+    function closeAdvisor() {
+      if (!advModal.classList.contains("open")) return;
+      advModal.classList.remove("open");
+      advModal.setAttribute("aria-hidden", "true");
+      unlockScroll();
+    }
+
+    advViews.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        openAdvisor(Number(btn.dataset.adv));
+      });
+    });
+    advModal.querySelectorAll("[data-adv-close]").forEach((el) => {
+      el.addEventListener("click", closeAdvisor);
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeAdvisor();
+    });
 
     // Zoom transform for the OMO logo: scales about the outlined last "O"
     // (transform-origin 84% / 38%) while drifting it to the viewport centre,
@@ -581,38 +1269,26 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
       const progress = Math.max(0, Math.min(1, scrolled / totalScroll));
 
       // Determine new phase.
-      // Dwell budget: intro 4% / zoom 32% / kaleidoscope 38% / blackhole 16% / grid 10%
-      // — the kaleidoscope (clientele showcase) holds the longest.
+      // Dwell budget: intro 4% / zoom 32% / advisory board 64% — after the
+      // advisory holds, the sticky simply unpins and normal scrolling
+      // carries the visitor into the clientele grid below.
       let newPhase = "";
       if (progress < 0.04) {
         newPhase = "initial";
       } else if (progress < 0.36) {
         newPhase = "zoom";
-      } else if (progress < 0.74) {
-        newPhase = "kaleidoscope";
-      } else if (progress < 0.9) {
-        newPhase = "blackhole";
       } else {
-        newPhase = "grid";
+        newPhase = "kaleidoscope";
       }
 
       // Update DOM classes ONLY when the phase shifts
       if (newPhase !== currentPhase) {
-        section.classList.remove(
-          "phase-zoom",
-          "phase-kaleidoscope",
-          "phase-blackhole",
-          "phase-grid",
-        );
+        section.classList.remove("phase-zoom", "phase-kaleidoscope");
 
         if (newPhase === "zoom") {
           section.classList.add("phase-zoom");
         } else if (newPhase === "kaleidoscope") {
           section.classList.add("phase-kaleidoscope");
-        } else if (newPhase === "blackhole") {
-          section.classList.add("phase-blackhole");
-        } else if (newPhase === "grid") {
-          section.classList.add("phase-grid");
         }
 
         currentPhase = newPhase;
@@ -620,56 +1296,21 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
 
       // Apply scroll-driven animations based on current phase
       if (newPhase === "initial") {
-        // ── Initial: O ring at rest ──────────────────
+        // ── Initial: logo at rest ────────────────────
         oRing.style.transform = "scale(1)";
-        section.style.setProperty("--bh", "0");
-        kDisc.style.setProperty("--bh-scale", "1");
-        kDisc.style.setProperty("--bh-spin", "0deg");
-        kDisc.style.opacity = "1";
-        bhVortex.style.background = "transparent";
+        setAdvProgress(0);
 
       } else if (newPhase === "zoom") {
         // ── Phase: O zoom in ─────────────────────────
         const zp = (progress - 0.04) / 0.32;
         oRing.style.transform = oZoomTransform(zp);
-        section.style.setProperty("--bh", "0");
-        kDisc.style.setProperty("--bh-scale", "1");
-        kDisc.style.setProperty("--bh-spin", "0deg");
-        kDisc.style.opacity = "1";
-        bhVortex.style.background = "transparent";
-
-      } else if (newPhase === "kaleidoscope") {
-        // ── Phase: Kaleidoscope idle ─────────────────
-        oRing.style.transform = oZoomTransform(1);
-        section.style.setProperty("--bh", "0");
-        kDisc.style.setProperty("--bh-scale", "1");
-        kDisc.style.setProperty("--bh-spin", "0deg");
-        kDisc.style.opacity = "1";
-        bhVortex.style.background = "transparent";
-
-      } else if (newPhase === "blackhole") {
-        // ── Phase: Black-hole fly-through ───────────
-        const bhP = easeInCubic((progress - 0.74) / 0.16);
-        oRing.style.transform = oZoomTransform(1);
-
-        // Disc scales UP to fly past the viewer: scale 1 → 9, spin 0 → 180deg
-        const bhScale = 1 + bhP * 8;
-        const bhSpin = bhP * 180;
-        kDisc.style.setProperty("--bh-scale", String(bhScale));
-        kDisc.style.setProperty("--bh-spin", `${bhSpin}deg`);
-
-        // Disc fades out as it zooms past the camera POV
-        kDisc.style.opacity = String(Math.max(0, 1 - bhP * 1.3));
-
-        // Background fades to pure solid black
-        bhVortex.style.background = `rgba(10, 10, 10, ${bhP})`;
+        setAdvProgress(0);
 
       } else {
-        // ── Phase: Grid ──────────────────────────────
+        // ── Phase: Advisory chapters — scrub pans the editorial track ──
+        const kp = (progress - 0.36) / 0.64;
         oRing.style.transform = oZoomTransform(1);
-        kDisc.style.setProperty("--bh-scale", "0");
-        kDisc.style.opacity = "0";
-        bhVortex.style.background = "#000";
+        setAdvProgress(kp);
       }
 
       ticking = false;
@@ -692,17 +1333,10 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
           } else {
             window.removeEventListener("scroll", onScroll);
             // Reset everything when section leaves viewport
-            section.classList.remove(
-              "phase-zoom",
-              "phase-kaleidoscope",
-              "phase-blackhole",
-              "phase-grid",
-            );
+            section.classList.remove("phase-zoom", "phase-kaleidoscope");
             oRing.style.transform = "scale(1)";
-            kDisc.style.setProperty("--bh-scale", "1");
-            kDisc.style.setProperty("--bh-spin", "0deg");
-            kDisc.style.opacity = "1";
-            bhVortex.style.background = "transparent";
+            setAdvProgress(0);
+            closeAdvisor();
             currentPhase = "";
           }
         });
@@ -710,6 +1344,44 @@ const allLogos = [...malaysiaLogos, ...apacLogos];
       { threshold: 0 },
     );
     observer.observe(section);
+
+    // Intercept clicks to #advisory-board and scroll to 38% of the spacer (allowing 2% progress for fade-in animation visibility)
+    const advisoryLinks = document.querySelectorAll('a[href="#advisory-board"]');
+    advisoryLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const spacerTop = spacer.getBoundingClientRect().top + window.scrollY;
+        const total = spacer.offsetHeight - window.innerHeight;
+        const targetScroll = spacerTop + 0.38 * total;
+
+        if ((window as any).lenis) {
+          (window as any).lenis.scrollTo(targetScroll, {
+            offset: 0,
+            duration: 1.8,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          });
+        } else {
+          window.scrollTo({
+            top: targetScroll,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+
+    // Handle initial hash on page load
+    if (window.location.hash === "#advisory-board") {
+      setTimeout(() => {
+        const spacerTop = spacer.getBoundingClientRect().top + window.scrollY;
+        const total = spacer.offsetHeight - window.innerHeight;
+        const targetScroll = spacerTop + 0.38 * total;
+        if ((window as any).lenis) {
+          (window as any).lenis.scrollTo(targetScroll, { immediate: true });
+        } else {
+          window.scrollTo(0, targetScroll);
+        }
+      }, 500);
+    }
 
     // Initial call
     onScroll();
