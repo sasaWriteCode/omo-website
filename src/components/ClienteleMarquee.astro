@@ -1,0 +1,264 @@
+---
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+const clienteleGlob = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/Clientele/*.png",
+  { eager: true },
+);
+const apacGlob = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/APAC_Clientele/*.png",
+  { eager: true },
+);
+
+const clientele = (file: string) =>
+  clienteleGlob[`../assets/Clientele/${file}`].default;
+const apac = (file: string) =>
+  apacGlob[`../assets/APAC_Clientele/${file}`].default;
+
+/* Optimize to hashed WebP at build time; keeps plain <img> tags in the
+   template so the scoped styles (.cl-grid-item img) still apply. */
+const optimize = (logos: { src: ImageMetadata; alt: string }[]) =>
+  Promise.all(
+    logos.map(async ({ src, alt }) => ({
+      src: (await getImage({ src, format: "webp" })).src,
+      alt,
+    })),
+  );
+
+const malaysiaSources = [
+  { src: clientele("Toyota.png"), alt: "Toyota" },
+  { src: clientele("Yamaha.png"), alt: "Yamaha" },
+  { src: clientele("Maxis.png"), alt: "Maxis" },
+  { src: clientele("FarmFresh.png"), alt: "Farm Fresh" },
+  { src: clientele("Li-Ning.png"), alt: "Li-Ning" },
+  { src: clientele("UTAR.png"), alt: "UTAR" },
+  { src: clientele("TARUMT.png"), alt: "TARUMT" },
+  {
+    src: clientele("OUM_OpenUniversityMalaysia.png"),
+    alt: "Open University Malaysia",
+  },
+  { src: clientele("redONE.png"), alt: "redONE" },
+  { src: clientele("BzuBzu.png"), alt: "BzuBzu" },
+  { src: clientele("JambanKing.png"), alt: "Jamban King" },
+  { src: clientele("RekaSetia.png"), alt: "Reka Setia" },
+];
+
+const apacSources = [
+  { src: apac("joy_group.png"), alt: "Joy Group" },
+  { src: apac("JinxinTechnology.png"), alt: "Jinxin Technology" },
+  { src: apac("KeerKeji.png"), alt: "Keer Keji" },
+  { src: apac("HuakangClean.png"), alt: "Huakang Clean" },
+  { src: apac("HubeiKingballLawFirm.png"), alt: "Hubei Kingball Law Firm" },
+  { src: apac("JCEX.png"), alt: "JCEX" },
+  { src: apac("SANY.png"), alt: "SANY" },
+  { src: apac("ChenxinShipping.png"), alt: "Chenxin Shipping" },
+  { src: apac("FigtonMedical.png"), alt: "Figton Medical" },
+  { src: apac("QingtianTech.png"), alt: "Qingtian Tech" },
+  { src: apac("RUIXUE.png"), alt: "RUIXUE" },
+  { src: apac("ShengjieLogistics.png"), alt: "Shengjie Logistics" },
+  { src: apac("SuperConstruction.png"), alt: "Super Construction" },
+  { src: apac("xjt.png"), alt: "XJT" },
+  { src: apac("YIHAI.png"), alt: "YIHAI" },
+  { src: apac("ZhentianJianshe_ZCIGC.png"), alt: "ZCIGC" },
+  { src: apac("ZCretechModularHouse.png"), alt: "ZCretech Modular House" },
+  {
+    src: apac("ZhengqiyanBuildingMaterials.png"),
+    alt: "Zhengqiyan Building Materials",
+  },
+  { src: apac("ZhentianConstruction.png"), alt: "Zhentian Construction" },
+  { src: apac("ZhongshunJierou.png"), alt: "Zhongshun Jierou" },
+  { src: apac("ChengEtech.png"), alt: "ChengE tech" },
+  { src: apac("QiCaiYing.png"), alt: "QiCaiYing" },
+  { src: apac("LingdongZhimenxin.png"), alt: "Lingdong Zhimenxin" },
+];
+
+const malaysiaLogos = await optimize(malaysiaSources);
+const apacLogos = await optimize(apacSources);
+---
+
+<div class="cl-grid-container">
+  <div class="cl-grid-header">
+    <h2 class="cl-grid-title">
+      Trusted by <span class="cl-accent">35+</span> brands across APAC
+    </h2>
+  </div>
+
+  <div class="cl-grid-group">
+    <div class="cl-marquee">
+      <div class="cl-marquee-track" style="--marquee-dur: 55s;">
+        {
+          malaysiaLogos.map((logo) => (
+            <div class="cl-grid-item">
+              <img src={logo.src} alt={logo.alt} loading="lazy" />
+            </div>
+          ))
+        }
+        {
+          malaysiaLogos.map((logo) => (
+            <div class="cl-grid-item" aria-hidden="true">
+              <img src={logo.src} alt="" loading="lazy" />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+  <div class="cl-grid-group">
+    <div class="cl-marquee cl-marquee-reverse">
+      <div class="cl-marquee-track" style="--marquee-dur: 95s;">
+        {
+          apacLogos.map((logo) => (
+            <div class="cl-grid-item">
+              <img src={logo.src} alt={logo.alt} loading="lazy" />
+            </div>
+          ))
+        }
+        {
+          apacLogos.map((logo) => (
+            <div class="cl-grid-item" aria-hidden="true">
+              <img src={logo.src} alt="" loading="lazy" />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Final Grid ─────────────────────────────── */
+  .cl-grid-container {
+    position: relative;
+    z-index: 8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5rem;
+    padding: 6rem var(--gutter, 2rem) 8rem;
+    background: #fafaf8;
+    width: 100%;
+  }
+
+  .cl-grid-header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .cl-grid-title {
+    font-family: var(--serif, "DM Serif Display", Georgia, serif);
+    font-size: clamp(1.8rem, 3.2vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: #111111;
+    letter-spacing: -0.01em;
+  }
+  .cl-eyebrow {
+    font-family: var(--sans, "DM Sans", system-ui, sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #ed4823;
+    margin-bottom: 1.2rem;
+  }
+  .cl-accent {
+    color: #ed4823;
+  }
+
+  .cl-grid-group {
+    text-align: center;
+    max-width: 1100px;
+    width: 100%;
+  }
+  .cl-grid-label {
+    font-family: var(--sans, "DM Sans", system-ui, sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #ed4823;
+    margin-bottom: 1.2rem;
+  }
+
+  /* ── Logo marquee — slow, seamless, full-bleed banner ───────────── */
+  .cl-marquee {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    overflow: hidden;
+    /* Fade the edges so logos drift in/out of view */
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+  }
+  .cl-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: cl-marquee var(--marquee-dur, 60s) linear infinite;
+  }
+  .cl-marquee-reverse .cl-marquee-track {
+    animation-direction: reverse;
+  }
+  .cl-marquee:hover .cl-marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes cl-marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cl-marquee-track {
+      animation: none;
+    }
+  }
+
+  .cl-grid-item {
+    background: #fff;
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    border-radius: 10px;
+    padding: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: clamp(120px, 13vw, 165px);
+    margin-right: 1rem;
+    aspect-ratio: 3 / 2;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .cl-grid-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  }
+  .cl-grid-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  /* ── Mobile ─────────────────────────────────── */
+  @media (max-width: 767px) {
+    .cl-grid-item {
+      width: 110px;
+      margin-right: 0.6rem;
+      padding: 0.5rem;
+    }
+    .cl-grid-container {
+      gap: 2rem;
+      padding: 4rem 1rem 6rem;
+    }
+  }
+</style>
