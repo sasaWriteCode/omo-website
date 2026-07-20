@@ -1361,17 +1361,22 @@ const MY = countries.find((c) => c.id === "malaysia")!;
     --glow-oceania: rgba(45, 122, 87, 0.22);
 
     background: #f8f6f1;
-    padding: 96px 2rem;
+    padding: 96px 2rem 176px 2rem;
     overflow: hidden;
   }
   @media (max-width: 900px) {
     .rf-section {
-      padding: 64px 1.5rem;
+      padding: 64px 1.5rem 176px 1.5rem;
+    }
+  }
+  @media (max-width: 767px) {
+    .rf-section {
+      padding-bottom: 128px;
     }
   }
   @media (max-width: 600px) {
     .rf-section {
-      padding: 48px 1.25rem;
+      padding: 48px 1.25rem 128px 1.25rem;
     }
   }
 
