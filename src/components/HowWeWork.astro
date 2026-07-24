@@ -283,8 +283,157 @@
       </div>
     </div>
 
+    <!-- ── MOBILE-ONLY Pyramid + Steps Layout ── -->
+    <div class="mobile-pyramid-layout">
+      <!-- Left Column: Half Pyramid, Connector Lines, Concentric Dots -->
+      <div class="mobile-pyramid-col">
+        <svg
+          viewBox="0 0 260 440"
+          class="mobile-pyramid-svg"
+          aria-label="Pyramid diagram showing the 4 steps of OMO working methodology"
+        >
+          <!-- Half-Pyramid Slices (flush with left viewport edge x=0) -->
+          <!-- Level 1 (Top) -->
+          <polygon
+            points="0,25 60,25 76,85 0,85"
+            fill="#ed4823"
+            class="pyramid-slice"
+            data-step="1"></polygon>
+          <!-- Level 2 -->
+          <polygon
+            points="0,135 90,135 106,195 0,195"
+            fill="#ed4823"
+            class="pyramid-slice"
+            data-step="2"></polygon>
+          <!-- Level 3 -->
+          <polygon
+            points="0,245 120,245 136,305 0,305"
+            fill="#ed4823"
+            class="pyramid-slice"
+            data-step="3"></polygon>
+          <!-- Level 4 (Bottom) -->
+          <polygon
+            points="0,355 150,355 166,415 0,415"
+            fill="#ed4823"
+            class="pyramid-slice"
+            data-step="4"></polygon>
+
+          <!-- White Icons overlayed centered inside half-slices -->
+          <!-- Level 1 Icon -->
+          <g transform="translate(16, 39)" class="pyramid-icon" pointer-events="none">
+            <g stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+              <circle cx="16" cy="9" r="4"></circle>
+              <path d="M16,7 v2 h2" stroke-width="1.2"></path>
+              <path d="M16,13 v5"></path>
+              <path d="M10,24 v-3 h12 v3"></path>
+              <path d="M10,21 H22"></path>
+              <circle cx="10" cy="24" r="2" fill="white"></circle>
+              <circle cx="16" cy="24" r="2" fill="white"></circle>
+              <circle cx="22" cy="24" r="2" fill="white"></circle>
+            </g>
+          </g>
+
+          <!-- Level 2 Icon -->
+          <g transform="translate(26, 149)" class="pyramid-icon" pointer-events="none">
+            <g stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+              <rect x="4" y="5" width="24" height="16" rx="2" stroke-width="1.5"></rect>
+              <path d="M10,21 l-3,4 h18 l-3,-4"></path>
+              <path d="M16,8 c2,0 3,2 3,5 v3 h-6 v-3 c0,-3 1,-5 3,-5 z"></path>
+              <path d="M11,16 v2 M21,16 v2 M16,16 v3"></path>
+            </g>
+          </g>
+
+          <!-- Level 3 Icon -->
+          <g transform="translate(36, 259)" class="pyramid-icon" pointer-events="none">
+            <g stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+              <path d="M10,10 h12 v10 h-12 z"></path>
+              <path d="M10,10 l6,4 l6,-4 M16,14 v6"></path>
+              <path d="M16,7 v-4 M13,5 l3,-3 l3,3"></path>
+              <path d="M16,23 v4 M13,25 l3,3 l3,-3"></path>
+              <path d="M7,15 h-4 M5,12 l-3,3 l3,3"></path>
+              <path d="M25,15 h4 M27,12 l3,3 l-3,3"></path>
+            </g>
+          </g>
+
+          <!-- Level 4 Icon -->
+          <g transform="translate(46, 369)" class="pyramid-icon" pointer-events="none">
+            <g stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+              <rect x="4" y="4" width="24" height="17" rx="2"></rect>
+              <path d="M12,21 l-2,4 h12 l-2,-4 M16,21 v-4"></path>
+              <line x1="8" y1="9" x2="24" y2="9" stroke-width="1"></line>
+              <circle cx="12" cy="9" r="2.5" fill="white"></circle>
+              <line x1="8" y1="14" x2="24" y2="14" stroke-width="1"></line>
+              <circle cx="20" cy="14" r="2.5" fill="white"></circle>
+            </g>
+          </g>
+
+          <!-- Connector Lines to the dots -->
+          <line
+            x1="76" y1="55" x2="235" y2="55"
+            stroke="rgba(0, 0, 0, 0.18)" stroke-width="1.5"
+            class="connector-line" data-step="1"></line>
+          <line
+            x1="106" y1="165" x2="235" y2="165"
+            stroke="rgba(0, 0, 0, 0.18)" stroke-width="1.5"
+            class="connector-line" data-step="2"></line>
+          <line
+            x1="136" y1="275" x2="235" y2="275"
+            stroke="rgba(0, 0, 0, 0.18)" stroke-width="1.5"
+            class="connector-line" data-step="3"></line>
+          <line
+            x1="166" y1="385" x2="235" y2="385"
+            stroke="rgba(0, 0, 0, 0.18)" stroke-width="1.5"
+            class="connector-line" data-step="4"></line>
+
+          <!-- Concentric Connector Dots -->
+          <g class="connector-dot" data-step="1">
+            <circle cx="235" cy="55" r="13" fill="white" stroke="#ed4823" stroke-width="4"></circle>
+            <circle cx="235" cy="55" r="5.5" fill="#ed4823"></circle>
+          </g>
+          <g class="connector-dot" data-step="2">
+            <circle cx="235" cy="165" r="13" fill="white" stroke="#ed4823" stroke-width="4"></circle>
+            <circle cx="235" cy="165" r="5.5" fill="#ed4823"></circle>
+          </g>
+          <g class="connector-dot" data-step="3">
+            <circle cx="235" cy="275" r="13" fill="white" stroke="#ed4823" stroke-width="4"></circle>
+            <circle cx="235" cy="275" r="5.5" fill="#ed4823"></circle>
+          </g>
+          <g class="connector-dot" data-step="4">
+            <circle cx="235" cy="385" r="13" fill="white" stroke="#ed4823" stroke-width="4"></circle>
+            <circle cx="235" cy="385" r="5.5" fill="#ed4823"></circle>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Right Column: Step Pills Container -->
+      <div class="mobile-steps-col">
+        <button class="mobile-card-close" aria-label="Close step details">×</button>
+        <div class="mobile-step-item" data-step="1">
+          <span class="mobile-step-label">Step 1</span>
+          <h3 class="mobile-step-title">Understand</h3>
+          <p class="mobile-step-desc">We clarify your business stage, goals, market position, challenges, and growth priorities.</p>
+        </div>
+        <div class="mobile-step-item" data-step="2">
+          <span class="mobile-step-label">Step 2</span>
+          <h3 class="mobile-step-title">Diagnose</h3>
+          <p class="mobile-step-desc">We review your business model, operations, revenue flow, market positioning, and execution gaps.</p>
+        </div>
+        <div class="mobile-step-item" data-step="3">
+          <span class="mobile-step-label">Step 3</span>
+          <h3 class="mobile-step-title">Prescribe</h3>
+          <p class="mobile-step-desc">We design a clear roadmap with recommended actions, priorities, timelines, and growth opportunities.</p>
+        </div>
+        <div class="mobile-step-item" data-step="4">
+          <span class="mobile-step-label">Step 4</span>
+          <h3 class="mobile-step-title">Execute</h3>
+          <p class="mobile-step-desc">We support the transformation through strategy, marketing, systems, AI, and ecosystem execution.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
+
 
 <script>
   // Helper to update active states across all corresponding data-step elements
@@ -319,6 +468,61 @@
       setActiveStep(step);
     });
   });
+
+  // ── Mobile Card Expand & Collapse Behavior ──
+  const mobileStepsCol = document.querySelector(".mobile-steps-col");
+  const mobileCloseBtn = document.querySelector(".mobile-card-close");
+
+  function expandMobileCard() {
+    if (window.innerWidth < 768 && mobileStepsCol) {
+      mobileStepsCol.classList.add("is-expanded");
+    }
+  }
+
+  function collapseMobileCard() {
+    if (mobileStepsCol) {
+      mobileStepsCol.classList.remove("is-expanded");
+    }
+  }
+
+  // Click step item on mobile to expand card
+  document.querySelectorAll(".mobile-step-item").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const step = el.getAttribute("data-step");
+      if (step) {
+        setActiveStep(step);
+        expandMobileCard();
+      }
+    });
+  });
+
+  // Click SVG slice/dot on mobile to expand card
+  document.querySelectorAll(".mobile-pyramid-col [data-step]").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const step = el.getAttribute("data-step");
+      if (step) {
+        setActiveStep(step);
+        expandMobileCard();
+      }
+    });
+  });
+
+  // Click close button inside card
+  mobileCloseBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    collapseMobileCard();
+  });
+
+  // Click outside container to collapse
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const pyramidLayout = document.querySelector(".mobile-pyramid-layout");
+    if (pyramidLayout && !pyramidLayout.contains(target)) {
+      collapseMobileCard();
+    }
+  });
 </script>
 
 <style>
@@ -334,6 +538,7 @@
     box-shadow: 
       0 -20px 40px rgba(0, 0, 0, 0.04), /* Multi-layer top shadow acting as 3D separator */
       0 -2px 10px rgba(0, 0, 0, 0.02);
+    overflow-x: hidden; /* clips pyramid left-overflow on mobile */
   }
 
   /* Normal centered container */
@@ -383,19 +588,261 @@
     margin: 0 auto 4rem auto;
   }
 
+  /* Desktop grid: hidden on mobile, shown on tablet+ */
   .how-we-work-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    max-width: 1000px;
-    margin: 0 auto;
-    align-items: center;
+    display: none;
   }
 
   @media (min-width: 768px) {
     .how-we-work-grid {
+      display: grid;
       grid-template-columns: 420px 1fr;
       gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: center;
+    }
+  }
+
+  /* ── Mobile-only pyramid + steps layout ── */
+  .mobile-pyramid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 0.5rem;
+    align-items: center;
+    position: relative;
+    /* Escape page-wrap left padding so half-pyramid is flush with viewport edge */
+    margin-left: -1.5rem;
+    width: calc(100% + 1.5rem);
+    background: transparent;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-pyramid-layout {
+      display: none;
+    }
+  }
+
+  /* Left: Pyramid column with SVG */
+  .mobile-pyramid-col {
+    width: 100%;
+    position: relative;
+    height: 440px;
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-pyramid-svg {
+    width: 100%;
+    height: 440px;
+    display: block;
+    overflow: visible;
+  }
+
+  /* Right: steps column inside light grey rounded container */
+  .mobile-steps-col {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 440px;
+    background: #f8f9fa;
+    border-radius: 24px;
+    padding: 0.75rem 0.85rem;
+    box-sizing: border-box;
+    align-items: stretch;
+    transition:
+      padding 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-card-close {
+    display: flex;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.07);
+    color: #444444;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    opacity: 0;
+    transform: scale(0.5) rotate(-90deg);
+    pointer-events: none;
+    transition:
+      opacity 0.3s ease,
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background 0.2s ease;
+  }
+
+  .mobile-card-close:hover {
+    background: rgba(0, 0, 0, 0.14);
+    transform: scale(1.1) rotate(0deg);
+  }
+
+  /* Expanded state styling: smoothly collapses inactive steps and expands active step */
+  .mobile-steps-col.is-expanded {
+    justify-content: flex-start;
+    padding: 1.1rem 0.85rem;
+    background: #f4f5f7;
+  }
+
+  .mobile-steps-col.is-expanded .mobile-card-close {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    pointer-events: auto;
+  }
+
+  .mobile-steps-col.is-expanded .mobile-step-item:not(.active) {
+    opacity: 0;
+    max-height: 0;
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+    transform: translateY(-10px) scale(0.94);
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .mobile-steps-col.is-expanded .mobile-step-item.active {
+    flex: 1;
+    max-height: 380px;
+    background-color: #ffffff;
+    border: 1px solid rgba(237, 72, 35, 0.14);
+    border-left: 4px solid #ed4823;
+    border-radius: 20px;
+    padding: 1.25rem 1.1rem;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+    transform: translateY(0) scale(1);
+    cursor: default;
+    box-sizing: border-box;
+  }
+
+  .mobile-steps-col.is-expanded .mobile-step-item.active .mobile-step-desc {
+    max-height: 250px;
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 0.75rem;
+    transition:
+      max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.35s ease 0.08s,
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
+  }
+
+  .mobile-step-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.25rem;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    padding: 0.75rem 0.85rem;
+    width: 100%;
+    max-height: 95px;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition:
+      max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.3s ease,
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+    cursor: pointer;
+    box-sizing: border-box;
+    will-change: transform, opacity, max-height;
+  }
+
+  .mobile-step-item.active {
+    background-color: #ffffff;
+    border: 1px solid rgba(237, 72, 35, 0.12);
+    border-left: 4px solid #ed4823;
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  }
+
+  .mobile-step-label {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #ed4823;
+    background: rgba(237, 72, 35, 0.1);
+    padding: 3px 10px;
+    border-radius: 9999px;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-step-item.active .mobile-step-label {
+    background: #ed4823;
+    color: #ffffff;
+  }
+
+  .mobile-step-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #111111;
+    margin: 0;
+  }
+
+  .mobile-step-desc {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(8px);
+    overflow: hidden;
+    margin: 0;
+    transition:
+      max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.25s ease,
+      transform 0.3s ease;
+  }
+
+  /* Explicit Mobile SVG Visibility Overrides */
+  @media (max-width: 767px) {
+    .mobile-pyramid-svg .pyramid-slice {
+      opacity: 0.7 !important;
+      transform: none !important;
+    }
+    .mobile-pyramid-svg .pyramid-slice.active,
+    .mobile-pyramid-svg .pyramid-slice:hover {
+      fill: #ed4823 !important;
+      opacity: 1 !important;
+      filter: drop-shadow(0 0 10px rgba(237, 72, 35, 0.4));
+    }
+    .mobile-pyramid-svg .pyramid-icon {
+      opacity: 1 !important;
+    }
+    .mobile-pyramid-svg .connector-line {
+      display: block !important;
+      stroke-dashoffset: 0 !important;
+    }
+    .mobile-pyramid-svg .connector-line.active {
+      stroke: #ed4823 !important;
+      stroke-width: 2.2px !important;
+    }
+    .mobile-pyramid-svg .connector-dot {
+      display: block !important;
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+    .mobile-pyramid-svg .connector-dot.active circle:nth-child(1) {
+      r: 16px !important;
+      stroke: #ed4823 !important;
+    }
+    .mobile-pyramid-svg .connector-dot.active circle:nth-child(2) {
+      r: 7px !important;
     }
   }
 
@@ -598,6 +1045,23 @@
     transition:
       opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
       transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Mobile pyramid: bypass scroll-reveal — always visible */
+  @media (max-width: 767px) {
+    .mobile-pyramid-svg .pyramid-slice {
+      opacity: 0.85 !important;
+      transform: none !important;
+      transition: opacity 0.3s ease, filter 0.3s ease !important;
+    }
+    .mobile-pyramid-svg .pyramid-slice.active {
+      opacity: 1 !important;
+      filter: drop-shadow(0 0 10px rgba(237, 72, 35, 0.4));
+    }
+    .mobile-pyramid-svg .pyramid-icon {
+      opacity: 1 !important;
+      transition: none !important;
+    }
   }
 
   #how-we-work.in .pyramid-slice {
