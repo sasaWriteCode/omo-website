@@ -1780,21 +1780,31 @@ const MY = countries.find((c) => c.id === "malaysia")!;
     position: relative;
     overflow: hidden;
 
-    /* Metallic shimmer sweep gradient */
-    background: linear-gradient(
-      110deg,
-      #ed4823 0%,
-      #f86240 35%,
-      #ffe1cc 48%,
-      #f86240 60%,
-      #ed4823 100%
-    );
-    background-size: 200% auto;
-    animation: rf-shimmer 3.5s linear infinite;
+    /* Hardware-accelerated GPU metallic shimmer sweep */
+    background-color: #ed4823;
     box-shadow:
       0 4px 12px rgba(237, 72, 35, 0.25),
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
     transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
+  }
+  .rf-tour-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.45) 50%,
+      transparent 100%
+    );
+    transform: translateX(-150%) skewX(-25deg) translateZ(0);
+    animation: rf-shimmer-gpu 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform;
+    pointer-events: none;
   }
   .rf-tour-btn:hover {
     transform: translateY(-2.5px);
@@ -1814,12 +1824,12 @@ const MY = countries.find((c) => c.id === "malaysia")!;
     z-index: 2;
   }
 
-  @keyframes rf-shimmer {
+  @keyframes rf-shimmer-gpu {
     0% {
-      background-position: -200% center;
+      transform: translateX(-150%) skewX(-25deg) translateZ(0);
     }
-    100% {
-      background-position: 200% center;
+    60%, 100% {
+      transform: translateX(250%) skewX(-25deg) translateZ(0);
     }
   }
 

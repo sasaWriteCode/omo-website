@@ -1,4 +1,7 @@
 ---
+import { getImage } from "astro:assets";
+import omoLogo from "../assets/omo_logo.png";
+
 export interface Props {
   title?: string;
   description?: string;
@@ -8,6 +11,8 @@ const {
   title = 'OMO — Business Growth & Scaling Advisory',
   description = 'Hands-on advisory from Malaysia to APAC. Design-led strategy, real execution, and measurable growth — from market entry to full scale.',
 } = Astro.props;
+
+const omoLogoSrc = (await getImage({ src: omoLogo, format: "webp" })).src;
 ---
 
 <!DOCTYPE html>
@@ -30,8 +35,8 @@ const {
   <link rel="apple-touch-icon" href="/favicon-192x192.png" />
 
   <!-- OG / Twitter image -->
-  <meta property="og:image" content="/assets/omo_logo.png" />
-  <meta name="twitter:image" content="/assets/omo_logo.png" />
+  <meta property="og:image" content={omoLogoSrc} />
+  <meta name="twitter:image" content={omoLogoSrc} />
 
   <title>{title}</title>
 
@@ -111,7 +116,7 @@ const {
   <!-- Site Loading Screen / Preloader -->
   <div id="sitePreloader" class="site-preloader" aria-hidden="false">
     <div class="preloader-content">
-      <img src="/assets/omo_logo.png" alt="OMO" class="preloader-logo" width="100" height="36" />
+      <img src={omoLogoSrc} alt="OMO" class="preloader-logo" width="100" height="36" />
       <div class="preloader-bar-wrap">
         <div class="preloader-progress-bar" id="preloaderProgress"></div>
       </div>
