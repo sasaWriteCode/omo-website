@@ -37,54 +37,171 @@ const {
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://flagcdn.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=DM+Serif+Display:ital@0;1&display=swap"
     rel="stylesheet"
   />
+
+  <!-- Critical Inline Styles for Site Preloader -->
+  <style is:inline>
+    .site-preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: #0b0b0b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s cubic-bezier(0.22, 0.68, 0, 1.2), visibility 0.5s ease;
+    }
+    .site-preloader.loaded {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .preloader-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      text-align: center;
+      padding: 2rem;
+    }
+    .preloader-logo {
+      height: 42px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      animation: preloaderPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes preloaderPulse {
+      0%, 100% { opacity: 0.75; transform: scale(0.98); }
+      50% { opacity: 1; transform: scale(1.02); }
+    }
+    .preloader-bar-wrap {
+      width: 140px;
+      height: 2.5px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    .preloader-progress-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0%;
+      background: linear-gradient(90deg, #ed4823 0%, #f86240 100%);
+      border-radius: 4px;
+      transition: width 0.25s ease;
+      box-shadow: 0 0 10px rgba(237, 72, 35, 0.6);
+    }
+    .preloader-caption {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+    }
+  </style>
 </head>
 <body>
+  <!-- Site Loading Screen / Preloader -->
+  <div id="sitePreloader" class="site-preloader" aria-hidden="false">
+    <div class="preloader-content">
+      <img src="/assets/omo_logo.png" alt="OMO" class="preloader-logo" width="100" height="36" />
+      <div class="preloader-bar-wrap">
+        <div class="preloader-progress-bar" id="preloaderProgress"></div>
+      </div>
+      <span class="preloader-caption">Malaysia · APAC Advisory</span>
+    </div>
+  </div>
+
   <slot />
   
+  <!-- Preloader Controller -->
+  <script is:inline>
+    (function () {
+      const preloader = document.getElementById('sitePreloader');
+      const progress = document.getElementById('preloaderProgress');
+      if (!preloader) return;
+
+      // Lock body scroll during preloader
+      document.body.style.overflow = 'hidden';
+
+      let percentage = 20;
+      if (progress) progress.style.width = percentage + '%';
+
+      const interval = setInterval(() => {
+        if (percentage < 85) {
+          percentage += Math.floor(Math.random() * 10) + 6;
+          if (progress) progress.style.width = Math.min(percentage, 85) + '%';
+        }
+      }, 90);
+
+      function dismissPreloader() {
+        clearInterval(interval);
+        if (progress) progress.style.width = '100%';
+        setTimeout(() => {
+          preloader.classList.add('loaded');
+          document.body.style.overflow = '';
+          preloader.setAttribute('aria-hidden', 'true');
+        }, 180);
+      }
+
+      if (document.readyState === 'complete') {
+        dismissPreloader();
+      } else {
+        window.addEventListener('load', dismissPreloader, { once: true });
+        // Mobile timeout safety fallback (max 1200ms)
+        setTimeout(dismissPreloader, 1200);
+      }
+    })();
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" is:inline></script>
   <script is:inline>
-    // Initialize Lenis smooth scrolling
-    const lenis = new Lenis({
-      duration: 1.8, // Slightly slower scroll duration for a premium, heavy, smooth feel
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom premium easing curve
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 0.95, // Make wheel scrolling slightly slower/softer
-      smoothTouch: false, // Let mobile touch scroll remain native
-      infinite: false,
-    });
-
-    window.lenis = lenis;
-
-    // Smooth scroll for all hash links via Lenis
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener('click', function (e) {
-        const targetId = this.getAttribute('href');
-        if (targetId === '#' || targetId === '') return;
-
-        const target = document.querySelector(targetId);
-        if (target) {
-          e.preventDefault();
-          lenis.scrollTo(target, {
-            offset: 0,
-            duration: 1.5,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          });
-        }
+    // Initialize Lenis smooth scrolling safely
+    if (typeof Lenis !== 'undefined') {
+      const lenis = new Lenis({
+        duration: 1.8,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 0.95,
+        smoothTouch: false,
+        infinite: false,
       });
-    });
 
-    function raf(time) {
-      lenis.raf(time);
+      window.lenis = lenis;
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#' || targetId === '') return;
+
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            lenis.scrollTo(target, {
+              offset: 0,
+              duration: 1.5,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+          }
+        });
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
       requestAnimationFrame(raf);
     }
-
-    requestAnimationFrame(raf);
   </script>
 </body>
 </html>
